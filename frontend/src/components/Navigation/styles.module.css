@@ -1,0 +1,91 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--black);
+  color: var(--white);
+  min-height: 60px;
+}
+
+.logo a {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+}
+
+.links a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: var(--white);
+  font-size: 1rem;
+}
+
+.menuItem {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 130px;
+}
+
+.menuItem:hover {
+  cursor: pointer;
+  background-color: var(--white);
+}
+
+.menuItem:hover a {
+  color: var(--black);
+}
+
+.cart a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  background-color: lightgoldenrodyellow;
+  list-style: none;
+  margin: 0;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownMenu .dropdownLink {
+  height: 35px;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center text vertically */
+  justify-content: center; /* Center text horizontally */
+  color: var(--white);
+  margin: 0;
+}
+
+.dropdownLink:hover {
+  background-color: lightgray;
+  color: var(--black);
+}
+
+.dropdownMenu a {
+    text-decoration: none;
+}

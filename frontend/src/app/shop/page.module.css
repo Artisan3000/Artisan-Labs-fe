@@ -1,0 +1,135 @@
+.main {
+  padding: 0 2rem;
+  margin-top: 60px;
+}
+
+.heading {
+  margin-bottom: 1.5rem;
+  padding: 20px 0;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.title {
+  font-size: 1.2rem;
+  text-decoration: underline;
+}
+
+.shopSettings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0rem;
+}
+
+.shopSettings h1 {
+  border-bottom: 1px solid black;
+  padding: 0 20px;
+}
+
+.shopSettings a {
+  display: flex;
+  height: 33px;
+  border-bottom: 1px solid black;
+  padding: 0 20px;
+  align-items: center;
+}
+
+.shopSettings a:hover {
+  background-color: black;
+  color: white;
+}
+
+.shopSettingsCat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.shopSettingsCol {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid black;
+  justify-content: center;
+}
+
+.item {
+  margin-bottom: 1.5rem;
+  
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  /* transition: opacity 0.3s ease; */
+}
+
+.hoverImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  /* transition: opacity 0.3s ease; */
+}
+
+.imageWrapper:hover .hoverImage {
+  opacity: 1;
+}
+
+.imageWrapper:hover .image:first-child {
+  opacity: 0;
+}
+
+.price {
+  color: black;
+}
+
+.priceDiscounted {
+  color: red;
+}
+
+.priceCompare {
+  text-decoration: line-through;
+  margin-right: 8px;
+  color: gray;
+}
+
+.priceSoldOut {
+  color: gray;
+}
+
+.vendor {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.loadMore {
+  text-align: center;
+  padding: 1rem;
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: gainsboro;
+  border-radius: 50px;
+}

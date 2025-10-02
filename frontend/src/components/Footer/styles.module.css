@@ -1,0 +1,37 @@
+.footer {
+  padding: 1rem 2rem;
+  background-color: var(--black);
+  color: var(--white);
+  text-align: center;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.storeInfo {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 1rem 2rem;
+  background-color: var(--white);
+  color: var(--black);
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-items: center;
+  padding: 1rem 2rem;
+}
+
+.links > div {
+  text-align: left;
+}
+
+.links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
