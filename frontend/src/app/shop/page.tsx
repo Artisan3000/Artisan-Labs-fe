@@ -109,20 +109,21 @@ export default async function ShopPage({
         <div className={styles.shopSettings}>
           <div className={styles.shopSettingsCat}>
             <h1>Category</h1>
-            <Link href="/shop/products/all">All</Link>
-            <Link href="/shop/products/clothing">Clothing</Link>
-            <Link href="/shop/products/tools">Tools</Link>
-            <Link href="/shop/products/grooming">Grooming</Link>
-            <Link href="/shop/products/sale">Sale</Link>
+            <Link href="/shop/all">All</Link>
+            <Link href="/shop/wardrobe">Clothing</Link>
+            <Link href="/shop/tools">Tools</Link>
+            <Link href="/shop/grooming">Grooming</Link>
+            <Link href="/shop/sale">Sale</Link>
           </div>
           <div className={styles.shopSettingsCol}>
             <h1>Collections</h1>
-            <Link href="">Duke & Hyde</Link>
-            <Link href="">Artisan Merch</Link>
-            <Link href="">Vintage</Link>
-            <Link href="">Jewelry</Link>
-            <Link href="">Sale</Link>
+            <Link href="/shop/duke-hyde">Duke & Hyde</Link>
+            <Link href="/shop/artisan-barber">Artisan Merch</Link>
+            <Link href="/shop/vintage">Vintage</Link>
+            <Link href="/shop/jewelry">Jewelry</Link>
+            <Link href="/shop/sale">Sale</Link>
           </div>
+
         </div>
         <h1 className={styles.heading}>Latest</h1>
         {products.length === 0 ? (

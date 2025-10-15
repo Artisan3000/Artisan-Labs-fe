@@ -1,0 +1,26 @@
+.productInfoHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: normal;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: #444;
+  line-height: 1.6;
+}
+
+.price {
+  font-size: 3rem;
+  font-weight: 300;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0.5rem 0 1rem;
+}
+
+.itemInfo {
+  margin-top: 1rem;
+}

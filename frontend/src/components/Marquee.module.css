@@ -1,0 +1,52 @@
+.container {
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center; /* centers the marquee vertically */
+    height: 60px; /* fixed height to vertically center content */
+  }
+  
+  .track {
+    display: flex;
+    align-items: center;
+    animation: scroll 30s linear infinite;
+  }
+  
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 50px;
+    height: 100%;
+  }
+  
+  .icon {
+    display: inline-block;
+    margin: 0 20px 0 15px;
+    height: 24px; /* smaller than container, helps optical centering */
+    width: auto;
+  }
+  
+  .text {
+    font-size: 20px;
+    line-height: 1; /* ensures text sits in middle of container */
+    color: var(--black);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* duplicate effect to create seamless loop */
+  .track::after {
+    content: attr(data-text);
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  

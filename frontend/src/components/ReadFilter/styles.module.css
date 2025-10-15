@@ -1,0 +1,35 @@
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.tag {
+  background: transparent;
+  border: 1px solid var(--black);
+  color: var(--black);
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.tag:hover {
+  background: var(--old-gold);
+  color: white;
+}
+
+.active {
+  background: var(--cerulean);
+  border-color: var(--cerulean);
+  color: white;
+}
+
+.count {
+  opacity: 0.7;
+  font-size: 0.8rem;
+  margin-left: 0.25rem;
+}

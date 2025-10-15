@@ -19,6 +19,20 @@
   color: var(--white);
 }
 
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+}
+
+.logoContainer svg {
+  display: block;
+  width: auto;
+  height: 40px;
+  fill: var(--white);
+}
+
 .links {
   display: flex;
   flex-direction: row;
@@ -62,7 +76,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  background-color: lightgoldenrodyellow;
+  background-color: #fbfbdf;
   list-style: none;
   margin: 0;
   z-index: 1001;
@@ -74,18 +88,33 @@
   height: 35px;
   padding: 0.5rem 0;
   text-decoration: none;
-  display: flex; /* Use flexbox for alignment */
-  align-items: center; /* Center text vertically */
-  justify-content: center; /* Center text horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--white);
   margin: 0;
 }
 
 .dropdownLink:hover {
-  background-color: lightgray;
+  background-color: var(--old-gold);
   color: var(--black);
 }
 
 .dropdownMenu a {
-    text-decoration: none;
+  text-decoration: none;
+}
+
+.marqueeWrapper {
+  display: none;
+  overflow: hidden;
+  width: 250px;
+  background: var(--old-gold);
+  align-self: center;
+  height: 60px;
+}
+
+@media screen and (min-width: 1024px) {
+  .marqueeWrapper {
+    display: block;
+  }
 }

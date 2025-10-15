@@ -1,0 +1,45 @@
+.wrapper {
+  margin: 1.5rem 0;
+}
+
+.optionGroup {
+  margin-bottom: 1rem;
+}
+
+.label {
+  display: block;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.optionValues {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.optionButton {
+  border: none;
+  background: #ccc;
+  color: var(--white);
+  border-radius: 50px;
+  font-weight: 400;
+  font-size: 2rem;
+  font-family: var(--font-family);
+  padding: 0.8rem 1.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.optionButton:hover {
+  color: var(--black);
+  background: var(--turquoise);
+}
+
+.active {
+  border: none;
+  font-weight: 400;
+  background-color: var(--cerulean);
+  color: var(--white);
+  border-radius: 50px;
+}

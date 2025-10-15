@@ -1,0 +1,45 @@
+.wrapper {
+  border-top: 1px solid var(--black);
+}
+
+.item {
+  border-bottom: 1px solid var(--black);
+}
+
+.trigger {
+  width: 100%;
+  text-align: left;
+  font-weight: 500;
+  padding: 1rem 0;
+  cursor: pointer;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.trigger:hover {
+  color: #333;
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.arrowOpen {
+  transform: rotate(180deg);
+}
+
+.content {
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  max-height: 0;
+  opacity: 0;
+}
+
+.contentOpen {
+  max-height: 500px;
+  opacity: 1;
+}

@@ -1,0 +1,31 @@
+.button {
+  background: var(--black);
+  color: var(--white);
+  padding: 0.8rem 1.6rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 50px;
+  margin-top: 1rem;
+  font-size: 2rem;
+  font-family: var(--font-family);
+  width: 100%;
+}
+
+.button:hover {
+  background: var(--old-gold);
+  font-size: 2.75rem;
+}
+
+.buttonDisabled {
+  font-family: var(--font-family);
+  font-size: 2rem;
+  background: gray;
+  color: var(--white);
+  padding: 0.8rem 1.6rem;
+  border: none;
+  cursor: not-allowed;
+  opacity: 0.7;
+  border-radius: 50px;
+  width: 100%;
+}

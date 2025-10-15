@@ -1,6 +1,13 @@
 :root {
   --white: #fffff8;
   --black: #111;
+  --font-family: "Times New Roman", Times, serif;
+
+  --red: #b02e0c;
+  --cerulean: #007ea7;
+  --old-gold: #e0c01d;
+  --turquoise: #30d5c8;
+
 }
 
 html,

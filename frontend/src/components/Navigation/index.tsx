@@ -3,19 +3,20 @@
 import { useState } from "react";
 import Link from "next/link";
 import styles from "./styles.module.css";
+import Marquee from "../Marquee";
 
 const Navigation = () => {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   const collections = [
-    { name: "Latest", href: "/shop/products/all" },
-    { name: "Best Sellers", href: "/shop/products/beard-care" },
-    { name: "Grooming", href: "/shop/products/grooming" },
-    { name: "Collaborations", href: "/shop/products/collaborations" },
-    { name: "Haberdashery", href: "/shop/products/haberdashery" },
-    { name: "Apothecary", href: "/shop/products/apothecary" },
-    { name: "Wardrobe", href: "/shop/products/wardrobe" },
-    { name: "All", href: "/shop/products/all" },
+    { name: "Latest", href: "/shop/new" },
+    { name: "Best Sellers", href: "/shop/best-sellers" },
+    { name: "Hair Styling", href: "/shop/hair-styling" },
+    // { name: "Collaborations", href: "/shop/collaborations" },
+    { name: "Haberdashery", href: "/shop/haberdashery" },
+    { name: "Apothecary", href: "/shop/apothecary" },
+    { name: "Wardrobe", href: "/shop/wardrobe" },
+    { name: "All", href: "/shop" },
   ];
 
   const about = [
@@ -23,19 +24,45 @@ const Navigation = () => {
     { name: "Manifesto", href: "/manifesto" },
   ];
 
+  const learn = [
+    { name: "Read", href: "/read" },
+  ];
+
   return (
     <nav className={styles.nav}>
       <div className={styles.logo}>
-        <Link href="/">Artisan Barber</Link>
+        <div className={styles.logoContainer}>
+          <Link href="/">
+            <svg
+              id="b"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 701.99 332.2"
+            >
+              <g id="c">
+                <path d="m88.4,311.6l12.4,7.6-21.2,13-21.2-13,1-214.2-13.6,8.6-14.8-9-1,207,12.4,7.6-21.2,13-21.2-13L1,20.8,45.8,0l43.6,26.6-1,285ZM59.4,34.2L31,13.8v82.6l14.8-9,13.6,8.6v-61.8Z" />
+                <path d="m164.8,319.2l1-218.6-28.4-11.6-1,222.6,12.4,7.6-21.2,13-21.2-13,1-285.4-12.4-7.6,21.2-13.2,6.8,4.2L151.8,0l44,20.4v35.2l-28.8,16.4,28.8,11-1,228.6,12.4,7.6-21.2,13-21.2-13Zm1-252.4V12.8l-28.4,13.6v56.8l28.4-16.4Z" />
+                <path d="m248,31l16-11.4-61.4,10.4L215.6,0h108l-12.8,30-32.8-7.4-1,289,12.6,7.6-21.2,13-21.4-13,1-288.2Z" />
+                <path d="m323.79,13l21.2-13,21.2,12.8-1,298.8,12.4,7.6-21.2,13-21.2-13,1-298.6-12.4-7.6Z" />
+                <path d="m384.99,310.8l1-218.8h30l-1,197.6,35.6,25.8,1-218-65.6-40.4V24L437.39,0l38.8,13.6v39.4h-30v-22.8l-30.2-14.2v48.2l65.6,39.8-1,204.2-51.4,24-44.2-21.4Z" />
+                <path d="m582.99,311.6l12.4,7.6-21.2,13-21.2-13,1-214.2-13.6,8.6-14.8-9-1,207,12.4,7.6-21.2,13-21.2-13,1-298.4L540.39,0l43.6,26.6-1,285Zm-29-277.4l-28.4-20.4v82.6l14.8-9,13.6,8.6v-61.8Z" />
+                <path d="m589.79,26l21.2-13,6.4,3.8,28.4-16.8,44.8,20.8-1,290.8,12.4,7.6-21.2,13-21.2-13,1-306.8-28.4,13.6-1,285.6,12.4,7.6-21.2,13-21.2-13,1-285.6-12.4-7.6Z" />
+                <polygon points="45.61 113.35 24.61 100.35 45.64 86.92 66.61 100.35 45.61 113.35" />
+              </g>
+            </svg>
+          </Link>
+        </div>
       </div>
+
       <div className={styles.links}>
+        {/* SHOP MENU */}
         <div
           className={styles.menuItem}
-          onMouseEnter={() => setOpenMenu('shop')}
+          onMouseEnter={() => setOpenMenu("shop")}
           onMouseLeave={() => setOpenMenu(null)}
         >
           <Link href="/shop">Shop</Link>
-          {openMenu === 'shop' && (
+          {openMenu === "shop" && (
             <div className={styles.dropdownMenu}>
               {collections.map((collection) => (
                 <Link
@@ -49,13 +76,15 @@ const Navigation = () => {
             </div>
           )}
         </div>
+
+        {/* INFO MENU */}
         <div
           className={styles.menuItem}
-          onMouseEnter={() => setOpenMenu('about')}
+          onMouseEnter={() => setOpenMenu("about")}
           onMouseLeave={() => setOpenMenu(null)}
         >
           <Link href="/about">Info</Link>
-          {openMenu === 'about' && (
+          {openMenu === "about" && (
             <div className={styles.dropdownMenu}>
               {about.map((about) => (
                 <Link
@@ -69,16 +98,44 @@ const Navigation = () => {
             </div>
           )}
         </div>
+
+        {/* VISIT */}
         <div className={styles.menuItem}>
           <Link href="/contact">Visit</Link>
         </div>
-        <div className={styles.menuItem}>
-          <Link href="/contact">Learn</Link>
+
+        {/* LEARN MENU */}
+        <div
+          className={styles.menuItem}
+          onMouseEnter={() => setOpenMenu("learn")}
+          onMouseLeave={() => setOpenMenu(null)}
+        >
+          <Link href="/learn">Learn</Link>
+          {openMenu === "learn" && (
+            <div className={styles.dropdownMenu}>
+              {learn.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={styles.dropdownLink}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
+
+        {/* ACADEMY */}
         <div className={styles.menuItem}>
-          <Link href="/contact">Academy</Link>
+          <Link href="/academy">Academy</Link>
+        </div>
+
+        <div className={styles.marqueeWrapper}>
+          <Marquee />
         </div>
       </div>
+
       <div className={styles.cart}>
         <Link href="/shop/bag">Bag</Link>
       </div>
