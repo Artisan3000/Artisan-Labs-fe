@@ -20,9 +20,10 @@
 
 .optionButton {
   border: none;
-  background: #ccc;
-  color: var(--white);
+  background: var(--white);
+  color: var(--cerulean);
   border-radius: 50px;
+  border: 1px solid var(--cerulean);
   font-weight: 400;
   font-size: 2rem;
   font-family: var(--font-family);
@@ -32,8 +33,9 @@
 }
 
 .optionButton:hover {
-  color: var(--black);
+  color: #666;
   background: var(--turquoise);
+  border: 1px solid transparent;
 }
 
 .active {

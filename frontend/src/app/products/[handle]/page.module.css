@@ -38,6 +38,20 @@
   line-height: 1.6;
 }
 
+.productPref {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.productRecs {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 @media (max-width: 768px) {
   .productContainer {
     flex-direction: column;

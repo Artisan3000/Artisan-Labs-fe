@@ -1,6 +1,6 @@
 .button {
-  background: black;
-  color: white;
+  background: var(--black);
+  color: var(--white);
   padding: 0.5rem 1rem;
   border: none;
   cursor: pointer;
@@ -15,7 +15,7 @@
 
 .buttonDisabled {
   background: gray;
-  color: white;
+  color: var(--white);
   padding: 0.5rem 1rem;
   border: none;
   cursor: not-allowed;

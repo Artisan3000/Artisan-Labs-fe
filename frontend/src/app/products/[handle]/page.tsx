@@ -2,15 +2,16 @@ import { shopifyClient } from "@/lib/shopify";
 import styles from "./page.module.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import AddToCartButton from "@/components/AddToCartButton";
 import ProductOptions from "@/components/ProductOptions";
 import ProductDetails from "@/components/ProductDetails";
 import ProductRecommendations from "@/components/ProductRecommendations";
+import ProductReviews from "@/components/ProductReviews";
 
 type Product = {
   id: string;
   title: string;
-  description: string;
+  descriptionHtml: string;
+  vendor: string;
   options: {
     name: string;
     values: string[];
@@ -38,6 +39,12 @@ type Product = {
   };
 };
 
+type Review = {
+  name: string;
+  rating: number;
+  comment: string;
+};
+
 export default async function ProductPage({
   params,
 }: {
@@ -51,7 +58,8 @@ export default async function ProductPage({
   product(handle: $handle) {
     id
     title
-    description
+    vendor
+    descriptionHtml
     options { name values }
     images(first: 10) {
       edges { node { url altText } }
@@ -86,6 +94,26 @@ export default async function ProductPage({
   const variants = product.variants.edges.map((e: any) => e.node);
   const options = product.options || [];
 
+  const mockReviews: Review[] = [
+    {
+      name: "Camila",
+      rating: 5,
+      comment:
+        "Amazing quality and color. The fit is perfect — definitely worth it!",
+    },
+    {
+      name: "Jonas",
+      rating: 4,
+      comment:
+        "Really nice material. Slightly oversized, but looks great overall.",
+    },
+    {
+      name: "Zoe",
+      rating: 5,
+      comment: "Bought this at the concert — nostalgia overload!",
+    },
+  ];  
+
   return (
     <>
       <Navigation />
@@ -112,6 +140,7 @@ export default async function ProductPage({
         <div className={styles.productPref}>
           <div>
             <h1>Ratings & Reviews</h1>
+            <ProductReviews reviews={mockReviews} />
           </div>
         </div>
         <div className={styles.productRecs}>
