@@ -2,42 +2,16 @@ import { shopifyClient } from "@/lib/shopify";
 import styles from "./page.module.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import ProductOptions from "@/components/ProductOptions";
 import ProductDetails from "@/components/ProductDetails";
 import ProductRecommendations from "@/components/ProductRecommendations";
 import ProductReviews from "@/components/ProductReviews";
+import Image from "next/image";
 
-type Product = {
-  id: string;
-  title: string;
-  descriptionHtml: string;
-  vendor: string;
-  options: {
-    name: string;
-    values: string[];
-  }[];
-  images: {
-    edges: {
-      node: {
-        url: string;
-        altText: string | null;
-      };
-    }[];
-  };
-  variants: {
-    edges: {
-      node: {
-        id: string;
-        availableForSale: boolean;
-        title: string;
-        selectedOptions: {
-          name: string;
-          value: string;
-        }[];
-      };
-    }[];
-  };
-};
+import {
+  ShopifyProduct,
+  normalizeProduct,
+  Product,
+} from "@/lib/transformers/product";
 
 type Review = {
   name: string;
@@ -48,51 +22,51 @@ type Review = {
 export default async function ProductPage({
   params,
 }: {
-  params: { handle: string };
+  params: Promise<{ handle: string }>;
 }) {
+  const { handle } = await params;
+
   const { data } = await shopifyClient.request<{
-    product: Product | null;
+    product: ShopifyProduct | null;
   }>(
     `
-      query ProductByHandle($handle: String!) {
-  product(handle: $handle) {
-    id
-    title
-    vendor
-    descriptionHtml
-    options { name values }
-    images(first: 10) {
-      edges { node { url altText } }
-    }
-    variants(first: 50) {
-      edges {
-        node {
-          id
-          title
-          availableForSale
-          selectedOptions { name value }
-          price {
-            amount
-            currencyCode
+    query ProductByHandle($handle: String!) {
+      product(handle: $handle) {
+        id
+        title
+        vendor
+        descriptionHtml
+        options { name values }
+        images(first: 10) {
+          edges { node { url altText } }
+        }
+        variants(first: 50) {
+          edges {
+            node {
+              id
+              title
+              availableForSale
+              selectedOptions { name value }
+              price {
+                amount
+                currencyCode
+              }
+            }
           }
         }
       }
     }
-  }
-}
-
     `,
-    { variables: { handle: params.handle } }
+    { variables: { handle } }
   );
-  
-  const product = data?.product;
 
-  if (!product) {
+  const rawProduct = data?.product;
+
+  if (!rawProduct) {
     return <p>Product not found</p>;
   }
 
-  const variants = product.variants.edges.map((e: any) => e.node);
-  const options = product.options || [];
+  const product: Product = normalizeProduct(rawProduct);
 
   const mockReviews: Review[] = [
     {
@@ -112,41 +86,49 @@ export default async function ProductPage({
       rating: 5,
       comment: "Bought this at the concert — nostalgia overload!",
     },
-  ];  
+  ];
 
   return (
     <>
       <Navigation />
+
       <main className={styles.main}>
         <div className={styles.productContainer}>
           <div>
             <div className={styles.imageGallery}>
-              {product.images.edges.map(({ node }) => (
-                <img
-                  key={node.url}
-                  src={node.url}
-                  alt={node.altText || product.title}
+              {product.images.map((img) => (
+                <Image
+                  key={img.url}
+                  src={img.url}
+                  alt={img.altText || product.title}
+                  width={600}
+                  height={600}
                   className={styles.image}
                 />
               ))}
             </div>
           </div>
+
           <div className={styles.productInfo}>
-            <div>
-              <ProductDetails product={product} variants={variants} />
-            </div>
+            <ProductDetails
+              product={product}
+              variants={product.variants}
+            />
           </div>
         </div>
+
         <div className={styles.productPref}>
           <div>
             <h1>Ratings & Reviews</h1>
             <ProductReviews reviews={mockReviews} />
           </div>
         </div>
+
         <div className={styles.productRecs}>
           <ProductRecommendations productId={product.id} />
         </div>
       </main>
+
       <Footer />
     </>
   );

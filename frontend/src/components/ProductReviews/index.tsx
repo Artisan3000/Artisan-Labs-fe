@@ -2,7 +2,7 @@
 
 import styles from "./styles.module.css";
 import ReviewSummary from "../ReviewSummary";
-import { motion } from "framer-motion";
+/* import { motion } from "framer-motion"; */
 import ReviewCarousel from "../ReviewCarousel";
 
 type Review = {
@@ -29,8 +29,8 @@ export default function ProductReviews({ reviews }: Props) {
     return acc;
   }, {} as { [key: number]: number });
 
-  const fullStars = Math.floor(average);
-  const hasHalfStar = average % 1 >= 0.5;
+  /* const fullStars = Math.floor(average);
+  const hasHalfStar = average % 1 >= 0.5; */
 
   return (
     <div className={styles.reviewsSection}>

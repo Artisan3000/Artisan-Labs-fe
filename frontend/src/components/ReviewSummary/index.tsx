@@ -13,7 +13,6 @@ export default function ReviewSummary({
   totalReviews,
   distribution,
 }: ReviewSummaryProps) {
-  const maxBarWidth = Math.max(...Object.values(distribution));
 
   return (
     <div className={styles.summaryContainer}>

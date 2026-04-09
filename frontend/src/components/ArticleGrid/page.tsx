@@ -4,16 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "@/app/read/page.module.css";
-
-type Article = {
-  id: string;
-  title: string;
-  handle: string;
-  excerpt: string;
-  publishedAt: string;
-  image?: { url: string; altText: string | null } | null;
-  authorV2?: { name: string } | null;
-};
+import { Article } from "@/lib/types/article";
 
 export default function ArticleGrid({ articles }: { articles: Article[] }) {
   return (

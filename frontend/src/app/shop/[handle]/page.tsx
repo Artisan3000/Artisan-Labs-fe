@@ -28,15 +28,27 @@ export default async function CollectionPage({
   params,
   searchParams,
 }: {
-  params: { handle: string };
-  searchParams: { after?: string; sort?: string };
+  params: Promise<{ handle: string }>;
+  searchParams: Promise<{ after?: string; sort?: string }>;
 }) {
-  const { handle } = params;
-  const sortParam = (searchParams.sort || "LATEST").toUpperCase();
+  const { handle } = await params;
+  const { after, sort } = await searchParams;
 
-  // Map URL sort → Shopify sortKey + reverse
-  // For collection.products, sortKey is ProductCollectionSortKeys (common values below)
-  type SortConfig = { sortKey: "CREATED" | "PRICE" | "TITLE" | "BEST_SELLING" | "UPDATED" | "ID" | "MANUAL" | "COLLECTION_DEFAULT"; reverse: boolean };
+  const sortParam = (sort || "LATEST").toUpperCase();
+
+  type SortConfig = {
+    sortKey:
+      | "CREATED"
+      | "PRICE"
+      | "TITLE"
+      | "BEST_SELLING"
+      | "UPDATED"
+      | "ID"
+      | "MANUAL"
+      | "COLLECTION_DEFAULT";
+    reverse: boolean;
+  };
+
   const sortMap: Record<string, SortConfig> = {
     LATEST: { sortKey: "CREATED", reverse: true },
     OLDEST: { sortKey: "CREATED", reverse: false },
@@ -44,6 +56,7 @@ export default async function CollectionPage({
     PRICE_LOW: { sortKey: "PRICE", reverse: false },
     ALPHA: { sortKey: "TITLE", reverse: false },
   };
+
   const { sortKey, reverse } = sortMap[sortParam] || sortMap.LATEST;
 
   const { data } = await shopifyClient.request<{
@@ -88,7 +101,7 @@ export default async function CollectionPage({
     {
       variables: {
         handle,
-        after: searchParams.after || null,
+        after: after || null,
         sortKey,
         reverse,
       },
@@ -104,10 +117,12 @@ export default async function CollectionPage({
   return (
     <>
       <Navigation />
+
       <main className={styles.main}>
         <ShopControls />
 
         <h1 className={styles.heading}>{collection.title}</h1>
+
         {collection.description && (
           <p
             className={styles.collectionDescription}
@@ -121,10 +136,13 @@ export default async function CollectionPage({
           <ul className={styles.list}>
             {products.map((p) => {
               const variant = p.variants.nodes[0];
+
               const price = parseFloat(variant.price.amount).toFixed(2);
+
               const compareAt = variant.compareAtPrice
                 ? parseFloat(variant.compareAtPrice.amount).toFixed(2)
                 : null;
+
               const isAvailable = variant.availableForSale;
 
               const firstImage = p.images.nodes[0];
@@ -143,12 +161,15 @@ export default async function CollectionPage({
                         />
                         <Image
                           src={(secondImage || firstImage).url}
-                          alt={(secondImage || firstImage).altText || p.title}
+                          alt={
+                            (secondImage || firstImage).altText || p.title
+                          }
                           fill
                           className={`${styles.image} ${styles.hoverImage}`}
                         />
                       </div>
                     )}
+
                     <h2 className={styles.title}>{p.title}</h2>
                     <p className={styles.vendor}>{p.vendor}</p>
 
@@ -162,8 +183,11 @@ export default async function CollectionPage({
                       }
                     >
                       {compareAt && (
-                        <span className={styles.priceCompare}>${compareAt}</span>
+                        <span className={styles.priceCompare}>
+                          ${compareAt}
+                        </span>
                       )}
+
                       <span
                         className={
                           compareAt
@@ -178,7 +202,11 @@ export default async function CollectionPage({
                       </span>
                     </p>
                   </Link>
-                  <AddToCartButton variantId={variant.id} disabled={!isAvailable} />
+
+                  <AddToCartButton
+                    variantId={variant.id}
+                    disabled={!isAvailable}
+                  />
                 </li>
               );
             })}
@@ -193,6 +221,7 @@ export default async function CollectionPage({
             <p className={styles.loadMore}>Load more</p>
           </Link>
         )}
+
         <div>
           <h1>
             The Artisan Barber Store is the creative extension of our craft.
@@ -205,6 +234,7 @@ export default async function CollectionPage({
           </h1>
         </div>
       </main>
+
       <Footer />
     </>
   );

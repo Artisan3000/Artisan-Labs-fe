@@ -3,9 +3,40 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FilterBar from "@/components/ReadFilter";
 import styles from "./page.module.css";
+import { Article } from "@/lib/types/article";
+
+/* ------------------ RAW TYPES ------------------ */
+
+type ShopifyArticle = {
+  id: string;
+  title: string;
+  handle: string;
+  excerpt: string;
+  publishedAt: string;
+  image?: { url: string; altText: string | null } | null;
+  authorV2?: { name: string } | null;
+};
+
+type ShopifyBlog = {
+  title: string;
+  articles: {
+    nodes: ShopifyArticle[];
+  };
+};
+
+type ShopifyResponse = {
+  grooming?: ShopifyBlog;
+  local?: ShopifyBlog;
+  journal?: ShopifyBlog;
+  team?: ShopifyBlog;
+  lifestyle?: ShopifyBlog;
+  learn?: ShopifyBlog;
+};
+
+/* ------------------ PAGE ------------------ */
 
 export default async function ReadPage() {
-  const { data } = await shopifyClient.request(`
+  const { data } = await shopifyClient.request<ShopifyResponse>(`
     query {
       grooming: blog(handle: "grooming") {
         title
@@ -63,15 +94,17 @@ export default async function ReadPage() {
     { key: "Learn", data: data?.learn },
   ];
 
-  const allArticles = allBlogs
+  const allArticles: Article[] = allBlogs
     .flatMap((blog) =>
-      (blog.data?.articles?.nodes ?? []).map((a: any) => ({
+      (blog.data?.articles?.nodes ?? []).map((a) => ({
         ...a,
         source: blog.key,
       }))
     )
     .sort(
-      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+      (a, b) =>
+        new Date(b.publishedAt).getTime() -
+        new Date(a.publishedAt).getTime()
     );
 
   const counts = Object.fromEntries(
@@ -81,13 +114,19 @@ export default async function ReadPage() {
   return (
     <>
       <Navigation />
+
       <main className={styles.main}>
         <header className={styles.header}>
           <p>Stories, culture, and dispatches from Artisan Barber.</p>
         </header>
 
-        <FilterBar blogs={Object.keys(counts)} counts={counts} articles={allArticles} />
+        <FilterBar
+          blogs={Object.keys(counts)}
+          counts={counts}
+          articles={allArticles}
+        />
       </main>
+
       <Footer />
     </>
   );

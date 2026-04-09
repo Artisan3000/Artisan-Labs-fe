@@ -14,54 +14,68 @@ export async function createCart(variantId: string, quantity = 1) {
       cart?: { id: string };
       userErrors?: ShopifyUserError[];
     };
-  }>({
-    query: CREATE_CART_MUTATION,
-    variables: {
-      input: {
-        lines: [{ merchandiseId: variantId, quantity }],
+  }>(
+    CREATE_CART_MUTATION,
+    {
+      variables: {
+        input: {
+          lines: [{ merchandiseId: variantId, quantity }],
+        },
       },
-    },
-  });
+    }
+  );
 
-  const data = response?.data;
+  const data = response.data;
+
   if (!data?.cartCreate) throw new Error("Invalid Shopify response");
 
   const { cart, userErrors } = data.cartCreate;
+
   if (userErrors && userErrors.length > 0) {
     console.error("Shopify cartCreate error:", userErrors);
     throw new Error(userErrors[0].message);
   }
 
   if (!cart) throw new Error("Cart not returned from Shopify");
+
   console.log("🛒 Cart created:", cart.id);
   return cart;
 }
 
 // ➕ Add an item to an existing cart
-export async function addToCart(cartId: string, variantId: string, quantity = 1) {
+export async function addToCart(
+  cartId: string,
+  variantId: string,
+  quantity = 1
+) {
   const response = await shopifyClient.request<{
     cartLinesAdd?: {
       cart?: { id: string };
       userErrors?: ShopifyUserError[];
     };
-  }>({
-    query: ADD_TO_CART_MUTATION,
-    variables: {
-      cartId,
-      lines: [{ merchandiseId: variantId, quantity }],
-    },
-  });
+  }>(
+    ADD_TO_CART_MUTATION,
+    {
+      variables: {
+        cartId,
+        lines: [{ merchandiseId: variantId, quantity }],
+      },
+    }
+  );
 
-  const data = response?.data;
+  const data = response.data;
+
   if (!data?.cartLinesAdd) throw new Error("Invalid Shopify response");
 
   const { cart, userErrors } = data.cartLinesAdd;
+
   if (userErrors && userErrors.length > 0) {
     console.error("Shopify cartLinesAdd error:", userErrors);
     throw new Error(userErrors[0].message);
   }
 
   if (!cart) throw new Error("Cart not returned from Shopify");
+
   console.log("✅ Added to cart:", cart.id);
   return cart;
 }
@@ -73,21 +87,29 @@ export async function removeFromCart(cartId: string, lineId: string) {
       cart?: { id: string };
       userErrors?: ShopifyUserError[];
     };
-  }>({
-    query: REMOVE_FROM_CART_MUTATION,
-    variables: { cartId, lineIds: [lineId] },
-  });
+  }>(
+    REMOVE_FROM_CART_MUTATION,
+    {
+      variables: {
+        cartId,
+        lineIds: [lineId],
+      },
+    }
+  );
 
-  const data = response?.data;
+  const data = response.data;
+
   if (!data?.cartLinesRemove) throw new Error("Invalid Shopify response");
 
   const { cart, userErrors } = data.cartLinesRemove;
+
   if (userErrors && userErrors.length > 0) {
     console.error("Shopify cartLinesRemove error:", userErrors);
     throw new Error(userErrors[0].message);
   }
 
   if (!cart) throw new Error("Cart not returned from Shopify");
+
   console.log("🗑️ Removed from cart:", lineId);
   return cart;
 }

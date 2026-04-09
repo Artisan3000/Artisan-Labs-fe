@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ArticleGrid from "../ArticleGrid/page";
 import styles from "./styles.module.css";
+import { Article } from "@/lib/types/article";
 
 export default function FilterBar({
   blogs,
@@ -11,7 +12,7 @@ export default function FilterBar({
 }: {
   blogs: string[];
   counts: Record<string, number>;
-  articles: any[];
+  articles: Article[];
 }) {
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
 

@@ -1,72 +1,96 @@
 "use client";
-import { useState } from "react";
+import {
+  useState,
+  ReactNode,
+  Children,
+  isValidElement,
+  cloneElement,
+} from "react";
 import styles from "./Accordion.module.css";
 
-export function Accordion({ children }: { children: React.ReactNode }) {
+/* ------------------ ROOT ------------------ */
+
+export function Accordion({ children }: { children: ReactNode }) {
   return <div className={styles.wrapper}>{children}</div>;
 }
+
+/* ------------------ ITEM ------------------ */
+
+type AccordionItemProps = {
+  value: string;
+  children: ReactNode;
+  defaultOpen?: boolean; // 👈 new
+};
 
 export function AccordionItem({
   value,
   children,
-}: {
-  value: string;
-  children: React.ReactNode;
-}) {
-  const [open, setOpen] = useState(false);
+  defaultOpen = false,
+}: AccordionItemProps) {
+  const [open, setOpen] = useState(defaultOpen);
 
   return (
     <div className={styles.item}>
-      {Array.isArray(children)
-        ? children.map((child: any) => {
-            if (child.type.displayName === "AccordionTrigger") {
-              return {
-                ...child,
-                props: { ...child.props, open, onToggle: () => setOpen(!open) },
-              };
-            }
-            if (child.type.displayName === "AccordionContent") {
-              return {
-                ...child,
-                props: { ...child.props, open },
-              };
-            }
-            return child;
-          })
-        : children}
+      {Children.map(children, (child) => {
+        if (!isValidElement(child)) return child;
+
+        if (child.type === AccordionTrigger) {
+          return cloneElement(
+            child as React.ReactElement<AccordionTriggerProps>,
+            {
+              open,
+              onToggle: () => setOpen((prev) => !prev),
+            },
+          );
+        }
+
+        if (child.type === AccordionContent) {
+          return cloneElement(
+            child as React.ReactElement<AccordionContentProps>,
+            { open },
+          );
+        }
+
+        return child;
+      })}
     </div>
   );
 }
+
+/* ------------------ TRIGGER ------------------ */
+
+type AccordionTriggerProps = {
+  children: ReactNode;
+  open?: boolean;
+  onToggle?: () => void;
+};
 
 export function AccordionTrigger({
   children,
   open,
   onToggle,
-}: {
-  children: React.ReactNode;
-  open?: boolean;
-  onToggle?: () => void;
-}) {
+}: AccordionTriggerProps) {
   return (
     <button onClick={onToggle} className={styles.trigger}>
       {children}
-      <span className={`${styles.arrow} ${open ? styles.arrowOpen : ""}`}>▼</span>
+      <span className={`${styles.arrow} ${open ? styles.arrowOpen : ""}`}>
+        ▼
+      </span>
     </button>
   );
 }
-AccordionTrigger.displayName = "AccordionTrigger";
 
-export function AccordionContent({
-  children,
-  open,
-}: {
-  children: React.ReactNode;
+/* ------------------ CONTENT ------------------ */
+
+type AccordionContentProps = {
+  children: ReactNode;
   open?: boolean;
-}) {
+};
+
+export function AccordionContent({ children, open }: AccordionContentProps) {
   return (
     <div className={`${styles.content} ${open ? styles.contentOpen : ""}`}>
       {children}
     </div>
   );
 }
-AccordionContent.displayName = "AccordionContent";
