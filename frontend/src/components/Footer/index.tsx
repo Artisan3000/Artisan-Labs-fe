@@ -4,7 +4,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className={styles.footerWrapper}>
-      {/* ✅ Centered Logo */}
+      {/* Centered Logo */}
       <div className={styles.logoContainer}>
         <img
           src="/artisan-diag-blk.svg"
@@ -13,12 +13,12 @@ const Footer = () => {
         />
       </div>
 
-      {/* ✅ Store Info */}
+      {/* Store Info */}
       <div className={styles.storeInfo}>
         <div>
           Monday - Friday
           <br />
-          9:00 AM - 6:00 PM
+          11:00 AM - 7:00 PM
         </div>
         <div>
           Saturday: Closed
@@ -37,7 +37,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* ✅ Links & Social */}
+      {/* Links & Social */}
       <div className={styles.links}>
         <div>
           <h3>About</h3>
@@ -56,7 +56,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* ✅ Social with SVG icons */}
+        {/* Social with SVG icons */}
         <div>
           <h3>Follow</h3>
           <ul className={styles.socials}>
@@ -94,7 +94,7 @@ const Footer = () => {
 
       <div className={styles.footerBottom}>
         <p>&copy; {new Date().getFullYear()} Artisan Barber</p>
-        <p>Site updated 10/01/2025</p>
+        <p>Site updated 04/10/2026</p>
         <p>
           Handmade by{" "}
           <Link href="https://wearecobalt.net" target="_blank" rel="noopener noreferrer">

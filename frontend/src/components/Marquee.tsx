@@ -16,7 +16,7 @@ export default function Marquee() {
               className={styles.icon}
             />
             <span className={styles.text}>
-              5% of all purchases go to our charity. Free shipping over $99
+              Try our Volume Hero - Free shipping over $75
             </span>
           </div>
         ))}

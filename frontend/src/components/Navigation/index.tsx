@@ -19,13 +19,10 @@ const Navigation = () => {
     { name: "All", href: "/shop" },
   ];
 
-  const about = [
-    { name: "Team", href: "/team" },
-    { name: "Manifesto", href: "/manifesto" },
-  ];
-
   const learn = [
     { name: "Read", href: "/read" },
+    { name: "Team", href: "/team" },
+    { name: "Manifesto", href: "/manifesto" },
   ];
 
   return (
@@ -77,31 +74,9 @@ const Navigation = () => {
           )}
         </div>
 
-        {/* INFO MENU */}
-        <div
-          className={styles.menuItem}
-          onMouseEnter={() => setOpenMenu("about")}
-          onMouseLeave={() => setOpenMenu(null)}
-        >
-          <Link href="/about">Info</Link>
-          {openMenu === "about" && (
-            <div className={styles.dropdownMenu}>
-              {about.map((about) => (
-                <Link
-                  key={about.href}
-                  href={about.href}
-                  className={styles.dropdownLink}
-                >
-                  {about.name}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-
         {/* VISIT */}
         <div className={styles.menuItem}>
-          <Link href="/contact">Visit</Link>
+          <Link href="/visit">Visit</Link>
         </div>
 
         {/* LEARN MENU */}
@@ -124,11 +99,6 @@ const Navigation = () => {
               ))}
             </div>
           )}
-        </div>
-
-        {/* ACADEMY */}
-        <div className={styles.menuItem}>
-          <Link href="/academy">Academy</Link>
         </div>
 
         <div className={styles.marqueeWrapper}>
