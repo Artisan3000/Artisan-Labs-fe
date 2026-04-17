@@ -56,41 +56,49 @@ const team = [
     link: "https://getsquire.com/booking/book/manhattan/barber/-114137/services",
   },
   {
-    name: "Quentin",
-    title: "Atelier",
-    bio: "Quentin, born and raised in Houston and now based in New York, brings a unique blend of fashion, business, and psychology to Artisan Barber. With a background in Fashion Merchandising from Texas Southern University, he connects with clients through conversation, hospitality, and insight—whether guiding bookings, welcoming guests, or sharing the best of New York. His goal is simple: to make every client feel at home while representing the style and culture that define Artisan.",
-    img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/27490007.jpg?v=1758309939",
+    name: "Dione C.",
+    title: "Apprentice Barber",
+    exp: "Cutting since '14",
+    bio: "Dione completed a three-year apprenticeship from 2017 to 2019 under renowned Master Barber Kamal Nuru of Levels Harlem. From 2020 to 2024, she advanced her career in leading Afro barbershops and luxury salons, refining her expertise in clipper-based artistry and precision grooming. A proud 2025 graduate of Empire Manhattan, she added sheer work to her diverse skill set. Dione pairs technical precision with creative artistry to deliver modern, polished styles.",
+    img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/dione.png?v=1757629513",
+    link: "https://getsquire.com/booking/book/manhattan/barber/-136663/services",
   },
-  {
-    name: "Oomi",
-    title: "Chief of Staff",
-    bio: "Oomi, Artisan Barber’s Chief of Staff, brings a people-first approach to the shop. With roots in tech and wellness, she focuses on building a workplace where the team thrives and clients feel at home. From supporting growth to shaping a welcoming vibe, Oomi makes every visit more than just a haircut—it’s a moment of connection and care.",
-    img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/oomi_9cc6f3d7-4e6e-4903-bc3c-4cef15aaa112.png?v=1757629513",
-  },
+  // {
+  //   name: "Quentin",
+  //   title: "Atelier",
+  //   bio: "Quentin, born and raised in Houston and now based in New York, brings a unique blend of fashion, business, and psychology to Artisan Barber. With a background in Fashion Merchandising from Texas Southern University, he connects with clients through conversation, hospitality, and insight—whether guiding bookings, welcoming guests, or sharing the best of New York. His goal is simple: to make every client feel at home while representing the style and culture that define Artisan.",
+  //   img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/27490007.jpg?v=1758309939",
+  // },
+  // {
+  //   name: "Oomi",
+  //   title: "Chief of Staff",
+  //   bio: "Oomi, Artisan Barber’s Chief of Staff, brings a people-first approach to the shop. With roots in tech and wellness, she focuses on building a workplace where the team thrives and clients feel at home. From supporting growth to shaping a welcoming vibe, Oomi makes every visit more than just a haircut—it’s a moment of connection and care.",
+  //   img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/oomi_9cc6f3d7-4e6e-4903-bc3c-4cef15aaa112.png?v=1757629513",
+  // },
   {
     name: "Brian Felix",
     title: "Creative Director",
     bio: "Brian, Artisan Barber’s Creative Director, is the visionary behind the brand’s visual identity—from product packaging to shop design and seasonal rollouts. With a background in design and a love for storytelling, his creativity brings each detail of the Artisan experience to life.",
     img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/brian.png?v=1757629513",
   },
-  {
-    name: "Jada",
-    title: "PR Coordinator",
-    bio: "Jada is the creative force behind Artisan Barber’s outreach, blending her background in PR, journalism, and social media to craft compelling stories, partnerships, and community connections. A model, DJ, and NYC transplant with a passion for culture and connection, she brings energy and vision to every part of the brand.",
-    img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/jada_f9041511-9945-476c-90ed-89909a86cb5e.png?v=1757629513",
-  },
-  {
-    name: "Walesca",
-    title: "Apothecary",
-    bio: "Walesca is Artisan Barber’s product innovator and resident vibe curator, known for crafting multifunctional grooming products like her candle-to-hair-oil creations and spinning infectious DJ sets every Friday. A Brooklyn native with a flair for creativity and nightlife, she brings fresh energy, elevated self-care, and unforgettable vibes to the shop each week.",
-    img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/waleska_896863dd-27c2-4e1c-880f-589055bb6dc9.png?v=1757629513",
-  },
-  {
-    name: "Lauren",
-    title: "Social Media",
-    bio: "Lauren, the creative force behind Artisan Barber’s social media, uses her eye for photography and love for storytelling to bring the shop’s personality to life across TikTok and Instagram. Whether capturing transformations, creating behind-the-scenes content, or snapping team portraits, her work keeps our community connected, inspired, and always in the loop.",
-    img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/lauren_32d58d66-b35d-460a-a349-db4ed4cc1cb9.png?v=1757629513",
-  },
+  // {
+  //   name: "Jada",
+  //   title: "PR Coordinator",
+  //   bio: "Jada is the creative force behind Artisan Barber’s outreach, blending her background in PR, journalism, and social media to craft compelling stories, partnerships, and community connections. A model, DJ, and NYC transplant with a passion for culture and connection, she brings energy and vision to every part of the brand.",
+  //   img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/jada_f9041511-9945-476c-90ed-89909a86cb5e.png?v=1757629513",
+  // },
+  // {
+  //   name: "Walesca",
+  //   title: "Apothecary",
+  //   bio: "Walesca is Artisan Barber’s product innovator and resident vibe curator, known for crafting multifunctional grooming products like her candle-to-hair-oil creations and spinning infectious DJ sets every Friday. A Brooklyn native with a flair for creativity and nightlife, she brings fresh energy, elevated self-care, and unforgettable vibes to the shop each week.",
+  //   img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/waleska_896863dd-27c2-4e1c-880f-589055bb6dc9.png?v=1757629513",
+  // },
+  // {
+  //   name: "Lauren",
+  //   title: "Social Media",
+  //   bio: "Lauren, the creative force behind Artisan Barber’s social media, uses her eye for photography and love for storytelling to bring the shop’s personality to life across TikTok and Instagram. Whether capturing transformations, creating behind-the-scenes content, or snapping team portraits, her work keeps our community connected, inspired, and always in the loop.",
+  //   img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/lauren_32d58d66-b35d-460a-a349-db4ed4cc1cb9.png?v=1757629513",
+  // },
 ];
 
 export default function TeamPage() {

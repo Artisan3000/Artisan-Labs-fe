@@ -28,13 +28,14 @@ export function AccordionItem({
   defaultOpen = false,
 }: AccordionItemProps) {
   const [open, setOpen] = useState(defaultOpen);
+  const childArray = Children.toArray(children);
 
   return (
-    <div className={styles.item}>
-      {Children.map(children, (child) => {
+    <div className={styles.item} data-value={value}>
+      {childArray.map((child, index) => {
         if (!isValidElement(child)) return child;
 
-        if (child.type === AccordionTrigger) {
+        if (index === 0) {
           return cloneElement(
             child as React.ReactElement<AccordionTriggerProps>,
             {
@@ -44,7 +45,7 @@ export function AccordionItem({
           );
         }
 
-        if (child.type === AccordionContent) {
+        if (index === 1) {
           return cloneElement(
             child as React.ReactElement<AccordionContentProps>,
             { open },
@@ -71,7 +72,7 @@ export function AccordionTrigger({
   onToggle,
 }: AccordionTriggerProps) {
   return (
-    <button onClick={onToggle} className={styles.trigger}>
+    <button type="button" onClick={onToggle} className={styles.trigger}>
       {children}
       <span className={`${styles.arrow} ${open ? styles.arrowOpen : ""}`}>
         ▼

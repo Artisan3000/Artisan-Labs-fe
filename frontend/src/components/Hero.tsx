@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import styles from "./Hero.module.css";
 
 export default function HomeHero() {
@@ -46,6 +47,14 @@ export default function HomeHero() {
             Our barbers bring generations of skill and tradition to every cut.
             Book your appointment or shop our curated goods.
           </p>
+          <div className={styles.ctaRow}>
+            <Link href="/gallery" className={styles.secondaryButton}>
+              See our work
+            </Link>
+            <Link href="/" className={styles.primaryButton}>
+              Book Now
+            </Link>
+          </div>
         </div>
       </div>
     </section>

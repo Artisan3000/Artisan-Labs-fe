@@ -36,7 +36,9 @@
 .links {
   display: flex;
   flex-direction: row;
+  align-items: center;
   height: 60px;
+  min-width: 0;
 }
 
 .links a {
@@ -51,8 +53,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  width: 130px;
+  width: auto;
+  min-width: 110px;
+  padding: 0 0.5rem;
 }
 
 .menuItem:hover {
@@ -64,57 +67,77 @@
   color: var(--black);
 }
 
-.cart a {
-  text-decoration: none;
-  color: #fff;
-  font-size: 1rem;
-}
-
-.dropdownMenu {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  background-color: #fbfbdf;
-  list-style: none;
-  margin: 0;
-  z-index: 1001;
-  display: flex;
-  flex-direction: column;
-}
-
-.dropdownMenu .dropdownLink {
-  height: 35px;
-  padding: 0.5rem 0;
-  text-decoration: none;
+.actions {
+  width: 92px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
+.iconButton {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
+  border: 0;
+  background: transparent;
   color: var(--white);
-  margin: 0;
+  cursor: default;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
-.dropdownLink:hover {
-  background-color: var(--old-gold);
+.iconButton:hover {
+  background: var(--white);
   color: var(--black);
-}
-
-.dropdownMenu a {
-  text-decoration: none;
 }
 
 .marqueeWrapper {
   display: none;
   overflow: hidden;
   width: 250px;
+  min-width: 250px;
   background: var(--old-gold);
   align-self: center;
   height: 60px;
+  margin-left: 0.75rem;
 }
 
 @media screen and (min-width: 1024px) {
   .marqueeWrapper {
     display: block;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .nav {
+    padding: 0 0.75rem;
+  }
+
+  .links {
+    gap: 0.1rem;
+  }
+
+  .links a {
+    margin: 0 0.35rem;
+    font-size: 0.9rem;
+  }
+
+  .menuItem {
+    min-width: unset;
+    padding: 0;
+  }
+
+  .actions {
+    width: 88px;
+  }
+
+  .iconButton {
+    width: 36px;
+    height: 36px;
   }
 }

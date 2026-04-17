@@ -1,0 +1,91 @@
+.marquee {
+  margin-top: 2.5rem;
+  overflow: hidden;
+  width: 100%;
+}
+
+.track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: reviewScroll 52s linear infinite;
+}
+
+.marquee:hover .track {
+  animation-play-state: paused;
+}
+
+.ticket {
+  width: clamp(280px, 28vw, 360px);
+  min-height: 300px;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #111;
+  background: #fff;
+}
+
+.quote {
+  margin-bottom: 1rem;
+  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+  line-height: 1.02;
+  font-style: italic;
+  font-weight: normal;
+  text-wrap: balance;
+}
+
+.name {
+  margin-bottom: 1rem;
+  font-size: 1.15rem;
+  line-height: 1.15;
+}
+
+.detail {
+  margin-top: auto;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: rgba(17, 17, 17, 0.74);
+}
+
+.source {
+  margin-top: 0.85rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: rgba(17, 17, 17, 0.62);
+}
+
+@keyframes reviewScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 0.5rem));
+  }
+}
+
+@media (max-width: 1024px) {
+  .ticket {
+    width: clamp(280px, 42vw, 340px);
+  }
+}
+
+@media (max-width: 768px) {
+  .track {
+    animation-duration: 42s;
+  }
+
+  .ticket {
+    width: min(82vw, 320px);
+    min-height: 280px;
+    padding: 1.25rem;
+  }
+
+  .quote {
+    font-size: clamp(1.35rem, 7vw, 1.8rem);
+  }
+
+  .name {
+    font-size: 1rem;
+  }
+}

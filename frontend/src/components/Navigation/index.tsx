@@ -1,30 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import styles from "./styles.module.css";
 import Marquee from "../Marquee";
 
+const navItems = [
+  { name: "Services", href: "#services" },
+  { name: "Reviews", href: "#reviews" },
+  { name: "FAQ", href: "#faq" },
+  { name: "Visit", href: "#visit" },
+];
+
 const Navigation = () => {
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
-
-  const collections = [
-    { name: "Latest", href: "/shop/new" },
-    { name: "Best Sellers", href: "/shop/best-sellers" },
-    { name: "Hair Styling", href: "/shop/hair-styling" },
-    // { name: "Collaborations", href: "/shop/collaborations" },
-    { name: "Haberdashery", href: "/shop/haberdashery" },
-    { name: "Apothecary", href: "/shop/apothecary" },
-    { name: "Wardrobe", href: "/shop/wardrobe" },
-    { name: "All", href: "/shop" },
-  ];
-
-  const learn = [
-    { name: "Read", href: "/read" },
-    { name: "Team", href: "/team" },
-    { name: "Manifesto", href: "/manifesto" },
-  ];
-
   return (
     <nav className={styles.nav}>
       <div className={styles.logo}>
@@ -52,62 +39,81 @@ const Navigation = () => {
       </div>
 
       <div className={styles.links}>
-        {/* SHOP MENU */}
+        {/*
         <div
           className={styles.menuItem}
           onMouseEnter={() => setOpenMenu("shop")}
           onMouseLeave={() => setOpenMenu(null)}
         >
           <Link href="/shop">Shop</Link>
-          {openMenu === "shop" && (
-            <div className={styles.dropdownMenu}>
-              {collections.map((collection) => (
-                <Link
-                  key={collection.href}
-                  href={collection.href}
-                  className={styles.dropdownLink}
-                >
-                  {collection.name}
-                </Link>
-              ))}
-            </div>
-          )}
         </div>
 
-        {/* VISIT */}
         <div className={styles.menuItem}>
           <Link href="/visit">Visit</Link>
         </div>
 
-        {/* LEARN MENU */}
         <div
           className={styles.menuItem}
           onMouseEnter={() => setOpenMenu("learn")}
           onMouseLeave={() => setOpenMenu(null)}
         >
           <Link href="/learn">Learn</Link>
-          {openMenu === "learn" && (
-            <div className={styles.dropdownMenu}>
-              {learn.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={styles.dropdownLink}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          )}
         </div>
-
+        */}
+        {navItems.map((item) => (
+          <div key={item.href} className={styles.menuItem}>
+            <Link href={item.href}>{item.name}</Link>
+          </div>
+        ))}
         <div className={styles.marqueeWrapper}>
           <Marquee />
         </div>
       </div>
 
-      <div className={styles.cart}>
-        <Link href="/shop/bag">Bag</Link>
+      <div className={styles.actions}>
+        <button
+          type="button"
+          className={styles.iconButton}
+          aria-label="Search"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-3.5-3.5" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          className={styles.iconButton}
+          aria-label="Shopping cart"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="9" cy="20" r="1.5" />
+            <circle cx="18" cy="20" r="1.5" />
+            <path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h9.8a1 1 0 0 0 1-.8L21 7H7" />
+          </svg>
+        </button>
       </div>
     </nav>
   );

@@ -1,63 +1,153 @@
-.page {
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
-  font-family: 'Times New Roman', Times, serif;
-}
-
 .main {
-  padding: 0 2rem;
   margin-top: 60px;
+  padding-bottom: 5rem;
 }
 
-a.primary {
-  background: var(--foreground);
-  color: var(--background);
-  gap: 8px;
+.section,
+.sectionAlt {
+  padding: 5rem 2rem;
 }
 
-a.secondary {
-  border-color: var(--gray-alpha-200);
-  min-width: 158px;
+.section {
+  background: var(--white);
+  color: var(--black);
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
+.sectionAlt {
+  background: #f3efe5;
+  color: var(--black);
+}
+
+.sectionInner {
+  width: min(100%, 960px);
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.heading {
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: normal;
+  line-height: 0.95;
+  margin-bottom: 1rem;
+}
+
+.description {
+  max-width: 44rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.faqWrapper {
+  margin-top: 2.5rem;
+}
+
+.faqPlaceholder {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(17, 17, 17, 0.68);
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.serviceCard {
+  min-height: 240px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px solid #111;
+  border-radius: 0;
+  background: #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 18px 40px rgba(17, 17, 17, 0.06);
+  transition:
+    transform 500ms ease,
+    box-shadow 500ms ease,
+    border-color 500ms ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-4px);
+  border-color: #111;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    0 22px 44px rgba(17, 17, 17, 0.1),
+    0 0 0 1px rgba(17, 17, 17, 0.08);
+}
+
+.serviceIcon {
+  margin-bottom: 1.25rem;
+  color: var(--cerulean);
+  flex-shrink: 0;
+}
+
+.serviceHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.serviceTitle {
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-weight: normal;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.servicePrice {
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  letter-spacing: 0.008em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--cerulean);
+  white-space: nowrap;
+}
+
+.serviceDescription {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(17, 17, 17, 0.68);
+}
+
+@media (max-width: 960px) {
+  .servicesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .section,
+  .sectionAlt {
+    padding: 4rem 1.25rem;
   }
 
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
+  .sectionInner {
+    padding: 1.5rem 0;
   }
 
-  .footer a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
+  .description {
+    font-size: 1rem;
   }
-}
 
-@media (max-width: 600px) {
-  .ctas {
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .serviceCard {
+    min-height: unset;
+  }
+
+  .serviceHeader {
     flex-direction: column;
-  }
-
-  .ctas a {
-    font-size: 14px;
-    height: 40px;
-    padding: 0 16px;
-  }
-
-  a.secondary {
-    min-width: auto;
+    align-items: flex-start;
+    gap: 0.35rem;
   }
 }
