@@ -42,17 +42,16 @@ export default function HomeHero() {
 
         {/* Overlay Text */}
         <div className={styles.overlayText}>
-          <h1 className={styles.fadeUp}>150+ Years of Combined Craft</h1>
+          <h1 className={styles.fadeUp}>Your fresh start begins at Artisan.</h1>
           <p className={styles.float}>
-            Our barbers bring generations of skill and tradition to every cut.
-            Book your appointment or shop our curated goods.
+            Manhattan barbers with 150+ years of combined craft.
           </p>
           <div className={styles.ctaRow}>
-            <Link href="/gallery" className={styles.secondaryButton}>
+            <Link href="/visit/gallery" className={styles.secondaryButton}>
               See our work
             </Link>
             <Link href="/" className={styles.primaryButton}>
-              Book Now
+              Make Your Appointment
             </Link>
           </div>
         </div>

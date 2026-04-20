@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import SiteWidget from "@/components/SiteWidget";
+import HomeProductCarousel from "@/components/HomeProductCarousel";
 import HomeReviewCarousel, {
   type HomeReview,
 } from "@/components/HomeReviewCarousel";
@@ -12,6 +13,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/Accordion";
+import { shopifyClient } from "@/lib/shopify";
 
 type Service = {
   title: string;
@@ -314,7 +316,67 @@ const reviews: HomeReview[] = [
   },
 ];
 
-export default function Home() {
+type HomeProduct = {
+  id: string;
+  title: string;
+  handle: string;
+  vendor: string;
+  images: {
+    nodes: {
+      url: string;
+      altText: string | null;
+    }[];
+  };
+  priceRange: {
+    minVariantPrice: {
+      amount: string;
+      currencyCode: string;
+    };
+  };
+};
+
+export default async function Home() {
+  const { data } = await shopifyClient.request<{
+    products: {
+      nodes: HomeProduct[];
+    };
+  }>(
+    `
+      query HomeProducts {
+        products(first: 8, sortKey: CREATED_AT, reverse: true) {
+          nodes {
+            id
+            title
+            handle
+            vendor
+            images(first: 1) {
+              nodes {
+                url
+                altText
+              }
+            }
+            priceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    `
+  );
+
+  const featuredProducts =
+    data?.products.nodes.map((product) => ({
+      id: product.id,
+      title: product.title,
+      handle: product.handle,
+      vendor: product.vendor,
+      image: product.images.nodes[0] ?? null,
+      price: product.priceRange.minVariantPrice,
+    })) ?? [];
+
   return (
     <>
       <Navigation />
@@ -368,21 +430,8 @@ export default function Home() {
 
         <section id="products" className={styles.sectionAlt}>
           <div className={styles.sectionInner}>
-            <h2 className={styles.heading}>Products section placeholder</h2>
-            <p className={styles.description}>
-              This will become the featured products area for curated in-store
-              offerings and Shopify-driven product highlights.
-            </p>
-          </div>
-        </section>
-
-        <section id="visit" className={styles.section}>
-          <div className={styles.sectionInner}>
-            <h2 className={styles.heading}>Visit section placeholder</h2>
-            <p className={styles.description}>
-              This will become the location, hours, and in-person visit section
-              for the redesigned homepage.
-            </p>
+            <h2 className={styles.heading}>From the shelves</h2>
+            <HomeProductCarousel products={featuredProducts} />
           </div>
         </section>
       </main>

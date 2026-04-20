@@ -4,16 +4,34 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className={styles.footerWrapper}>
-      {/* Centered Logo */}
-      <div className={styles.logoContainer}>
-        <img
-          src="/artisan-diag-blk.svg"
-          alt="Artisan Logo"
-          className={styles.logo}
-        />
+      <div className={styles.topRow}>
+        <div className={styles.logoContainer}>
+          <img
+            src="/artisan-diag-blk.svg"
+            alt="Artisan Logo"
+            className={styles.logo}
+          />
+        </div>
+
+        <div className={styles.mapContainer}>
+          <div className={styles.mapContent}>
+            <div className={styles.mapCopy}>
+              <h3>Find Us in the Heart of the City</h3>
+              <p>
+                Located in the Upper East Side. Check the map and plan your
+                trip.
+              </p>
+            </div>
+
+          <img
+            src="https://artisanbarber.com/cdn/shop/files/maps_2x_54bfc767-3a2a-40f2-a122-75ce72bc9065.png?v=1744746036&width=3840"
+            alt="Map showing Artisan Barber location"
+            className={styles.mapImage}
+          />
+          </div>
+        </div>
       </div>
 
-      {/* Store Info */}
       <div className={styles.storeInfo}>
         <div>
           Monday - Friday
@@ -37,7 +55,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Links & Social */}
       <div className={styles.links}>
         <div>
           <h3>About</h3>
@@ -56,7 +73,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Social with SVG icons */}
         <div>
           <h3>Follow</h3>
           <ul className={styles.socials}>

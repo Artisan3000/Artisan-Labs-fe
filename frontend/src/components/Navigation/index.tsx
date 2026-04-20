@@ -1,17 +1,50 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./styles.module.css";
 import Marquee from "../Marquee";
 
-const navItems = [
+const homeNavItems = [
   { name: "Services", href: "#services" },
   { name: "Reviews", href: "#reviews" },
   { name: "FAQ", href: "#faq" },
-  { name: "Visit", href: "#visit" },
+  { name: "Products", href: "#products" },
+];
+
+const siteNavItems = [
+  { name: "Shop", href: "/shop" },
+  { name: "Visit", href: "/visit" },
+  { name: "Read", href: "/read" },
+];
+
+const collections = [
+  { name: "Latest", href: "/shop/new" },
+  { name: "Best Sellers", href: "/shop/best-sellers" },
+  { name: "Hair Styling", href: "/shop/hair-styling" },
+  { name: "Haberdashery", href: "/shop/haberdashery" },
+  { name: "Apothecary", href: "/shop/apothecary" },
+  { name: "Wardrobe", href: "/shop/wardrobe" },
+  { name: "All", href: "/shop" },
+];
+
+const visitLinks = [
+  { name: "Visit", href: "/visit" },
+  { name: "Gallery", href: "/visit/gallery" },
+];
+
+const readLinks = [
+  { name: "Read", href: "/read" },
+  { name: "Team", href: "/team" },
 ];
 
 const Navigation = () => {
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const navItems = isHomePage ? homeNavItems : siteNavItems;
+
   return (
     <nav className={styles.nav}>
       <div className={styles.logo}>
@@ -39,32 +72,78 @@ const Navigation = () => {
       </div>
 
       <div className={styles.links}>
-        {/*
-        <div
-          className={styles.menuItem}
-          onMouseEnter={() => setOpenMenu("shop")}
-          onMouseLeave={() => setOpenMenu(null)}
-        >
-          <Link href="/shop">Shop</Link>
-        </div>
+        {isHomePage ? (
+          navItems.map((item) => (
+            <div key={item.href} className={styles.menuItem}>
+              <Link href={item.href}>{item.name}</Link>
+            </div>
+          ))
+        ) : (
+          <>
+            <div
+              className={styles.menuItem}
+              onMouseEnter={() => setOpenMenu("shop")}
+              onMouseLeave={() => setOpenMenu(null)}
+            >
+              <Link href="/shop">Shop</Link>
+              {openMenu === "shop" && (
+                <div className={styles.dropdownMenu}>
+                  {collections.map((collection) => (
+                    <Link
+                      key={collection.href}
+                      href={collection.href}
+                      className={styles.dropdownLink}
+                    >
+                      {collection.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
 
-        <div className={styles.menuItem}>
-          <Link href="/visit">Visit</Link>
-        </div>
+            <div
+              className={styles.menuItem}
+              onMouseEnter={() => setOpenMenu("visit")}
+              onMouseLeave={() => setOpenMenu(null)}
+            >
+              <Link href="/visit">Visit</Link>
+              {openMenu === "visit" && (
+                <div className={styles.dropdownMenu}>
+                  {visitLinks.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={styles.dropdownLink}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
 
-        <div
-          className={styles.menuItem}
-          onMouseEnter={() => setOpenMenu("learn")}
-          onMouseLeave={() => setOpenMenu(null)}
-        >
-          <Link href="/learn">Learn</Link>
-        </div>
-        */}
-        {navItems.map((item) => (
-          <div key={item.href} className={styles.menuItem}>
-            <Link href={item.href}>{item.name}</Link>
-          </div>
-        ))}
+            <div
+              className={styles.menuItem}
+              onMouseEnter={() => setOpenMenu("read")}
+              onMouseLeave={() => setOpenMenu(null)}
+            >
+              <Link href="/read">Read</Link>
+              {openMenu === "read" && (
+                <div className={styles.dropdownMenu}>
+                  {readLinks.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={styles.dropdownLink}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </>
+        )}
         <div className={styles.marqueeWrapper}>
           <Marquee />
         </div>

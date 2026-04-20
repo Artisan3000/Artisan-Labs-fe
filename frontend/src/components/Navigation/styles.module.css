@@ -53,6 +53,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   width: auto;
   min-width: 110px;
   padding: 0 0.5rem;
@@ -65,6 +66,39 @@
 
 .menuItem:hover a {
   color: var(--black);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  min-width: 180px;
+  background-color: #fbfbdf;
+  list-style: none;
+  margin: 0;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+}
+
+.dropdownLink {
+  height: 38px;
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black) !important;
+  margin: 0 !important;
+  white-space: nowrap;
+}
+
+.dropdownLink:hover {
+  background-color: var(--old-gold);
+  color: var(--black) !important;
 }
 
 .actions {

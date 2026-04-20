@@ -16,7 +16,7 @@ export default function Marquee() {
               className={styles.icon}
             />
             <span className={styles.text}>
-              Try our Volume Hero - Free shipping over $75
+              Walk ins welcomed. Come in Monday - Friday from 11am to 7pm. We're closed on Saturdays. Sundays are appointment only.
             </span>
           </div>
         ))}
