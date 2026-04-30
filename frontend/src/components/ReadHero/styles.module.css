@@ -1,0 +1,80 @@
+.hero {
+  width: calc(100vw - 4rem);
+  max-width: 1320px;
+  margin: 2rem auto 3rem;
+  padding: 2rem;
+  background: var(--cerulean);
+  color: var(--white);
+}
+
+.heroHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 0.4fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: end;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 248, 0.22);
+}
+
+.kicker,
+.panelLabel {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 248, 0.62);
+}
+
+.heroHeader h1 {
+  max-width: 820px;
+  font-size: clamp(2.2rem, 6vw, 6rem);
+  font-weight: normal;
+  line-height: 0.9;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.4fr);
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.panel {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 248, 0.18);
+}
+
+.stocksPanel {
+  grid-row: span 2;
+}
+
+.panelLabel {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    width: calc(100vw - 2.5rem);
+    padding: 1.25rem;
+  }
+
+  .heroHeader,
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .stocksPanel {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero {
+    width: 100vw;
+    margin-top: 0;
+    padding: 1rem;
+    border-left: 0;
+    border-right: 0;
+  }
+}

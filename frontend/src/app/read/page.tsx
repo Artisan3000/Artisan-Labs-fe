@@ -2,6 +2,7 @@ import { shopifyClient } from "@/lib/shopify";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import FilterBar from "@/components/ReadFilter";
+import ReadHero from "@/components/ReadHero";
 import styles from "./page.module.css";
 import { Article } from "@/lib/types/article";
 
@@ -116,9 +117,7 @@ export default async function ReadPage() {
       <Navigation />
 
       <main className={styles.main}>
-        <header className={styles.header}>
-          <p>Stories, culture, and dispatches from Artisan Barber.</p>
-        </header>
+        <ReadHero />
 
         <FilterBar
           blogs={Object.keys(counts)}

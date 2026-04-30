@@ -116,6 +116,8 @@ export default async function ProductPage({
             />
           </div>
         </div>
+        <br />
+        <br />
 
         <div className={styles.productPref}>
           <div>

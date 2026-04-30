@@ -1,10 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useCart } from "@/components/CartProvider";
+import type { CartMoney } from "@/lib/shopifyCart";
 import styles from "./styles.module.css";
-import Marquee from "../Marquee";
 
 const homeNavItems = [
   { name: "Services", href: "#services" },
@@ -39,11 +42,30 @@ const readLinks = [
   { name: "Team", href: "/team" },
 ];
 
+function formatMoney(money?: CartMoney) {
+  if (!money) return "$0.00";
+
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: money.currencyCode,
+  }).format(Number(money.amount));
+}
+
 const Navigation = () => {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const navItems = isHomePage ? homeNavItems : siteNavItems;
+  const {
+    cart,
+    totalQuantity,
+    isOpen,
+    isLoading,
+    error,
+    removeItem,
+    toggleCart,
+    closeCart,
+  } = useCart();
 
   return (
     <nav className={styles.nav}>
@@ -144,9 +166,9 @@ const Navigation = () => {
             </div>
           </>
         )}
-        <div className={styles.marqueeWrapper}>
+        {/* <div className={styles.marqueeWrapper}>
           <Marquee />
-        </div>
+        </div> */}
       </div>
 
       <div className={styles.actions}>
@@ -171,28 +193,150 @@ const Navigation = () => {
             <path d="m20 20-3.5-3.5" />
           </svg>
         </button>
-        <button
-          type="button"
-          className={styles.iconButton}
-          aria-label="Shopping cart"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
+        <div className={styles.cartAction}>
+          <button
+            type="button"
+            className={styles.iconButton}
+            aria-label={`Shopping cart, ${totalQuantity} item${
+              totalQuantity === 1 ? "" : "s"
+            }`}
+            aria-expanded={isOpen}
+            onClick={toggleCart}
           >
-            <circle cx="9" cy="20" r="1.5" />
-            <circle cx="18" cy="20" r="1.5" />
-            <path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h9.8a1 1 0 0 0 1-.8L21 7H7" />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="9" cy="20" r="1.5" />
+              <circle cx="18" cy="20" r="1.5" />
+              <path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h9.8a1 1 0 0 0 1-.8L21 7H7" />
+            </svg>
+            <AnimatePresence>
+              {totalQuantity > 0 && (
+                <motion.span
+                  key={totalQuantity}
+                  className={styles.cartBadge}
+                  initial={{ scale: 0.65, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.65, opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 520, damping: 22 }}
+                >
+                  {totalQuantity}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
+
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                className={styles.cartDropdown}
+                initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
+              >
+                <div className={styles.cartHeader}>
+                  <h2>Cart</h2>
+                  <button
+                    type="button"
+                    className={styles.cartClose}
+                    onClick={closeCart}
+                    aria-label="Close cart"
+                  >
+                    &times;
+                  </button>
+                </div>
+
+                {error && <p className={styles.cartError}>{error}</p>}
+                {isLoading && <p className={styles.cartLoading}>Updating cart...</p>}
+
+                {cart && cart.lines.length > 0 ? (
+                  <>
+                    <ul className={styles.cartLines}>
+                      {cart.lines.map((line) => (
+                        <li key={line.id} className={styles.cartLine}>
+                          <Link
+                            href={`/products/${line.productHandle}`}
+                            className={styles.cartLineImage}
+                            onClick={closeCart}
+                          >
+                            {line.image ? (
+                              <Image
+                                src={line.image.url}
+                                alt={line.image.altText || line.productTitle}
+                                fill
+                                sizes="64px"
+                                className={styles.cartImage}
+                              />
+                            ) : (
+                              <span>No image</span>
+                            )}
+                          </Link>
+
+                          <div className={styles.cartLineInfo}>
+                            <Link
+                              href={`/products/${line.productHandle}`}
+                              onClick={closeCart}
+                              className={styles.cartLineTitle}
+                            >
+                              {line.productTitle}
+                            </Link>
+                            {line.variantTitle !== "Default Title" && (
+                              <p className={styles.cartLineVariant}>
+                                {line.variantTitle}
+                              </p>
+                            )}
+                            <p className={styles.cartLineMeta}>
+                              Qty {line.quantity} / {formatMoney(line.totalAmount)}
+                            </p>
+                            <button
+                              type="button"
+                              className={styles.cartRemove}
+                              onClick={() => removeItem(line.id)}
+                              disabled={isLoading}
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className={styles.cartFooter}>
+                      <div className={styles.cartSubtotal}>
+                        <span>Subtotal</span>
+                        <strong>{formatMoney(cart.subtotal)}</strong>
+                      </div>
+                      <Link
+                        href={cart.checkoutUrl}
+                        className={styles.checkoutButton}
+                        onClick={closeCart}
+                      >
+                        Checkout
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <div className={styles.cartEmpty}>
+                    <p>Your cart is empty.</p>
+                    <Link href="/shop" onClick={closeCart}>
+                      Shop products
+                    </Link>
+                  </div>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </nav>
   );

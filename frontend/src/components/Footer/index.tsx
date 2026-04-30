@@ -61,7 +61,6 @@ const Footer = () => {
           <ul>
             <li><Link href="/team">Team</Link></li>
             <li><Link href="/read">Read</Link></li>
-            <li><Link href="/manifesto">Manifesto</Link></li>
           </ul>
         </div>
         <div>
@@ -69,7 +68,6 @@ const Footer = () => {
           <ul>
             <li><Link href="/visit">Visit</Link></li>
             <li><Link href="/legal">Legal</Link></li>
-            <li><Link href="/careers">Careers</Link></li>
           </ul>
         </div>
 

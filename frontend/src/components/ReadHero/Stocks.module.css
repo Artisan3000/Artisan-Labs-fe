@@ -1,0 +1,44 @@
+.stocks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.stock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.symbol {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 248, 0.58);
+}
+
+.num {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.price {
+  font-size: 1.08rem;
+  text-align: right;
+}
+
+.delta {
+  display: flex;
+  align-items: center;
+}
+
+.up {
+  color: #3fb950;
+}
+
+.down {
+  color: #f85149;
+}

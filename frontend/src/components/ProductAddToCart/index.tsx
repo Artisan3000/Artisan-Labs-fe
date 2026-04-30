@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { useCart } from "@/components/CartProvider";
 import styles from "./styles.module.css";
 
 type Props = {
@@ -8,14 +10,30 @@ type Props = {
 };
 
 export default function ProductAddToCart({ variantId, available }: Props) {
-  const handleClick = () => {
+  const [status, setStatus] = useState<"idle" | "loading" | "added">("idle");
+  const { addItem } = useCart();
+
+  const handleClick = async () => {
     if (!available || !variantId) return;
-    console.log("Adding to cart:", variantId);
-    alert("Added to cart! (check console)");
+
+    setStatus("loading");
+
+    try {
+      await addItem(variantId, 1);
+      setStatus("added");
+      setTimeout(() => setStatus("idle"), 2000);
+    } catch (error) {
+      console.error("Cart error:", error);
+      setStatus("idle");
+    }
   };
 
   const label = !variantId
     ? "---"
+    : status === "loading"
+    ? "Adding..."
+    : status === "added"
+    ? "Added"
     : available
     ? "Add to Cart"
     : "Sold Out";
@@ -24,7 +42,7 @@ export default function ProductAddToCart({ variantId, available }: Props) {
     <button
       onClick={handleClick}
       className={available ? styles.button : styles.buttonDisabled}
-      disabled={!available || !variantId}
+      disabled={!available || !variantId || status === "loading"}
     >
       {label}
     </button>

@@ -92,7 +92,7 @@ export default function ProductDetails({
 
       <div className={styles.itemInfo}>
         <Accordion>
-          <AccordionItem value="item-info">
+          <AccordionItem value="item-info" defaultOpen>
             <AccordionTrigger>Details</AccordionTrigger>
             <AccordionContent>
               <div

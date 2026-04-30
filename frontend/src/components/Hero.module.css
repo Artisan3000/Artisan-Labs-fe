@@ -111,10 +111,10 @@
 
 @keyframes float {
   from {
-    transform: translateY(0px);
+    transform: translateY(10px);
   }
   to {
-    transform: translateY(-10px);
+    transform: translateY(0px);
   }
 }
 

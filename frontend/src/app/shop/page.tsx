@@ -116,10 +116,10 @@ export default async function ShopPage({
             <Link href="/shop/sale">Sale</Link>
           </div>
           <div className={styles.shopSettingsCol}>
-            <h1>Collaborations</h1>
-            <Link href="/shop/artisan-barber">Artisan Barber Merch</Link>
-            <Link href="/shop/duke-hyde">Duke & Hyde</Link>
-            <Link href="/shop/first-hand">First Hand</Link>
+            <h1>Vendors</h1>
+            <Link href="/shop/artisan-barber">Artisan Barber</Link>
+            <Link href="/shop/blind-barber">Blind Barber</Link>
+            <Link href="/shop/first-hand">Firsthand</Link>
             <Link href="/shop/lowriders">Lowriders</Link>
             <Link href="/shop/grills">Grills</Link>
           </div>

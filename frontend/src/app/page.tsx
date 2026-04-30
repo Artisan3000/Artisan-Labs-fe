@@ -2,6 +2,7 @@ import styles from "./page.module.css";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
+import HomeFacts from "@/components/HomeFacts";
 import SiteWidget from "@/components/SiteWidget";
 import HomeProductCarousel from "@/components/HomeProductCarousel";
 import HomeReviewCarousel, {
@@ -333,32 +334,48 @@ type HomeProduct = {
       currencyCode: string;
     };
   };
+  variants: {
+    nodes: {
+      id: string;
+      availableForSale: boolean;
+    }[];
+  };
 };
 
 export default async function Home() {
   const { data } = await shopifyClient.request<{
-    products: {
-      nodes: HomeProduct[];
-    };
+    collection: {
+      products: {
+        nodes: HomeProduct[];
+      };
+    } | null;
   }>(
     `
-      query HomeProducts {
-        products(first: 8, sortKey: CREATED_AT, reverse: true) {
-          nodes {
-            id
-            title
-            handle
-            vendor
-            images(first: 1) {
-              nodes {
-                url
-                altText
+      query HomeBestSellers {
+        collection(handle: "best-sellers") {
+          products(first: 8) {
+            nodes {
+              id
+              title
+              handle
+              vendor
+              images(first: 1) {
+                nodes {
+                  url
+                  altText
+                }
               }
-            }
-            priceRange {
-              minVariantPrice {
-                amount
-                currencyCode
+              priceRange {
+                minVariantPrice {
+                  amount
+                  currencyCode
+                }
+              }
+              variants(first: 1) {
+                nodes {
+                  id
+                  availableForSale
+                }
               }
             }
           }
@@ -368,13 +385,14 @@ export default async function Home() {
   );
 
   const featuredProducts =
-    data?.products.nodes.map((product) => ({
+    data?.collection?.products.nodes.map((product) => ({
       id: product.id,
       title: product.title,
       handle: product.handle,
       vendor: product.vendor,
       image: product.images.nodes[0] ?? null,
       price: product.priceRange.minVariantPrice,
+      variant: product.variants.nodes[0] ?? null,
     })) ?? [];
 
   return (
@@ -382,6 +400,7 @@ export default async function Home() {
       <Navigation />
       <main className={styles.main}>
         <Hero />
+        <HomeFacts />
         <SiteWidget />
         <section id="services" className={styles.section}>
           <div className={styles.sectionInner}>

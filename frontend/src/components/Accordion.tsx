@@ -6,6 +6,7 @@ import {
   isValidElement,
   cloneElement,
 } from "react";
+import { motion } from "framer-motion";
 import styles from "./Accordion.module.css";
 
 /* ------------------ ROOT ------------------ */
@@ -72,7 +73,12 @@ export function AccordionTrigger({
   onToggle,
 }: AccordionTriggerProps) {
   return (
-    <button type="button" onClick={onToggle} className={styles.trigger}>
+    <button
+      type="button"
+      onClick={onToggle}
+      className={styles.trigger}
+      aria-expanded={open}
+    >
       {children}
       <span className={`${styles.arrow} ${open ? styles.arrowOpen : ""}`}>
         ▼
@@ -90,8 +96,20 @@ type AccordionContentProps = {
 
 export function AccordionContent({ children, open }: AccordionContentProps) {
   return (
-    <div className={`${styles.content} ${open ? styles.contentOpen : ""}`}>
-      {children}
-    </div>
+    <motion.div
+      className={styles.content}
+      initial={false}
+      animate={{
+        height: open ? "auto" : 0,
+        opacity: open ? 1 : 0,
+      }}
+      transition={{
+        height: { duration: 0.34, ease: [0.22, 1, 0.36, 1] },
+        opacity: { duration: open ? 0.22 : 0.16, ease: "easeOut" },
+      }}
+      aria-hidden={!open}
+    >
+      <div className={styles.contentInner}>{children}</div>
+    </motion.div>
   );
 }

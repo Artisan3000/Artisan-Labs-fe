@@ -34,13 +34,8 @@
 
 .content {
   overflow: hidden;
-  transition: max-height 0.3s ease, opacity 0.3s ease;
-  max-height: 0;
-  opacity: 0;
 }
 
-.contentOpen {
-  max-height: 500px;
-  opacity: 1;
-  padding: 0.5rem 0 2rem;  
+.contentInner {
+  padding: 0.5rem 0 2rem;
 }

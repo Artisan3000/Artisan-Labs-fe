@@ -20,7 +20,7 @@ export default function ReviewSummary({
       <div className={styles.left}>
         <div className={styles.averageScore}>
           {average.toFixed(1)}
-          <span className={styles.outOf}>/5</span>
+          <span className={styles.outOf}>of 5</span>
         </div>
         <p className={styles.reviewCount}>({totalReviews} Reviews)</p>
       </div>

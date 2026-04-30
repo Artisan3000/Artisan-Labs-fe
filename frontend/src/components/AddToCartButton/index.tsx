@@ -2,37 +2,33 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { createCart, addToCart } from "@/lib/shopifyCart";
+import { useCart } from "@/components/CartProvider";
 import styles from "./styles.module.css";
 
 type Props = {
   variantId: string;
   disabled?: boolean;
+  tabIndex?: number;
 };
 
-export default function AddToCartButton({ variantId, disabled = false }: Props) {
+export default function AddToCartButton({
+  variantId,
+  disabled = false,
+  tabIndex,
+}: Props) {
   const [status, setStatus] = useState<"idle" | "loading" | "added">("idle");
+  const { addItem } = useCart();
 
   const handleClick = async () => {
     if (disabled || status === "loading") return;
     setStatus("loading");
 
     try {
-      // Get or create a cart ID
-      let cartId = localStorage.getItem("shopify_cart_id");
-      if (!cartId) {
-        const cart = await createCart(variantId, 1);
-        cartId = cart.id;
-        localStorage.setItem("shopify_cart_id", cart.id);
-      } else {
-        await addToCart(cartId, variantId, 1);
-      }
-
+      await addItem(variantId, 1);
       setStatus("added");
       setTimeout(() => setStatus("idle"), 2000);
     } catch (error) {
       console.error("Cart error:", error);
-      alert("Failed to add item to cart. Please try again.");
       setStatus("idle");
     }
   };
@@ -41,6 +37,7 @@ export default function AddToCartButton({ variantId, disabled = false }: Props) 
     <motion.button
       onClick={handleClick}
       disabled={disabled || status === "loading"}
+      tabIndex={tabIndex}
       className={disabled ? styles.buttonDisabled : styles.button}
       whileTap={!disabled ? { scale: 0.95 } : {}}
       whileHover={!disabled ? { scale: 1.05 } : {}}

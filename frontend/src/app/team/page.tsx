@@ -5,6 +5,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SiteWidget, { SQUIRE_BRAND_ID } from "@/components/SiteWidget";
 
 const team = [
   {
@@ -101,10 +102,60 @@ const team = [
   // },
 ];
 
+type SquireSetup = {
+  brand: string;
+  shop?: string;
+  barber?: string;
+};
+
+function getSquireSetup(link: string): SquireSetup {
+  const url = new URL(link);
+  const parts = url.pathname.split("/").filter(Boolean);
+  const bookIndex = parts.indexOf("book");
+  const barberIndex = parts.findIndex(
+    (part) => part === "barber" || part === "professional"
+  );
+
+  return {
+    brand: SQUIRE_BRAND_ID,
+    shop: bookIndex >= 0 ? parts[bookIndex + 1] : undefined,
+    barber: barberIndex >= 0 ? parts[barberIndex + 1] : undefined,
+  };
+}
+
+function openSquireBooking(
+  event: React.MouseEvent<HTMLAnchorElement>,
+  link: string
+) {
+  event.preventDefault();
+
+  const setup = getSquireSetup(link);
+  let attempts = 0;
+
+  const tryOpen = () => {
+    attempts += 1;
+
+    if (window.SquireWidget) {
+      window.SquireWidget.open(setup);
+      return;
+    }
+
+    if (attempts < 30) {
+      window.setTimeout(tryOpen, 100);
+      return;
+    }
+
+    window.location.href = link;
+  };
+
+  tryOpen();
+}
+
 export default function TeamPage() {
   return (
     <>
       <Navigation />
+      <SiteWidget showFloatingButton={false} />
       <main className={styles.main}>
         <header className={styles.header}>
           <motion.h2
@@ -161,9 +212,8 @@ export default function TeamPage() {
                 <div className={styles.buttonContainer}>
                   <a
                     href={member.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className={styles.button}
+                    onClick={(event) => openSquireBooking(event, member.link)}
                   >
                     Book Now
                   </a>

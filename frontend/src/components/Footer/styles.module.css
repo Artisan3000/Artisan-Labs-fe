@@ -7,8 +7,8 @@
 }
 
 .topRow {
-  display: grid;
-  grid-template-columns: 30fr 60fr;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   background-color: var(--white);
@@ -19,14 +19,13 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 280px;
-  padding: 2rem;
-  background-color: var(--white);
+  min-height: 80px;
 }
 
 .logo {
-  width: min(100%, 280px);
+  width: min(25%, 100px);
   height: auto;
+  margin: 0 auto 3rem;
 }
 
 .mapContainer {

@@ -44,7 +44,7 @@ export default function HomeHero() {
         <div className={styles.overlayText}>
           <h1 className={styles.fadeUp}>Your fresh start begins at Artisan.</h1>
           <p className={styles.float}>
-            Manhattan barbers with 150+ years of combined craft.
+            Manhattan's go-to barbershop for scissor cuts, clean fades, and precision styling.
           </p>
           <div className={styles.ctaRow}>
             <Link href="/visit/gallery" className={styles.secondaryButton}>

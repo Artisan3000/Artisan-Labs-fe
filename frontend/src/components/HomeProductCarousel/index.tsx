@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import AddToCartButton from "@/components/AddToCartButton";
 import homeStyles from "@/app/page.module.css";
 
 type HomeProduct = {
@@ -17,6 +18,10 @@ type HomeProduct = {
   price: {
     amount: string;
     currencyCode: string;
+  } | null;
+  variant: {
+    id: string;
+    availableForSale: boolean;
   } | null;
 };
 
@@ -157,6 +162,10 @@ const imageStyle = {
 
 const vendorStyle = {
   marginTop: "0.5rem",
+};
+
+const addToCartStyle = {
+  marginTop: "0.75rem",
 };
 
 const emptyImageStyle = {
@@ -387,6 +396,7 @@ export default function HomeProductCarousel({ products }: Props) {
       >
         <div ref={trackRef} style={trackStyle} aria-label="Featured products">
           {carouselProducts.map((product, index) => {
+            const isDuplicate = products.length > 1 && index >= products.length;
             const formattedPrice = product.price
               ? new Intl.NumberFormat("en-US", {
                   style: "currency",
@@ -395,46 +405,59 @@ export default function HomeProductCarousel({ products }: Props) {
               : null;
 
             return (
-              <Link
+              <article
                 key={`${product.id}-${index}`}
-                href={`/products/${product.handle}`}
                 className={homeStyles.productCard}
                 style={cardStyle}
                 data-product-card
-                aria-hidden={products.length > 1 && index >= products.length}
-                tabIndex={products.length > 1 && index >= products.length ? -1 : 0}
+                aria-hidden={isDuplicate}
               >
-                {product.image ? (
-                  <div style={imageWrapStyle}>
-                    <Image
-                      src={product.image.url}
-                      alt={product.image.altText || product.title}
-                      fill
-                      sizes="(max-width: 768px) 76vw, 280px"
-                      style={imageStyle}
+                <Link
+                  href={`/products/${product.handle}`}
+                  tabIndex={isDuplicate ? -1 : 0}
+                >
+                  {product.image ? (
+                    <div style={imageWrapStyle}>
+                      <Image
+                        src={product.image.url}
+                        alt={product.image.altText || product.title}
+                        fill
+                        sizes="(max-width: 768px) 76vw, 280px"
+                        style={imageStyle}
+                      />
+                    </div>
+                  ) : (
+                    <div style={emptyImageStyle}>
+                      <p className={homeStyles.serviceDescription}>
+                        Product image coming soon.
+                      </p>
+                    </div>
+                  )}
+
+                  <div className={homeStyles.productHeader}>
+                    <p className={homeStyles.productDescription} style={vendorStyle}>
+                      {product.vendor || "Artisan Barber"}
+                    </p>
+                    <h3 className={homeStyles.productTitle}>{product.title}</h3>
+                  </div>
+
+                  <div>
+                    {formattedPrice && (
+                      <p className={homeStyles.productPrice}>{formattedPrice}</p>
+                    )}
+                  </div>
+                </Link>
+
+                {product.variant && (
+                  <div style={addToCartStyle}>
+                    <AddToCartButton
+                      variantId={product.variant.id}
+                      disabled={!product.variant.availableForSale}
+                      tabIndex={isDuplicate ? -1 : 0}
                     />
                   </div>
-                ) : (
-                  <div style={emptyImageStyle}>
-                    <p className={homeStyles.serviceDescription}>
-                      Product image coming soon.
-                    </p>
-                  </div>
                 )}
-
-                <div className={homeStyles.productHeader}>
-                  <p className={homeStyles.productDescription} style={vendorStyle}>
-                    {product.vendor || "Artisan Barber"}
-                  </p>
-                  <h3 className={homeStyles.productTitle}>{product.title}</h3>
-                </div>
-
-                <div>
-                  {formattedPrice && (
-                    <p className={homeStyles.productPrice}>{formattedPrice}</p>
-                  )}
-                </div>
-              </Link>
+              </article>
             );
           })}
         </div>
