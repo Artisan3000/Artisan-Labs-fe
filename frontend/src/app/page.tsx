@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import HomeFacts from "@/components/HomeFacts";
-import SiteWidget from "@/components/SiteWidget";
 import HomeProductCarousel from "@/components/HomeProductCarousel";
 import HomeReviewCarousel, {
   type HomeReview,
@@ -294,13 +293,13 @@ const reviews: HomeReview[] = [
       "Been cutting my hair with Charlie for 7 years now. He is the best in the city. Thank you Charlie!",
     source: "Google Maps Review",
   },
-  {
+/*   {
     quote: "Not cookie cutter, can do it all.",
     name: "Lucien von Wehren",
     detail:
       "Super talented gem to have in UES. Not cookie cutter, can do it all. Satesh is amazing.",
     source: "Google Maps Review",
-  },
+  },   */
   {
     quote: "They took great care of me while visiting town.",
     name: "Dallin Knudson",
@@ -401,7 +400,6 @@ export default async function Home() {
       <main className={styles.main}>
         <Hero />
         <HomeFacts />
-        <SiteWidget />
         <section id="services" className={styles.section}>
           <div className={styles.sectionInner}>
             <h2 className={styles.heading}>What we do</h2>

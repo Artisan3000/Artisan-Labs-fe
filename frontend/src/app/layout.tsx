@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CartProvider } from "@/components/CartProvider";
+import SiteWidget from "@/components/SiteWidget";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,8 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <CartProvider>{children}</CartProvider>
+      <body suppressHydrationWarning>
+        <CartProvider>
+          {children}
+          <SiteWidget />
+        </CartProvider>
       </body>
     </html>
   );

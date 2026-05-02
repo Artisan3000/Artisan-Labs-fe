@@ -1,24 +1,18 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
+import styles from "./styles.module.css";
+import { openSquireBooking, SQUIRE_BRAND_ID } from "@/lib/squire";
 
-export const SQUIRE_BRAND_ID = "91bdb09d-3ec5-4fc6-b8a1-012648984e77";
 const SQUIRE_SCRIPT_ID = "squire-water-widget";
 const SQUIRE_STYLE_ID = "artisan-squire-button-style";
-
-type SquireSetup = {
-  brand: string;
-  shop?: string | null;
-  barber?: string | null;
-};
-
-declare global {
-  interface Window {
-    SquireWidget?: {
-      open: (setup?: SquireSetup) => void;
-    };
-  }
-}
 
 function shouldLoadSquire() {
   const userAgent = window.navigator.userAgent;
@@ -30,7 +24,7 @@ function shouldLoadSquire() {
   );
 }
 
-function styleSquireButton(showFloatingButton: boolean) {
+function styleSquireButton() {
   const root = document.getElementById("squire_booking_widget_root");
   const shadowRoot = root?.shadowRoot;
 
@@ -39,50 +33,9 @@ function styleSquireButton(showFloatingButton: boolean) {
   const existingStyle = shadowRoot.getElementById(SQUIRE_STYLE_ID);
   const css = `
     button#squire-book-button {
-      ${
-        showFloatingButton
-          ? ""
-          : "display: none !important; visibility: hidden !important;"
-      }
-      bottom: 2.3rem !important;
-      right: 2rem !important;
-      width: auto !important;
-      height: auto !important;
-      min-width: 0 !important;
-      border: 0 !important;
-      border-radius: 0 !important;
-      background-color: #e0c01d !important;
-      color: #111 !important;
-      padding: 0 !important;
-      font-family: "Times New Roman", Times, serif !important;
-      font-size: 1rem !important;
-      font-weight: 500 !important;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
-      transition:
-        transform 0.3s ease,
-        background-color 0.3s ease,
-        color 0.3s ease,
-        opacity 300ms linear !important;
-    }
-
-    button#squire-book-button:hover {
-      transform: scale(1.1) !important;
-      background-color: #111 !important;
-      color: #e0c01d !important;
-    }
-
-    button#squire-book-button > span {
-      position: static !important;
-      display: block !important;
-      width: auto !important;
-      padding: 0.75rem 1.5rem !important;
-      transform: none !important;
-      color: inherit !important;
-      font-family: inherit !important;
-      font-size: inherit !important;
-      line-height: 1.2 !important;
-      white-space: nowrap !important;
-      animation: none !important;
+      display: none !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
     }
   `;
 
@@ -103,13 +56,56 @@ export default function SiteWidget({
 }: {
   showFloatingButton?: boolean;
 }) {
+  const pathname = usePathname();
+  const { scrollY } = useScroll();
+  const [homeHeroPassed, setHomeHeroPassed] = useState(false);
+  const [homeHeroBottom, setHomeHeroBottom] = useState(0);
+  const shouldShowFloatingButton =
+    showFloatingButton && (pathname !== "/" || homeHeroPassed);
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      return;
+    }
+
+    let frame = 0;
+    const updateHomeHeroBottom = () => {
+      const hero = document.getElementById("home-hero");
+
+      if (!hero) {
+        setHomeHeroBottom(0);
+        setHomeHeroPassed(false);
+        return;
+      }
+
+      const threshold = hero.offsetTop + hero.offsetHeight - 60;
+
+      setHomeHeroBottom(threshold);
+      setHomeHeroPassed(window.scrollY >= threshold);
+    };
+
+    frame = window.requestAnimationFrame(updateHomeHeroBottom);
+    window.addEventListener("resize", updateHomeHeroBottom);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("resize", updateHomeHeroBottom);
+    };
+  }, [pathname]);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (pathname !== "/") return;
+
+    setHomeHeroPassed(homeHeroBottom > 0 && latest >= homeHeroBottom);
+  });
+
   useEffect(() => {
     if (!shouldLoadSquire()) return;
 
     let attempts = 0;
     const interval = window.setInterval(() => {
       attempts += 1;
-      styleSquireButton(showFloatingButton);
+      styleSquireButton();
 
       const styled = document
         .getElementById("squire_booking_widget_root")
@@ -134,7 +130,30 @@ export default function SiteWidget({
     }
 
     return () => window.clearInterval(interval);
-  }, [showFloatingButton]);
+  }, []);
 
-  return null;
+  return (
+    <AnimatePresence>
+      {shouldShowFloatingButton && (
+        <motion.button
+          type="button"
+          className={`${styles.siteWidget} ${styles.btn}`}
+          onClick={() => openSquireBooking()}
+          initial={{ opacity: 0, y: 30, scale: 0.92 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 22, scale: 0.96 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.96 }}
+          transition={{
+            type: "spring",
+            stiffness: 420,
+            damping: 24,
+            mass: 0.8,
+          }}
+        >
+          BOOK NOW
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
 }

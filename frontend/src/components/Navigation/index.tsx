@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCart } from "@/components/CartProvider";
+import { useOptionalCart } from "@/components/CartProvider";
 import type { CartMoney } from "@/lib/shopifyCart";
 import styles from "./styles.module.css";
 
@@ -25,10 +25,11 @@ const siteNavItems = [
 const collections = [
   { name: "Latest", href: "/shop/new" },
   { name: "Best Sellers", href: "/shop/best-sellers" },
-  { name: "Hair Styling", href: "/shop/hair-styling" },
-  { name: "Haberdashery", href: "/shop/haberdashery" },
-  { name: "Apothecary", href: "/shop/apothecary" },
-  { name: "Wardrobe", href: "/shop/wardrobe" },
+  { name: "Artisan Barber", href: "/shop/artisan-barber" },
+  { name: "Blind Barber", href: "/shop/blind-barber" },
+  { name: "Firsthand", href: "/shop/firsthand" },
+  { name: "Malin + Goetz", href: "/shop/malin-goetz" },
+  { name: "Duke and Hyde", href: "/shop/duke-hyde" },
   { name: "All", href: "/shop" },
 ];
 
@@ -56,6 +57,7 @@ const Navigation = () => {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const navItems = isHomePage ? homeNavItems : siteNavItems;
+  const cartContext = useOptionalCart();
   const {
     cart,
     totalQuantity,
@@ -65,7 +67,16 @@ const Navigation = () => {
     removeItem,
     toggleCart,
     closeCart,
-  } = useCart();
+  } = cartContext ?? {
+    cart: null,
+    totalQuantity: 0,
+    isOpen: false,
+    isLoading: false,
+    error: null,
+    removeItem: async () => {},
+    toggleCart: () => {},
+    closeCart: () => {},
+  };
 
   return (
     <nav className={styles.nav}>

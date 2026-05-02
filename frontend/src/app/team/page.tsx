@@ -5,7 +5,11 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import SiteWidget, { SQUIRE_BRAND_ID } from "@/components/SiteWidget";
+import {
+  openSquireBooking,
+  SQUIRE_BRAND_ID,
+  type SquireSetup,
+} from "@/lib/squire";
 
 const team = [
   {
@@ -32,14 +36,14 @@ const team = [
     img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/irma.png?v=1757629513",
     link: "https://getsquire.com/booking/book/manhattan/barber/-85231/services",
   },
-  {
+/*   {
     name: "Satesh C.",
     title: "Master Barber / Stylist",
     exp: "Cutting since '14",
     bio: "Satesh, a master barber from Trinidad and Tobago, is known at Artisan Barber for his expert classic cuts and flawless skin fades, blending timeless techniques with a modern touch. With a passion for clean, polished styles and a flair for communication, he ensures every client leaves feeling confident and sharp.",
     img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/satesh_fe3d5e06-3644-4efa-a0d6-95e0133419d1.png?v=1757629514",
     link: "https://getsquire.com/booking/book/manhattan/barber/-85228/services",
-  },
+  }, */
   {
     name: "Cathy",
     title: "Kids Barber",
@@ -102,12 +106,6 @@ const team = [
   // },
 ];
 
-type SquireSetup = {
-  brand: string;
-  shop?: string;
-  barber?: string;
-};
-
 function getSquireSetup(link: string): SquireSetup {
   const url = new URL(link);
   const parts = url.pathname.split("/").filter(Boolean);
@@ -123,39 +121,19 @@ function getSquireSetup(link: string): SquireSetup {
   };
 }
 
-function openSquireBooking(
+function handleSquireBooking(
   event: React.MouseEvent<HTMLAnchorElement>,
   link: string
 ) {
   event.preventDefault();
 
-  const setup = getSquireSetup(link);
-  let attempts = 0;
-
-  const tryOpen = () => {
-    attempts += 1;
-
-    if (window.SquireWidget) {
-      window.SquireWidget.open(setup);
-      return;
-    }
-
-    if (attempts < 30) {
-      window.setTimeout(tryOpen, 100);
-      return;
-    }
-
-    window.location.href = link;
-  };
-
-  tryOpen();
+  openSquireBooking(getSquireSetup(link));
 }
 
 export default function TeamPage() {
   return (
     <>
       <Navigation />
-      <SiteWidget showFloatingButton={false} />
       <main className={styles.main}>
         <header className={styles.header}>
           <motion.h2
@@ -213,7 +191,7 @@ export default function TeamPage() {
                   <a
                     href={member.link}
                     className={styles.button}
-                    onClick={(event) => openSquireBooking(event, member.link)}
+                    onClick={(event) => handleSquireBooking(event, member.link)}
                   >
                     Book Now
                   </a>

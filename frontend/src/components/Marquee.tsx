@@ -16,7 +16,8 @@ export default function Marquee() {
               className={styles.icon}
             />
             <span className={styles.text}>
-              Walk ins welcomed. Come in Monday - Friday from 11am to 7pm. We're closed on Saturdays. Sundays are appointment only.
+              Walk ins welcomed. Come in Monday - Friday from 11am to 7pm.
+              We&apos;re closed on Saturdays. Sundays are appointment only.
             </span>
           </div>
         ))}

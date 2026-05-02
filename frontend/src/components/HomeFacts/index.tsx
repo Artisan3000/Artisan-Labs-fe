@@ -12,7 +12,7 @@ const facts = [
   },
   {
     title: "Manhattan Born",
-    description: "Rooted in the community since day one.",
+    description: "Rooted in the community since 2017.",
     icon: "/diamond.svg",
   },
   {

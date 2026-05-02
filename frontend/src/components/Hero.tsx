@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./Hero.module.css";
+import { openSquireBooking } from "@/lib/squire";
 
 export default function HomeHero() {
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -12,7 +13,7 @@ export default function HomeHero() {
   }, []);
 
   return (
-    <section className={styles.hero}>
+    <section id="home-hero" className={styles.hero}>
       <div className={styles.heroContainer}>
         {/* Placeholder Image */}
         <img
@@ -42,17 +43,21 @@ export default function HomeHero() {
 
         {/* Overlay Text */}
         <div className={styles.overlayText}>
-          <h1 className={styles.fadeUp}>Your fresh start begins at Artisan.</h1>
+          <h1 className={styles.fadeUp}>Your signature look begins at Artisan.</h1>
           <p className={styles.float}>
-            Manhattan's go-to barbershop for scissor cuts, clean fades, and precision styling.
+            Manhattan&apos;s go-to barbershop for scissor cuts, clean fades, and precision styling.
           </p>
           <div className={styles.ctaRow}>
             <Link href="/visit/gallery" className={styles.secondaryButton}>
               See our work
             </Link>
-            <Link href="/" className={styles.primaryButton}>
+            <button
+              type="button"
+              className={styles.primaryButton}
+              onClick={() => openSquireBooking()}
+            >
               Make Your Appointment
-            </Link>
+            </button>
           </div>
         </div>
       </div>

@@ -33,7 +33,7 @@ const brands = [
   {
     name: "Artisan Barber",
     src: "/brands/artisan-blk-short.svg",
-    href: "/shop/artisan",
+    href: "/shop/artisan-barber",
     width: 110,
     height: 42,
   },

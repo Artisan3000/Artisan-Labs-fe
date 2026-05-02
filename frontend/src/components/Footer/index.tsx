@@ -44,7 +44,8 @@ const Footer = () => {
           Sunday: Appointment Only
         </div>
         <div>
-          (917) 388-3554
+          {/* (917) 388-3554 */}
+          (833) 750-2760
           <br />
           Get In Touch
         </div>
