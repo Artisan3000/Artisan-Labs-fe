@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 
 const facts = [
   {
-    title: "Master Barbers",
+    title: "Expert Barbers",
     description: "Trained, experienced, precise.",
     icon: "/oval.svg",
   },

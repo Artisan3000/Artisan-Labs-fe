@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import ProductDetails from "@/components/ProductDetails";
 import ProductRecommendations from "@/components/ProductRecommendations";
 import ProductReviews from "@/components/ProductReviews";
+import { mockReviewsByProductHandle } from "@/lib/mockReviews";
 import Image from "next/image";
 
 import {
@@ -12,12 +13,6 @@ import {
   normalizeProduct,
   Product,
 } from "@/lib/transformers/product";
-
-type Review = {
-  name: string;
-  rating: number;
-  comment: string;
-};
 
 export default async function ProductPage({
   params,
@@ -67,26 +62,7 @@ export default async function ProductPage({
   }
 
   const product: Product = normalizeProduct(rawProduct);
-
-  const mockReviews: Review[] = [
-    {
-      name: "Camila",
-      rating: 5,
-      comment:
-        "Amazing quality and color. The fit is perfect — definitely worth it!",
-    },
-    {
-      name: "Jonas",
-      rating: 4,
-      comment:
-        "Really nice material. Slightly oversized, but looks great overall.",
-    },
-    {
-      name: "Zoe",
-      rating: 5,
-      comment: "Bought this at the concert — nostalgia overload!",
-    },
-  ];
+  const mockReviews = mockReviewsByProductHandle[handle] ?? [];
 
   return (
     <>
@@ -119,12 +95,14 @@ export default async function ProductPage({
         <br />
         <br />
 
-        <div className={styles.productPref}>
-          <div>
-            <h1>Ratings & Reviews</h1>
-            <ProductReviews reviews={mockReviews} />
+        {mockReviews.length > 0 && (
+          <div className={styles.productPref}>
+            <div>
+              <h1>Ratings & Reviews</h1>
+              <ProductReviews reviews={mockReviews} />
+            </div>
           </div>
-        </div>
+        )}
 
         <div className={styles.productRecs}>
           <ProductRecommendations productId={product.id} />

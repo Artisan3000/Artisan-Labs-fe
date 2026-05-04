@@ -160,10 +160,6 @@ const imageStyle = {
   objectFit: "cover" as const,
 };
 
-const vendorStyle = {
-  marginTop: "0.5rem",
-};
-
 const addToCartStyle = {
   marginTop: "0.75rem",
 };
@@ -435,9 +431,6 @@ export default function HomeProductCarousel({ products }: Props) {
                   )}
 
                   <div className={homeStyles.productHeader}>
-                    <p className={homeStyles.productDescription} style={vendorStyle}>
-                      {product.vendor || "Artisan Barber"}
-                    </p>
                     <h3 className={homeStyles.productTitle}>{product.title}</h3>
                   </div>
 

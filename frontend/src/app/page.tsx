@@ -61,11 +61,12 @@ function RazorIcon() {
       className={styles.serviceIcon}
       aria-hidden="true"
     >
-      <path d="M40 88h104a24 24 0 0 1 24 24v8" />
-      <path d="M168 120h24a24 24 0 0 0 24-24V64H104" />
-      <path d="M40 88V56h64v32" />
-      <path d="M168 128l-56 56" />
-      <path d="m112 184 28 28" />
+      <path d="M84 80c10-22 26-34 44-34s34 12 44 34" />
+      <path d="M60 108c10-18 24-28 42-28h52c18 0 32 10 42 28" />
+      <path d="M72 112v28c0 38 24 70 56 84 32-14 56-46 56-84v-28" />
+      <path d="M96 148c8 10 18 15 32 15s24-5 32-15" />
+      <path d="M128 164v44" />
+      <path d="M92 196c12-2 24-8 36-20 12 12 24 18 36 20" />
     </svg>
   );
 }
@@ -178,9 +179,9 @@ const services: Service[] = [
     icon: <ScissorsIcon />,
   },
   {
-    title: "Skin fade",
-    price: "$70+",
-    description: "Sharp, close fade work with a polished barbershop finish.",
+    title: "Beard trim",
+    price: "$45",
+    description: "Precision trim for a clean, polished beard shape.",
     icon: <RazorIcon />,
   },
   {
@@ -293,13 +294,20 @@ const reviews: HomeReview[] = [
       "Been cutting my hair with Charlie for 7 years now. He is the best in the city. Thank you Charlie!",
     source: "Google Maps Review",
   },
-/*   {
-    quote: "Not cookie cutter, can do it all.",
-    name: "Lucien von Wehren",
+  {
+    quote: "Could not recommend Irma enough.",
+    name: "Jake B",
     detail:
-      "Super talented gem to have in UES. Not cookie cutter, can do it all. Satesh is amazing.",
+      "Had a great experience here today, could not recommend Irma enough. She really understood my hair goals and walked me through the haircut in a way that was so specific and lovely. All around a great human and an even better haircut. Thanks Irma!",
     source: "Google Maps Review",
-  },   */
+  },
+  {
+    quote: "The best barber shop on the upper east side!",
+    name: "Laurie Giamella",
+    detail:
+      "The best barber shop on the upper east side! The owner is so kind and Kathy is just amazing with kids!! My son never liked getting his haircut and now he actually looks forward to it and the haircut itself is just perfect. Couldn’t recommend them more!",
+    source: "Google Maps Review",
+  },
   {
     quote: "They took great care of me while visiting town.",
     name: "Dallin Knudson",
@@ -420,6 +428,13 @@ export default async function Home() {
           </div>
         </section>
 
+        <section id="products" className={styles.sectionAlt}>
+          <div className={styles.sectionInner}>
+            <h2 className={styles.heading}>From the shelves</h2>
+            <HomeProductCarousel products={featuredProducts} />
+          </div>
+        </section>
+
         <section id="reviews" className={styles.sectionAlt}>
           <div className={styles.sectionInner}>
             <h2 className={styles.heading}>What the block is saying</h2>
@@ -445,12 +460,6 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="products" className={styles.sectionAlt}>
-          <div className={styles.sectionInner}>
-            <h2 className={styles.heading}>From the shelves</h2>
-            <HomeProductCarousel products={featuredProducts} />
-          </div>
-        </section>
       </main>
       <Footer />
     </>

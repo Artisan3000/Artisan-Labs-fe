@@ -119,7 +119,7 @@ export default async function CollectionPage({
       <Navigation />
 
       <main className={styles.main}>
-        <ShopControls />
+        <ShopControls hideFilter />
 
         <h1 className={styles.heading}>{collection.title}</h1>
 
@@ -171,7 +171,7 @@ export default async function CollectionPage({
                     )}
 
                     <h2 className={styles.title}>{p.title}</h2>
-                    <p className={styles.vendor}>{p.vendor}</p>
+                    {/* <p className={styles.vendor}>{p.vendor}</p> */}
 
                     <p
                       className={

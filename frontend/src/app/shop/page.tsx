@@ -109,7 +109,7 @@ export default async function ShopPage({
         <div className={styles.shopSettings}>
           <div className={styles.shopSettingsCat}>
             <h1>Category</h1>
-            <Link href="/shop/">All</Link>
+            {/* <Link href="/shop/">All</Link> */}
             <Link href="/shop/hair">Hair</Link>
             <Link href="/shop/skin">Skin</Link>
             <Link href="/shop/beard">Beard</Link>
@@ -123,7 +123,7 @@ export default async function ShopPage({
             <Link href="/shop/blind-barber">Blind Barber</Link>
             <Link href="/shop/firsthand">Firsthand</Link>
             <Link href="/shop/malin-goetz">Malin + Goetz</Link>
-            <Link href="/shop/duke-hyde">Duke and Hyde</Link>
+            {/* <Link href="/shop/duke-hyde">Duke and Hyde</Link> */}
           </div>
 
         </div>
@@ -163,7 +163,7 @@ export default async function ShopPage({
                       </div>
                     )}
                     <h2 className={styles.title}>{p.title}</h2>
-                    <p className={styles.vendor}>{p.vendor}</p>
+                    {/* <p className={styles.vendor}>{p.vendor}</p> */}
 
                     <p
                       className={

@@ -138,14 +138,6 @@
   text-wrap: balance;
 }
 
-.productDescription {
-  font-size: 0.8rem;
-  letter-spacing: -0.03em;
-  line-height: 0.7;
-  color: var(--gray);
-  font-style: italic;
-}
-
 .productPrice {
   font-size: 2rem;
   letter-spacing: 0.008em;

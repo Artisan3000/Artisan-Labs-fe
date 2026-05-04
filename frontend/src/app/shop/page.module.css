@@ -59,6 +59,11 @@
   justify-content: center;
 }
 
+.shopSettingsHidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .shopSettings button {
   display: flex;
   height: 33px;

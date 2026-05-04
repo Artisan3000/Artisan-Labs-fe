@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import styles from "./page.module.css";
@@ -37,6 +38,8 @@ const locations = [
     body: "Artisan Barber’s first home was a sleek, intimate 3-chair shop on Manhattan’s Upper East Side. Designed with a signature Slide-Away Glass façade, it invited the energy of the city right into the shop. Inside, clients were met with classic barber chairs, clean modern lines, and a curated soundtrack that kept the vibe sharp. This was where the vision was born - combining craft barbering, great music, and elite grooming products in one cool neighborhood hub.",
   },
 ];
+
+type FormStatus = "idle" | "sending" | "success" | "error";
 
 function VisitImage({
   src,
@@ -78,6 +81,53 @@ function VisitImage({
 }
 
 export default function VisitPage() {
+  const [formStatus, setFormStatus] = useState<FormStatus>("idle");
+  const [formMessage, setFormMessage] = useState("");
+
+  async function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setFormStatus("sending");
+    setFormMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          subject: formData.get("subject"),
+          message: formData.get("message"),
+          website: formData.get("website"),
+        }),
+      });
+
+      const result = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(result.error || "Message failed to send.");
+      }
+
+      form.reset();
+      setFormStatus("success");
+      setFormMessage("Thanks. Your message has been sent.");
+    } catch (error) {
+      setFormStatus("error");
+      setFormMessage(
+        error instanceof Error
+          ? error.message
+          : "Message failed to send. Please try again."
+      );
+    }
+  }
+
   return (
     <>
       <Navigation />
@@ -157,6 +207,88 @@ export default function VisitPage() {
               Sunday: <span>Appointment only</span>
             </p>
           </div>
+        </section>
+
+        <section className={styles.contactSection}>
+          <div className={styles.contactCopy}>
+            <h2>Get in touch</h2>
+            <p>
+              Questions about appointments, products, events, or the shop?
+              Send a note and the Artisan Barber team will follow up.
+            </p>
+          </div>
+
+          <form className={styles.contactForm} onSubmit={handleContactSubmit}>
+            <label className={styles.hiddenField}>
+              Website
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </label>
+
+            <div className={styles.formRow}>
+              <label>
+                Name
+                <input
+                  type="text"
+                  name="name"
+                  autoComplete="name"
+                  required
+                />
+              </label>
+              <label>
+                Email
+                <input
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  required
+                />
+              </label>
+            </div>
+
+            <div className={styles.formRow}>
+              <label>
+                Phone
+                <input type="tel" name="phone" autoComplete="tel" />
+              </label>
+              <label>
+                Subject
+                <select name="subject" defaultValue="General inquiry">
+                  <option>General inquiry</option>
+                  <option>Appointment question</option>
+                  <option>Product question</option>
+                  <option>Events and partnerships</option>
+                </select>
+              </label>
+            </div>
+
+            <label>
+              Message
+              <textarea name="message" rows={7} required />
+            </label>
+
+            <div className={styles.formActions}>
+              <button type="submit" disabled={formStatus === "sending"}>
+                {formStatus === "sending" ? "Sending..." : "Send message"}
+              </button>
+              {formMessage && (
+                <p
+                  className={
+                    formStatus === "success"
+                      ? styles.formSuccess
+                      : styles.formError
+                  }
+                  role="status"
+                >
+                  {formMessage}
+                </p>
+              )}
+            </div>
+          </form>
         </section>
       </main>
       <Footer />

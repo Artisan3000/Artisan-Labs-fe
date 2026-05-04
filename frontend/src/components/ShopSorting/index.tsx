@@ -4,7 +4,11 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import Link from "next/link";
 import styles from "@/app/shop/page.module.css";
 
-export default function ShopControls() {
+export default function ShopControls({
+  hideFilter = false,
+}: {
+  hideFilter?: boolean;
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -56,7 +60,12 @@ export default function ShopControls() {
       </div>
 
       {/* Filter (navigate to other collection routes) */}
-      <div className={styles.shopSettingsCol}>
+      <div
+        className={`${styles.shopSettingsCol} ${
+          hideFilter ? styles.shopSettingsHidden : ""
+        }`}
+        aria-hidden={hideFilter}
+      >
         <h1>Filter</h1>
         <Link href="/shop/all">All</Link>
         <Link href="/shop/wardrobe">Clothing</Link>

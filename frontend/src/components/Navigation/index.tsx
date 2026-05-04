@@ -11,9 +11,9 @@ import styles from "./styles.module.css";
 
 const homeNavItems = [
   { name: "Services", href: "#services" },
-  { name: "Reviews", href: "#reviews" },
-  { name: "FAQ", href: "#faq" },
   { name: "Products", href: "#products" },
+  { name: "Reviews", href: "#reviews" },
+  { name: "FAQ", href: "#faq" }
 ];
 
 const siteNavItems = [
@@ -29,7 +29,7 @@ const collections = [
   { name: "Blind Barber", href: "/shop/blind-barber" },
   { name: "Firsthand", href: "/shop/firsthand" },
   { name: "Malin + Goetz", href: "/shop/malin-goetz" },
-  { name: "Duke and Hyde", href: "/shop/duke-hyde" },
+  // { name: "Duke and Hyde", href: "/shop/duke-hyde" },
   { name: "All", href: "/shop" },
 ];
 

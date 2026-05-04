@@ -1,0 +1,137 @@
+.main {
+  margin-top: 60px;
+  padding: 2rem;
+  overflow: visible;
+}
+
+.header {
+  max-width: 960px;
+  margin: 1.5rem auto 2rem;
+}
+
+.header h1 {
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-weight: normal;
+  line-height: 0.95;
+}
+
+.header p {
+  max-width: 680px;
+  margin-top: 0.75rem;
+  color: #555;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.lastUpdated {
+  color: var(--black) !important;
+  font-size: 0.9rem !important;
+  font-style: italic;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 5rem;
+  align-items: start;
+  overflow: visible;
+}
+
+.tocSlot {
+  min-height: 1px;
+}
+
+.toc {
+  background: var(--white);
+  width: 100%;
+  height: fit-content;
+  max-height: calc(100vh - 104px);
+  overflow-y: auto;
+  border: 1px solid var(--black);
+  padding: 1rem;
+  z-index: 1;
+}
+
+.tocFixed {
+  position: fixed;
+}
+
+.toc h2 {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-bottom: 1rem;
+}
+
+.toc ul {
+  display: grid;
+  gap: 0.65rem;
+  list-style: none;
+}
+
+.toc a {
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 0.22rem;
+}
+
+.content {
+  border-top: 1px solid var(--black);
+}
+
+.content h2 {
+  scroll-margin-top: 96px;
+  border-bottom: 1px solid var(--black);
+  padding: 1.5rem 0 0.75rem;
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  font-weight: normal;
+  line-height: 1;
+}
+
+.content p {
+  max-width: 860px;
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.content strong {
+  font-weight: 800;
+}
+
+.content a {
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 0.22rem;
+}
+
+.policySection {
+  padding-top: 0.2rem;
+}
+
+@media screen and (max-width: 800px) {
+  .main {
+    padding: 1rem;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .toc {
+    width: auto;
+    max-height: none;
+  }
+
+  .toc ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .toc ul {
+    grid-template-columns: 1fr;
+  }
+}

@@ -27,32 +27,34 @@ export default function ArticleGrid({ articles }: { articles: Article[] }) {
           }}
         >
           <Link href={`/read/${article.handle}`} className={styles.link}>
-            {article.image && (
-              <div className={styles.imageWrapper}>
+            <div className={styles.imageWrapper}>
+              {article.image ? (
                 <Image
                   src={article.image.url}
                   alt={article.image.altText || article.title}
                   fill
                   className={styles.image}
                 />
-              </div>
-            )}
+              ) : (
+                <div className={styles.imageFallback}>
+                  <span>{article.source}</span>
+                </div>
+              )}
+            </div>
             <div className={styles.meta}>
-              <h2>{article.title}</h2>
-              <p className={styles.excerpt}>{article.excerpt}</p>
-              <Link href={`/read/${article.handle}`} className={styles.link}>
-                Read More
-              </Link>
-              <div className={styles.info}>
-                {/* {article.authorV2?.name && <span>by {article.authorV2.name}</span>} */}
-                <span>
+              <div className={styles.articleTopline}>
+                <span>{article.source}</span>
+                <time dateTime={article.publishedAt}>
                   {new Date(article.publishedAt).toLocaleDateString("en-US", {
                     month: "short",
                     day: "numeric",
                     year: "numeric",
                   })}
-                </span>
+                </time>
               </div>
+              <h2>{article.title}</h2>
+              <p className={styles.excerpt}>{article.excerpt}</p>
+              <span className={styles.readMore}>Read article</span>
             </div>
           </Link>
         </motion.div>

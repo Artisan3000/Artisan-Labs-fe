@@ -61,7 +61,7 @@ export default function ProductDetails({
       <div className={styles.productInfoHeader}>
         <div className={styles.productInfoHeaderTitle}>
           <h1 className={styles.title}>{product.title}</h1>
-          {product.vendor && <p className={styles.vendor}>{product.vendor}</p>}
+          {/* {product.vendor && <p className={styles.vendor}>{product.vendor}</p>} */}
         </div>
 
         {activeVariant?.price && (
