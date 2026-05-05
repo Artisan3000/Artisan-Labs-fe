@@ -180,7 +180,7 @@ const services: Service[] = [
   },
   {
     title: "Beard trim",
-    price: "$45",
+    price: "$45+",
     description: "Precision trim for a clean, polished beard shape.",
     icon: <RazorIcon />,
   },
@@ -435,14 +435,14 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="reviews" className={styles.sectionAlt}>
+        <section id="reviews" className={styles.section}>
           <div className={styles.sectionInner}>
             <h2 className={styles.heading}>What the block is saying</h2>
             <HomeReviewCarousel reviews={reviews} />
           </div>
         </section>
 
-        <section id="faq" className={styles.section}>
+        <section id="faq" className={styles.sectionAlt}>
           <div className={styles.sectionInner}>
             <h2 className={styles.heading}>Got questions</h2>
             <div className={styles.faqWrapper}>
