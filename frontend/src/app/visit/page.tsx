@@ -19,7 +19,7 @@ const locations = [
     image: "/ues-space.jpg",
     imageAlt: "Artisan Barber Upper East Side shop interior",
     imagePosition: "center",
-    body: "Today’s location is a refined evolution: a fully operational Apothecary, Haberdashery, and Gentleman’s Salon nestled in a sophisticated stretch of the Upper East Side. This space blends old-world elegance with modern edge - offering signature cuts, straight razor shaves, exclusive grooming products, and curated men’s accessories. The music is smooth, the barbers are seasoned, and the atmosphere is immersive - making this more than just a barbershop. It’s a lifestyle destination for the modern gentleman.",
+    body: "Opened in 2021, today’s location has had a refined evolution: a fully operational Apothecary, Haberdashery, and Gentleman’s Salon nestled in a sophisticated stretch of the Upper East Side. This space blends old-world elegance with modern edge - offering signature cuts, hot towel treatments, and curated grooming products. The music is smooth, the barbers are seasoned, and the atmosphere is immersive - making this more than just a barbershop. It’s a lifestyle destination for the modern gentleman.",
   },
   {
     title: "Second Location",
@@ -27,7 +27,7 @@ const locations = [
     image: "/les-space.jpg",
     imageAlt: "Barber working with a client inside the Lower East Side shop",
     imagePosition: "center",
-    body: "In the heart of the Lower East Side, Artisan Barber’s second location took things to the next level - literally. Set in a duplex-style space, it doubled as an art gallery and culture lounge, hosting events, photo shoots, and brand collaborations. The shop also sold vintage apparel alongside grooming essentials, giving clients a unique blend of style, substance, and self-expression. With an ever-rotating playlist and a team of versatile, creative barbers, this location became a staple for downtown tastemakers.",
+    body: "In the heart of the Lower East Side, Artisan Barber’s second location opened in 2019. Set in a duplex-style space, it doubled as an art gallery and culture lounge, hosting events, photo shoots, and brand collaborations. The shop also sold vintage apparel alongside grooming essentials, giving clients a unique blend of style, substance, and self-expression. With an ever-rotating playlist and a team of versatile, creative barbers, this location became a staple for downtown tastemakers before its closure in 2022.",
   },
   {
     title: "First Location",
@@ -35,7 +35,7 @@ const locations = [
     image: "/les-space-02.jpg",
     imageAlt: "Black and white photograph of a barber cutting hair",
     imagePosition: "center",
-    body: "Artisan Barber’s first home was a sleek, intimate 3-chair shop on Manhattan’s Upper East Side. Designed with a signature Slide-Away Glass façade, it invited the energy of the city right into the shop. Inside, clients were met with classic barber chairs, clean modern lines, and a curated soundtrack that kept the vibe sharp. This was where the vision was born - combining craft barbering, great music, and elite grooming products in one cool neighborhood hub.",
+    body: "Artisan Barber’s first home was established in 2017, as a retro 3-chair shop on Manhattan’s Upper East Side. Designed with a signature Slide-Away Glass façade, it invited the energy of the city right into the shop. Clients were met with classic barber chairs, clean modern lines, and a curated soundtrack that kept the vibe sharp. This was where the vision was born - combining craft barbering, great music, and elite grooming products in one cool neighborhood hub.",
   },
 ];
 
@@ -262,6 +262,7 @@ export default function VisitPage() {
                   <option>Appointment question</option>
                   <option>Product question</option>
                   <option>Events and partnerships</option>
+                  <option>Work with Artisan</option>
                 </select>
               </label>
             </div>

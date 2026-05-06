@@ -212,29 +212,54 @@ const services: Service[] = [
 
 const faqItems = [
   {
-    question: "Do you accept walk-ins?",
+    question: "Do I need an appointment or can I walk in?",
     answer:
-      "We welcome everyone, but we require customers to book at least 45 minutes in advance or join our online waitlist for a same-day standby appointment. This policy helps us manage customer volume in the shop.",
+      "Walk-ins are always welcome to sit and wait for the next appointment, however booking ahead guarantees your time in the chair is reserved. You can also join our online wait list for a same-day standby appointment.",
   },
   {
-    question: "How long should I expect a haircut to take?",
+    question: "How long does a haircut usually take?",
     answer:
-      "Haircut duration details are coming soon.",
+      "Our hair technicians normally take about 30-45 minutes. We don't rush; your cut deserves the time.",
   },
   {
-    question: "What happens if I arrive late to my appointment?",
+    question: "What happens when I arrive late for my appointment?",
     answer:
-      "We allow a five to ten minute grace period depending on your service time length.",
+      "We allow a grace period depending on the circumstances and your service time length. Our goal is to make the best possible outcome with the allotted time we have left in the chair.",
   },
   {
-    question: "Are there charges for late cancellations?",
+    question: "Do I still get charged for late cancellations?",
     answer:
-      "Yes. By clicking \"Reserve,\" you authorize the shop to charge for your appointment. However, you will not incur any charges if you cancel or reschedule at least 2 hours before your reservation. Booking an appointment signifies your agreement to our terms of service and privacy policy.",
+      "Yes, however you will not incur any charges if you cancel or reschedule at least 2 hours before your reservation. By clicking \"Reserve,\" you authorize the shop to charge for your appointment in agreement to our terms of service and under 2 hour cancellation policy.",
   },
   {
     question: "What payment methods do you accept?",
     answer:
-      "Payment method details are coming soon.",
+      "We accept cash, card, Apple Pay, and Venmo. Whatever works for you, works for us.",
+  },
+  {
+    question: "Do we do women's hair?",
+    answer:
+      "Yes. In addition to our barbers, we also have master hair stylists and long hair scissor-only services available.",
+  },
+  {
+    question: "What's your recommendation on children's haircuts?",
+    answer:
+      "Our kids specialist, Cath, does early morning appointments especially for younger children.",
+  },
+  {
+    question: "Do we do color?",
+    answer:
+      "No. We're not offering any color services at our shop, however we can make referrals upon request.",
+  },
+  {
+    question: "Do you offer gift cards?",
+    answer:
+      "Yes. Simply select the \"Buy a gift card instead\" option at the very bottom when booking a service on our website. After your purchase, you'll receive a unique code that can be used at checkout.",
+  },
+  {
+    question: "How do I apply for a position at Artisan?",
+    answer:
+      "Go to our Visit page and fill out the Get in touch form to apply with your resume and credentials.",
   },
 ];
 
@@ -243,7 +268,7 @@ const reviews: HomeReview[] = [
     quote: "Always scary to switch barbers... found my new barber.",
     name: "valentina Villarraga Castañeda",
     detail:
-      "Henry absolutely crushed it. Always scary to switch barbers and Bobby didn’t disappoint. Found my new barber.",
+      "Bobby absolutely crushed it. Always scary to switch barbers and Bobby didn’t disappoint. Found my new barber.",
     source: "Google Maps Review",
   },
   {
@@ -313,13 +338,6 @@ const reviews: HomeReview[] = [
     name: "Dallin Knudson",
     detail:
       "Charlie was amazing. Was visiting town and they took great care of me and the result looked so good. Thanks for the great haircut!",
-    source: "Google Maps Review",
-  },
-  {
-    quote: "Gentle approach towards customers.",
-    name: "abner merciadez",
-    detail:
-      "Really nice service and gentle approach towards customers. Good job Nina, keep it up.",
     source: "Google Maps Review",
   },
 ];
