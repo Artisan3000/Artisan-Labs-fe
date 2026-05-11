@@ -229,7 +229,7 @@ const faqItems = [
   {
     question: "Do I still get charged for late cancellations?",
     answer:
-      "Yes, however you will not incur any charges if you cancel or reschedule at least 2 hours before your reservation. By clicking \"Reserve,\" you authorize the shop to charge for your appointment in agreement to our terms of service and under 2 hour cancellation policy.",
+      "Yes, however you will not incur any charges if you cancel or reschedule at least 2 hours before your reservation. By clicking \"Reserve,\" you authorize the shop to charge for your appointment in agreement to our terms of service and 2 hour cancellation policy.",
   },
   {
     question: "What payment methods do you accept?",
@@ -244,7 +244,7 @@ const faqItems = [
   {
     question: "What's your recommendation on children's haircuts?",
     answer:
-      "Our kids specialist, Cath, does early morning appointments especially for younger children.",
+      "Our kids specialist, Cathy, does early morning appointments especially for younger children.",
   },
   {
     question: "Do we do color?",
