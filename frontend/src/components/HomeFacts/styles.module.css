@@ -60,7 +60,7 @@
     grid-template-columns: 1fr;
     align-items: stretch;
     padding: 1.25rem;
-    gap: 1rem;
+    gap: 3rem;
   }
 
   .fact {

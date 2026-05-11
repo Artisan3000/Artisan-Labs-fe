@@ -22,4 +22,16 @@
   right: 2rem;
   z-index: 999;
 }
+
+@media (max-width: 520px) {
+  .btn {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .siteWidget {
+    right: 1rem;
+    bottom: 1rem;
+  }
+}
   

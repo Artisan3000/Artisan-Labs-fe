@@ -41,7 +41,7 @@ const locations = [
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
-function VisitImage({
+function AboutImage({
   src,
   alt,
   priority = false,
@@ -80,7 +80,7 @@ function VisitImage({
   );
 }
 
-export default function VisitPage() {
+export default function AboutPage() {
   const [formStatus, setFormStatus] = useState<FormStatus>("idle");
   const [formMessage, setFormMessage] = useState("");
 
@@ -174,7 +174,7 @@ export default function VisitPage() {
                 <p>{location.body}</p>
               </motion.div>
 
-              <VisitImage
+              <AboutImage
                 src={location.image}
                 alt={location.imageAlt}
                 priority={index === 0}

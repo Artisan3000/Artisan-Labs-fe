@@ -48,7 +48,7 @@ export default function HomeHero() {
             Manhattan&apos;s go-to barbershop for scissor cuts, clean fades, and precision styling.
           </p>
           <div className={styles.ctaRow}>
-            <Link href="/visit/gallery" className={styles.secondaryButton}>
+            <Link href="/about/gallery" className={styles.secondaryButton}>
               See our work
             </Link>
             <button

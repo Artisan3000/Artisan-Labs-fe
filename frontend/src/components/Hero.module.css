@@ -96,6 +96,7 @@
 
 .fadeUp {
   animation: fadeUp 1s ease-out forwards;
+  font-size: xx-large;
 }
 
 @keyframes fadeUp {

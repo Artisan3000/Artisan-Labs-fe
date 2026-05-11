@@ -259,7 +259,7 @@ const faqItems = [
   {
     question: "How do I apply for a position at Artisan?",
     answer:
-      "Go to our Visit page and fill out the Get in touch form to apply with your resume and credentials.",
+      "Go to our About page and fill out the Get in touch form to apply with your resume and credentials.",
   },
 ];
 

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { shopifyClient } from "@/lib/shopify";
@@ -5,6 +6,12 @@ import styles from "./page.module.css";
 import AddToCartButton from "@/components/AddToCartButton";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Shop | Artisan Barber",
+  description:
+    "Shop grooming, apparel, and lifestyle goods from Artisan Barber.",
+};
 
 type Product = {
   id: string;

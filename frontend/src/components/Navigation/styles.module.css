@@ -134,6 +134,26 @@
   color: var(--black);
 }
 
+.mobileMenuButton,
+.mobileMenu {
+  display: none;
+}
+
+.hamburgerIcon {
+  width: 20px;
+  height: 14px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburgerIcon span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+}
+
 .cartAction {
   position: relative;
 }
@@ -316,6 +336,84 @@
 
 .cartEmpty {
   padding: 1.25rem 0 0;
+}
+
+@media (max-width: 760px) {
+  .nav {
+    padding: 0 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .links {
+    display: none;
+  }
+
+  .logoContainer svg {
+    height: 34px;
+  }
+
+  .actions {
+    width: auto;
+    flex: 0 0 auto;
+    gap: 0.15rem;
+  }
+
+  .mobileMenuButton {
+    display: inline-flex;
+  }
+
+  .mobileMenu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--black);
+    color: var(--white);
+    border-top: 1px solid rgba(255, 255, 248, 0.16);
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.28);
+    z-index: 1000;
+  }
+
+  .mobileMenuLink {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 1rem;
+    border-bottom: 1px solid rgba(255, 255, 248, 0.12);
+    color: var(--white);
+    font-size: 1.1rem;
+  }
+
+  .mobileMenuLink:hover {
+    background: var(--white);
+    color: var(--black);
+  }
+
+  .cartDropdown {
+    position: fixed;
+    top: 70px;
+    right: 0.75rem;
+    left: 0.75rem;
+    width: auto;
+    max-height: calc(100vh - 88px);
+  }
+}
+
+@media (max-width: 420px) {
+  .nav {
+    padding: 0 0.6rem;
+  }
+
+  .logoContainer svg {
+    height: 31px;
+  }
+
+  .iconButton {
+    width: 36px;
+    height: 40px;
+  }
 }
 
 .cartEmpty p {

@@ -24,7 +24,7 @@ const Footer = () => {
             </div>
 
           <img
-            src="https://artisanbarber.com/cdn/shop/files/maps_2x_54bfc767-3a2a-40f2-a122-75ce72bc9065.png?v=1744746036&width=3840"
+            src="/maps_2x_54bfc767-.png"
             alt="Map showing Artisan Barber location"
             className={styles.mapImage}
           />
@@ -58,7 +58,7 @@ const Footer = () => {
 
       <div className={styles.links}>
         <div>
-          <h3>About</h3>
+          <h3>Who we are</h3>
           <ul>
             <li><Link href="/team">Team</Link></li>
             <li><Link href="/read">Read</Link></li>
@@ -67,7 +67,7 @@ const Footer = () => {
         <div>
           <h3>Support</h3>
           <ul>
-            <li><Link href="/visit">Visit</Link></li>
+            <li><Link href="/about">About</Link></li>
             <li><Link href="/policy">Policy</Link></li>
           </ul>
         </div>
@@ -108,7 +108,7 @@ const Footer = () => {
       </div>
 
       <div className={styles.footerBottom}>
-        <p>&copy; {new Date().getFullYear()} Artisan Barber</p>
+        <p>&copy; {new Date().getFullYear()} Artisan Barber. All rights reserved.</p>
         <p></p>
         <p>
           Handmade by{" "}

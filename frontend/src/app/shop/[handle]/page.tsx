@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { shopifyClient } from "@/lib/shopify";
@@ -6,6 +7,15 @@ import AddToCartButton from "@/components/AddToCartButton";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ShopControls from "@/components/ShopSorting";
+
+type CollectionMetadata = {
+  title: string;
+  description: string;
+  seo?: {
+    title: string | null;
+    description: string | null;
+  } | null;
+};
 
 type Product = {
   id: string;
@@ -23,6 +33,52 @@ type Product = {
     }[];
   };
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ handle: string }>;
+}): Promise<Metadata> {
+  const { handle } = await params;
+
+  const { data } = await shopifyClient.request<{
+    collection: CollectionMetadata | null;
+  }>(
+    `
+      query CollectionMetadata($handle: String!) {
+        collection(handle: $handle) {
+          title
+          description
+          seo {
+            title
+            description
+          }
+        }
+      }
+    `,
+    { variables: { handle } }
+  );
+
+  const collection = data?.collection;
+
+  if (!collection) {
+    return {
+      title: "Collection Not Found | Artisan Barber",
+    };
+  }
+
+  const title = collection.seo?.title || collection.title;
+  const description = collection.seo?.description || collection.description;
+
+  return {
+    title: `${title} | Artisan Barber`,
+    description,
+    openGraph: {
+      title,
+      description,
+    },
+  };
+}
 
 export default async function CollectionPage({
   params,

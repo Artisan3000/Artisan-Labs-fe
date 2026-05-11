@@ -18,7 +18,7 @@ const homeNavItems = [
 
 const siteNavItems = [
   { name: "Shop", href: "/shop" },
-  { name: "Visit", href: "/visit" },
+  { name: "About", href: "/about" },
   { name: "Read", href: "/read" },
 ];
 
@@ -33,12 +33,20 @@ const collections = [
   { name: "All", href: "/shop" },
 ];
 
-const visitLinks = [
-  { name: "Visit", href: "/visit" },
-  { name: "Gallery", href: "/visit/gallery" },
+const aboutLinks = [
+  { name: "About", href: "/about" },
+  { name: "Gallery", href: "/about/gallery" },
 ];
 
 const readLinks = [
+  { name: "Read", href: "/read" },
+  { name: "Team", href: "/team" },
+];
+
+const mobileSiteLinks = [
+  { name: "Shop", href: "/shop" },
+  { name: "About", href: "/about" },
+  { name: "Gallery", href: "/about/gallery" },
   { name: "Read", href: "/read" },
   { name: "Team", href: "/team" },
 ];
@@ -54,6 +62,7 @@ function formatMoney(money?: CartMoney) {
 
 const Navigation = () => {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const navItems = isHomePage ? homeNavItems : siteNavItems;
@@ -77,6 +86,10 @@ const Navigation = () => {
     toggleCart: () => {},
     closeCart: () => {},
   };
+
+  const mobileLinks = isHomePage
+    ? [...homeNavItems, ...mobileSiteLinks]
+    : mobileSiteLinks;
 
   return (
     <nav className={styles.nav}>
@@ -136,13 +149,13 @@ const Navigation = () => {
 
             <div
               className={styles.menuItem}
-              onMouseEnter={() => setOpenMenu("visit")}
+              onMouseEnter={() => setOpenMenu("about")}
               onMouseLeave={() => setOpenMenu(null)}
             >
-              <Link href="/visit">Visit</Link>
-              {openMenu === "visit" && (
+              <Link href="/about">About</Link>
+              {openMenu === "about" && (
                 <div className={styles.dropdownMenu}>
-                  {visitLinks.map((item) => (
+                  {aboutLinks.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
@@ -183,6 +196,20 @@ const Navigation = () => {
       </div>
 
       <div className={styles.actions}>
+        <button
+          type="button"
+          className={`${styles.iconButton} ${styles.mobileMenuButton}`}
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setMobileMenuOpen((open) => !open)}
+        >
+          <span className={styles.hamburgerIcon} aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
+        </button>
         <button
           type="button"
           className={styles.iconButton}
@@ -349,6 +376,30 @@ const Navigation = () => {
           </AnimatePresence>
         </div>
       </div>
+
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            id="mobile-navigation"
+            className={styles.mobileMenu}
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+          >
+            {mobileLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={styles.mobileMenuLink}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

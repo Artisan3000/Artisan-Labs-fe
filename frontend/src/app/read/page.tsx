@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { shopifyClient } from "@/lib/shopify";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -5,6 +6,12 @@ import FilterBar from "@/components/ReadFilter";
 import ReadHero from "@/components/ReadHero";
 import styles from "./page.module.css";
 import { Article } from "@/lib/types/article";
+
+export const metadata: Metadata = {
+  title: "Read | Artisan Barber",
+  description:
+    "Read grooming notes, local stories, team updates, and lifestyle pieces from Artisan Barber.",
+};
 
 /* ------------------ RAW TYPES ------------------ */
 
