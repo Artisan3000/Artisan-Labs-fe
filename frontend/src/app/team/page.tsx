@@ -60,14 +60,14 @@ const team = [
     img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/kris.jpg?v=1757629512",
     link: "https://getsquire.com/booking/book/manhattan/barber/-114137/services",
   },
-  {
+  /* {
     name: "Dione C.",
     title: "Apprentice Barber",
     exp: "Cutting since '14",
     bio: "Dione completed a three-year apprenticeship from 2017 to 2019 under renowned Master Barber Kamal Nuru of Levels Harlem. From 2020 to 2024, she advanced her career in leading Afro barbershops and luxury salons, refining her expertise in clipper-based artistry and precision grooming. A proud 2025 graduate of Empire Manhattan, she added sheer work to her diverse skill set. Dione pairs technical precision with creative artistry to deliver modern, polished styles.",
     img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/dione.png?v=1757629513",
     link: "https://getsquire.com/booking/book/manhattan/barber/-136663/services",
-  },
+  }, */
   // {
   //   name: "Quentin",
   //   title: "Atelier",
