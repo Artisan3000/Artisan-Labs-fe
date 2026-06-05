@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type FormEvent,
+  type KeyboardEvent as ReactKeyboardEvent,
+  type MouseEvent,
+} from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -135,15 +142,25 @@ const Navigation = () => {
     }
   };
 
-  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const query = searchValue.trim();
+  const submitSearch = (value: string) => {
+    const query = value.trim();
 
     if (!query) return;
 
     setSearchOpen(false);
     router.push(`/search?q=${encodeURIComponent(query)}`);
+  };
+
+  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    submitSearch(searchInputRef.current?.value ?? searchValue);
+  };
+
+  const handleSearchKeyDown = (event: ReactKeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== "Enter") return;
+
+    event.preventDefault();
+    submitSearch(event.currentTarget.value);
   };
 
   return (
@@ -459,45 +476,44 @@ const Navigation = () => {
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {searchOpen && (
-          <motion.div
-            className={styles.searchOverlay}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="site-search-title"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
-            onMouseDown={handleSearchBackdropClick}
+      {searchOpen && (
+        <motion.div
+          className={styles.searchOverlay}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="site-search-title"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.18, ease: "easeOut" }}
+          onMouseDown={handleSearchBackdropClick}
+        >
+          <motion.form
+            className={styles.searchPanel}
+            role="search"
+            action="/search"
+            onSubmit={handleSearchSubmit}
+            initial={{ opacity: 0, y: 12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
           >
-            <motion.form
-              className={styles.searchPanel}
-              role="search"
-              onSubmit={handleSearchSubmit}
-              initial={{ opacity: 0, y: 12, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 12, scale: 0.98 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <label id="site-search-title" htmlFor="site-search-input">
-                Search Artisan
-              </label>
-              <input
-                ref={searchInputRef}
-                id="site-search-input"
-                type="search"
-                value={searchValue}
-                onChange={(event) => setSearchValue(event.target.value)}
-                placeholder="Articles, grooming goods, brands..."
-                autoComplete="off"
-              />
-              <p>Press Enter to search</p>
-            </motion.form>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <label id="site-search-title" htmlFor="site-search-input">
+              Search Artisan
+            </label>
+            <input
+              ref={searchInputRef}
+              id="site-search-input"
+              name="q"
+              type="search"
+              value={searchValue}
+              onChange={(event) => setSearchValue(event.target.value)}
+              onKeyDown={handleSearchKeyDown}
+              placeholder="Articles, grooming goods, brands..."
+              autoComplete="off"
+            />
+            <p>Press Enter to search</p>
+          </motion.form>
+        </motion.div>
+      )}
     </nav>
   );
 };
