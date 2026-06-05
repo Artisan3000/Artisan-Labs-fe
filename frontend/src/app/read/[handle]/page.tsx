@@ -44,6 +44,20 @@ type ShopifyBlogArticle = {
 
 type ArticleWithSource = ShopifyArticle & {
   source: string;
+  sourceHandle: string;
+};
+
+type RecommendedArticle = {
+  id: string;
+  title: string;
+  handle: string;
+  excerpt: string;
+  publishedAt: string;
+  source: string;
+  image?: {
+    url: string;
+    altText: string | null;
+  } | null;
 };
 
 function formatDate(date: string) {
@@ -98,14 +112,213 @@ async function getArticle(handle: string): Promise<ArticleWithSource | null> {
     variables: { handle },
   });
 
-  const blog = Object.values(data ?? {}).find((item) => item?.articleByHandle);
+  const blogEntry = Object.entries(data ?? {}).find(
+    ([, item]) => item?.articleByHandle
+  );
+  const blog = blogEntry?.[1];
+  const blogIndex = blogEntry?.[0].replace("blog", "");
+  const sourceHandle =
+    blogIndex !== undefined ? blogHandles[Number(blogIndex)] : undefined;
 
-  if (!blog?.articleByHandle) return null;
+  if (!blog?.articleByHandle || !sourceHandle) return null;
 
   return {
     ...blog.articleByHandle,
     source: blog.title,
+    sourceHandle,
   };
+}
+
+function recommendationArticlesQuery() {
+  const fallbackBlogs = blogHandles
+    .map(
+      (blogHandle, index) => `
+        fallbackBlog${index}: blog(handle: "${blogHandle}") {
+          title
+          articles(first: 4, sortKey: PUBLISHED_AT, reverse: true) {
+            nodes {
+              id
+              title
+              handle
+              excerpt
+              publishedAt
+              image {
+                url
+                altText
+              }
+            }
+          }
+        }
+      `
+    )
+    .join("\n");
+
+  return `
+    query RecommendedReadArticles($sourceHandle: String!) {
+      sourceBlog: blog(handle: $sourceHandle) {
+        title
+        articles(first: 4, sortKey: PUBLISHED_AT, reverse: true) {
+          nodes {
+            id
+            title
+            handle
+            excerpt
+            publishedAt
+            image {
+              url
+              altText
+            }
+          }
+        }
+      }
+      ${fallbackBlogs}
+    }
+  `;
+}
+
+type RecommendationBlog = {
+  title: string;
+  articles: {
+    nodes: Omit<RecommendedArticle, "source">[];
+  };
+};
+
+function addRecommendation(
+  recommendations: RecommendedArticle[],
+  seen: Set<string>,
+  article: Omit<RecommendedArticle, "source">,
+  source: string,
+  currentArticle: ArticleWithSource
+) {
+  if (
+    article.id === currentArticle.id ||
+    article.handle === currentArticle.handle ||
+    seen.has(article.id) ||
+    seen.has(article.handle) ||
+    recommendations.length >= 3
+  ) {
+    return;
+  }
+
+  recommendations.push({ ...article, source });
+  seen.add(article.id);
+  seen.add(article.handle);
+}
+
+async function getRecommendedArticles(
+  currentArticle: ArticleWithSource
+): Promise<RecommendedArticle[]> {
+  try {
+    const { data } = await shopifyClient.request<
+      Record<string, RecommendationBlog | null>
+    >(recommendationArticlesQuery(), {
+      variables: { sourceHandle: currentArticle.sourceHandle },
+    });
+
+    const recommendations: RecommendedArticle[] = [];
+    const seen = new Set<string>();
+    const sourceArticles = data?.sourceBlog?.articles?.nodes ?? [];
+
+    sourceArticles.forEach((article) => {
+      addRecommendation(
+        recommendations,
+        seen,
+        article,
+        data?.sourceBlog?.title || currentArticle.source,
+        currentArticle
+      );
+    });
+
+    if (recommendations.length >= 3) return recommendations;
+
+    const fallbackArticles = Object.entries(data ?? {})
+      .filter(([key]) => key.startsWith("fallbackBlog"))
+      .flatMap(([, blog]) =>
+        (blog?.articles?.nodes ?? []).map((article) => ({
+          ...article,
+          source: blog?.title || "",
+        }))
+      )
+      .sort(
+        (a, b) =>
+          new Date(b.publishedAt).getTime() -
+          new Date(a.publishedAt).getTime()
+      );
+
+    fallbackArticles.forEach((article) => {
+      addRecommendation(
+        recommendations,
+        seen,
+        article,
+        article.source,
+        currentArticle
+      );
+    });
+
+    return recommendations;
+  } catch (error) {
+    console.error("Recommended reading request failed:", error);
+    return [];
+  }
+}
+
+function formatShortDate(date: string) {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date(date));
+}
+
+function RecommendedReading({ articles }: { articles: RecommendedArticle[] }) {
+  if (articles.length === 0) return null;
+
+  return (
+    <section className={styles.recommended} aria-labelledby="recommended-title">
+      <div className={styles.recommendedHeader}>
+        <p>Keep Reading</p>
+        <h2 id="recommended-title">Recommended Reading</h2>
+      </div>
+
+      <div className={styles.recommendedGrid}>
+        {articles.map((article) => (
+          <Link
+            href={`/read/${article.handle}`}
+            key={article.id}
+            className={styles.recommendedCard}
+          >
+            <div className={styles.recommendedImageWrapper}>
+              {article.image ? (
+                <Image
+                  src={article.image.url}
+                  alt={article.image.altText || article.title}
+                  fill
+                  sizes="(max-width: 700px) 100vw, 33vw"
+                  className={styles.recommendedImage}
+                />
+              ) : (
+                <div className={styles.recommendedImageFallback}>
+                  <span>{article.source}</span>
+                </div>
+              )}
+            </div>
+
+            <div className={styles.recommendedMeta}>
+              <div className={styles.recommendedTopline}>
+                <span>{article.source}</span>
+                <time dateTime={article.publishedAt}>
+                  {formatShortDate(article.publishedAt)}
+                </time>
+              </div>
+              <h3>{article.title}</h3>
+              {article.excerpt && <p>{article.excerpt}</p>}
+              <span className={styles.recommendedLink}>Read article</span>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 export async function generateMetadata({
@@ -141,6 +354,8 @@ export default async function ReadArticlePage({
   const article = await getArticle(handle);
 
   if (!article) notFound();
+
+  const recommendedArticles = await getRecommendedArticles(article);
 
   return (
     <>
@@ -180,6 +395,8 @@ export default async function ReadArticlePage({
             className={styles.content}
             dangerouslySetInnerHTML={{ __html: article.contentHtml }}
           />
+
+          <RecommendedReading articles={recommendedArticles} />
         </article>
       </main>
       <Footer />
