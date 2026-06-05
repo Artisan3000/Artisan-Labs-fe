@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useOptionalCart } from "@/components/CartProvider";
 import type { CartMoney } from "@/lib/shopifyCart";
 import styles from "./styles.module.css";
@@ -63,7 +63,12 @@ function formatMoney(money?: CartMoney) {
 const Navigation = () => {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const searchButtonRef = useRef<HTMLButtonElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
   const isHomePage = pathname === "/";
   const navItems = isHomePage ? homeNavItems : siteNavItems;
   const cartContext = useOptionalCart();
@@ -90,6 +95,56 @@ const Navigation = () => {
   const mobileLinks = isHomePage
     ? [...homeNavItems, ...mobileSiteLinks]
     : mobileSiteLinks;
+
+  useEffect(() => {
+    if (!searchOpen) return;
+
+    const focusTimer = window.setTimeout(() => {
+      searchInputRef.current?.focus();
+    }, 80);
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSearchOpen(false);
+        searchButtonRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.clearTimeout(focusTimer);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [searchOpen]);
+
+  const openSearch = () => {
+    setMobileMenuOpen(false);
+    closeCart();
+    setSearchOpen(true);
+  };
+
+  const closeSearch = () => {
+    setSearchOpen(false);
+    searchButtonRef.current?.focus();
+  };
+
+  const handleSearchBackdropClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget) {
+      closeSearch();
+    }
+  };
+
+  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const query = searchValue.trim();
+
+    if (!query) return;
+
+    setSearchOpen(false);
+    router.push(`/search?q=${encodeURIComponent(query)}`);
+  };
 
   return (
     <nav className={styles.nav}>
@@ -211,9 +266,12 @@ const Navigation = () => {
           </span>
         </button>
         <button
+          ref={searchButtonRef}
           type="button"
           className={styles.iconButton}
           aria-label="Search"
+          aria-expanded={searchOpen}
+          onClick={openSearch}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -397,6 +455,46 @@ const Navigation = () => {
                 {item.name}
               </Link>
             ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {searchOpen && (
+          <motion.div
+            className={styles.searchOverlay}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="site-search-title"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            onMouseDown={handleSearchBackdropClick}
+          >
+            <motion.form
+              className={styles.searchPanel}
+              role="search"
+              onSubmit={handleSearchSubmit}
+              initial={{ opacity: 0, y: 12, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 12, scale: 0.98 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              <label id="site-search-title" htmlFor="site-search-input">
+                Search Artisan
+              </label>
+              <input
+                ref={searchInputRef}
+                id="site-search-input"
+                type="search"
+                value={searchValue}
+                onChange={(event) => setSearchValue(event.target.value)}
+                placeholder="Articles, grooming goods, brands..."
+                autoComplete="off"
+              />
+              <p>Press Enter to search</p>
+            </motion.form>
           </motion.div>
         )}
       </AnimatePresence>
