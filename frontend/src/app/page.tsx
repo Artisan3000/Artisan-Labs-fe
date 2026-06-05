@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import styles from "./page.module.css";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
@@ -14,6 +15,14 @@ import {
   AccordionTrigger,
 } from "@/components/Accordion";
 import { shopifyClient } from "@/lib/shopify";
+import { buildPageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Upper East Side Barbershop",
+  description:
+    "Book precision haircuts, beard trims, and grooming services at Artisan Barber on the Upper East Side, and shop curated grooming goods.",
+  path: "/",
+});
 
 type Service = {
   title: string;

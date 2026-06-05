@@ -6,12 +6,14 @@ import styles from "./page.module.css";
 import AddToCartButton from "@/components/AddToCartButton";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Shop | Artisan Barber",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Shop",
   description:
     "Shop grooming, apparel, and lifestyle goods from Artisan Barber.",
-};
+  path: "/shop",
+});
 
 type Product = {
   id: string;

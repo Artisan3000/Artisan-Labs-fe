@@ -7,6 +7,7 @@ import ProductDetails from "@/components/ProductDetails";
 import ProductRecommendations from "@/components/ProductRecommendations";
 import ProductReviews from "@/components/ProductReviews";
 import { mockReviewsByProductHandle } from "@/lib/mockReviews";
+import { buildPageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 
 import {
@@ -58,25 +59,21 @@ export async function generateMetadata({
   const product = data?.product;
 
   if (!product) {
-    return {
-      title: "Product Not Found | Artisan Barber",
-    };
+    return buildPageMetadata({
+      title: "Product Not Found",
+      path: `/products/${handle}`,
+    });
   }
 
   const title = product.seo?.title || product.title;
   const description = product.seo?.description || product.description;
 
-  return {
-    title: `${title} | Artisan Barber`,
+  return buildPageMetadata({
+    title,
     description,
-    openGraph: {
-      title,
-      description,
-      images: product.featuredImage
-        ? [{ url: product.featuredImage.url }]
-        : undefined,
-    },
-  };
+    path: `/products/${handle}`,
+    image: product.featuredImage?.url,
+  });
 }
 
 export default async function ProductPage({

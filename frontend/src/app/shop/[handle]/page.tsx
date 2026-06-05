@@ -7,6 +7,7 @@ import AddToCartButton from "@/components/AddToCartButton";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ShopControls from "@/components/ShopSorting";
+import { buildPageMetadata } from "@/lib/metadata";
 
 type CollectionMetadata = {
   title: string;
@@ -62,22 +63,20 @@ export async function generateMetadata({
   const collection = data?.collection;
 
   if (!collection) {
-    return {
-      title: "Collection Not Found | Artisan Barber",
-    };
+    return buildPageMetadata({
+      title: "Collection Not Found",
+      path: `/shop/${handle}`,
+    });
   }
 
   const title = collection.seo?.title || collection.title;
   const description = collection.seo?.description || collection.description;
 
-  return {
-    title: `${title} | Artisan Barber`,
+  return buildPageMetadata({
+    title,
     description,
-    openGraph: {
-      title,
-      description,
-    },
-  };
+    path: `/shop/${handle}`,
+  });
 }
 
 export default async function CollectionPage({

@@ -1,7 +1,16 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { buildPageMetadata } from "@/lib/metadata";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Gallery",
+  description:
+    "Browse Artisan Barber haircut, beard trim, shave, and grooming work from the New York shop.",
+  path: "/about/gallery",
+});
 
 type GalleryItem = {
   src: string;

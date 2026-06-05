@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
+import { buildPageMetadata } from "@/lib/metadata";
 import { shopifyClient } from "@/lib/shopify";
 import styles from "./page.module.css";
 
@@ -116,20 +117,19 @@ export async function generateMetadata({
   const article = await getArticle(handle);
 
   if (!article) {
-    return {
-      title: "Article Not Found | Artisan Barber",
-    };
+    return buildPageMetadata({
+      title: "Article Not Found",
+      path: `/read/${handle}`,
+    });
   }
 
-  return {
-    title: `${article.seo?.title || article.title} | Artisan Barber`,
+  return buildPageMetadata({
+    title: article.seo?.title || article.title,
     description: article.seo?.description || article.excerpt,
-    openGraph: {
-      title: article.seo?.title || article.title,
-      description: article.seo?.description || article.excerpt,
-      images: article.image ? [{ url: article.image.url }] : undefined,
-    },
-  };
+    path: `/read/${article.handle}`,
+    image: article.image?.url,
+    type: "article",
+  });
 }
 
 export default async function ReadArticlePage({

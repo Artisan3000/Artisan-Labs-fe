@@ -6,12 +6,14 @@ import FilterBar from "@/components/ReadFilter";
 import ReadHero from "@/components/ReadHero";
 import styles from "./page.module.css";
 import { Article } from "@/lib/types/article";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Read | Artisan Barber",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Read",
   description:
     "Read grooming notes, local stories, team updates, and lifestyle pieces from Artisan Barber.",
-};
+  path: "/read",
+});
 
 /* ------------------ RAW TYPES ------------------ */
 

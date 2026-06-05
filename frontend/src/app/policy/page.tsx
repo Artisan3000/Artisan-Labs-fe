@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import PolicyToc from "./PolicyToc";
+import { buildPageMetadata } from "@/lib/metadata";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
-  title: "Policy | Artisan Barber",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Policy",
   description:
     "Artisan Barber policies, including privacy, terms of service, refunds, and safe shopping information.",
-};
+  path: "/policy",
+});
 
 const tocItems = [
   { href: "#section1", label: "Shop with Confidence" },
