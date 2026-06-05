@@ -31,8 +31,8 @@ const team = [
   {
     name: "Irma Cadiz",
     title: "Master Hair Stylist / Colorist",
-    exp: "Cutting since '03",
-    bio: "With over 20 years of experience, Irma is a precision stylist at Artisan Barber known for her sharp scissor work, warm personality, and passion for helping clients walk out with confidence. Originally from Rochester, NY, she brings creativity, charm, and even homemade coquito to her chair—making every appointment feel personal and unforgettable.",
+    exp: "Cutting since '99",
+    bio: "With over 25 years of experience, Irma is a precision stylist at Artisan Barber known for her sharp scissor work, warm personality, and passion for helping clients walk out with confidence. Originally from Rochester, NY, she brings creativity, charm, and even homemade coquito to her chair—making every appointment feel personal and unforgettable.",
     img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/irma.png?v=1757629513",
     link: "https://getsquire.com/booking/book/manhattan/barber/-85231/services",
   },

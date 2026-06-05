@@ -277,13 +277,13 @@ const reviews: HomeReview[] = [
     detail: "Kris got me right. Best lineup I’ve had.",
     source: "Google Maps Review",
   },
-  {
+/*   {
     quote: "You will leave getting what you asked for.",
     name: "Enoch A.",
     detail:
       "Dionne consistently produces excellent work. You will leave getting exactly what you asked for.",
     source: "Google Maps Review",
-  },
+  }, */
   {
     quote: "Master class in the cuts he gives.",
     name: "Justin Diner",
@@ -305,13 +305,13 @@ const reviews: HomeReview[] = [
       "Got my haircut by Charlie, did a great job. Nice clean skin fade.",
     source: "Google Maps Review",
   },
-  {
+/*   {
     quote: "Attention to detail is worth every penny.",
     name: "Berrel",
     detail:
       "Dion was fantastic. First time cutting my hair and we figured out a unique style I wanted to try and it was executed perfectly. The attention to detail is worth every penny. Will be back soon.",
     source: "Google Maps Review",
-  },
+  }, */
   {
     quote: "Been cutting my hair with Charlie for 7 years.",
     name: "Oscar McCormick",
