@@ -13,7 +13,7 @@ import {
 
 const team = [
   {
-    name: "Charlie McCoy",
+    name: "Charlie",
     title: "Master Barber",
     exp: "Cutting since '96",
     bio: "Charlie is the founder of Artisan Barber, a NYC barbershop known for its creative energy, community focus, and precise grooming. From humble beginnings in Oklahoma to serving high-end clientele and launching a product line, Charlie's journey reflects resilience, reinvention, and a deep passion for his craft.",
@@ -21,7 +21,7 @@ const team = [
     link: "https://getsquire.com/booking/book/manhattan/barber/-85245/services",
   },
   {
-    name: "Bobby Boas",
+    name: "Bobby",
     title: "Master Hair Stylist",
     exp: "Cutting since '05",
     bio: "Bobby, a master stylist and manager at Artisan Barber, blends nearly two decades of precision scissor work with a love for bold, classic styles, especially skilled in cuts for curly and wavy hair. Raised in New Jersey and trained in California, he brings a unique fusion of East Coast edge and West Coast cool to every cut, crafting timeless looks with a modern twist.",
@@ -29,7 +29,7 @@ const team = [
     link: "https://getsquire.com/booking/book/manhattan/barber/-85240/services",
   },
   {
-    name: "Irma Cadiz",
+    name: "Irma",
     title: "Master Hair Stylist / Colorist",
     exp: "Cutting since '99",
     bio: "With over 25 years of experience, Irma is a precision stylist at Artisan Barber known for her sharp scissor work, warm personality, and passion for helping clients walk out with confidence. Originally from Rochester, NY, she brings creativity, charm, and even homemade coquito to her chair—making every appointment feel personal and unforgettable.",
@@ -37,7 +37,7 @@ const team = [
     link: "https://getsquire.com/booking/book/manhattan/barber/-85231/services",
   },
 /*   {
-    name: "Satesh C.",
+    name: "Satesh",
     title: "Master Barber / Stylist",
     exp: "Cutting since '14",
     bio: "Satesh, a master barber from Trinidad and Tobago, is known at Artisan Barber for his expert classic cuts and flawless skin fades, blending timeless techniques with a modern touch. With a passion for clean, polished styles and a flair for communication, he ensures every client leaves feeling confident and sharp.",
@@ -60,8 +60,22 @@ const team = [
     img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/kris.jpg?v=1757629512",
     link: "https://getsquire.com/booking/book/manhattan/barber/-114137/services",
   },
+  {
+    name: "Juan",
+    title: "Barber",
+    exp: "Cutting since '24",
+    bio: "With nearly two years of experience, Juan is passionate about delivering personalized grooming services that help every client look and feel their best. He specializes in modern fades, precision clipper work, and classic men's haircuts, while continuing to refine his scissor-cutting techniques through ongoing education. Dedicated to craftsmanship and attention to detail, Juan strives to provide every client with a comfortable experience and a haircut tailored to their individual style.",
+    img: "/team/20260616--untitled--7995-01.png",
+    link: "https://getsquire.com/booking/book/manhattan/barber/juan-hernandez-9/services",
+  },
+  {
+    name: "Bri",
+    title: "Concierge and Charitable Outreach",
+    bio: "Living in New York City for 15 years, Briana is a professional in customer experience, retail, and social impact project management. Combining these skills at Artisan Barber, you can find Bri behind the front desk welcoming clients into the shop and creating content for social media. Using her experience in nonprofit operations, Bri leads the charge at the Artisan Barber Foundation, the charitable branch of our business focused on giving back to underserved youth through free haircut campaigns and leadership programs.",
+    img: "/team/image.png",
+  },
   /* {
-    name: "Dione C.",
+    name: "Dione",
     title: "Apprentice Barber",
     exp: "Cutting since '14",
     bio: "Dione completed a three-year apprenticeship from 2017 to 2019 under renowned Master Barber Kamal Nuru of Levels Harlem. From 2020 to 2024, she advanced her career in leading Afro barbershops and luxury salons, refining her expertise in clipper-based artistry and precision grooming. A proud 2025 graduate of Empire Manhattan, she added sheer work to her diverse skill set. Dione pairs technical precision with creative artistry to deliver modern, polished styles.",
@@ -81,7 +95,7 @@ const team = [
   //   img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/oomi_9cc6f3d7-4e6e-4903-bc3c-4cef15aaa112.png?v=1757629513",
   // },
   {
-    name: "Brian Felix",
+    name: "Brian",
     title: "Creative Director",
     bio: "Brian, Artisan Barber’s Creative Director, is the visionary behind the brand’s visual identity—from product packaging to shop design and seasonal rollouts. With a background in design and a love for storytelling, his creativity brings each detail of the Artisan experience to life.",
     img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/brian.png?v=1757629513",
@@ -183,7 +197,9 @@ export default function TeamPage() {
               <div className={styles.meta}>
                 <h2>{member.name}</h2>
                 <p className={styles.title}>{member.title}</p>
-                {member.exp && <p className={styles.exp}>{member.exp}</p>}
+                <p className={styles.exp} aria-hidden={!member.exp}>
+                  {member.exp || "\u00a0"}
+                </p>
                 <p className={styles.sub}>{member.bio}</p>
               </div>
               {member.link && (
