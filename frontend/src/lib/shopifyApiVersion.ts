@@ -1,0 +1,1 @@
+export const SHOPIFY_STOREFRONT_API_VERSION = "2026-07";

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
+import { SHOPIFY_STOREFRONT_API_VERSION } from "@/lib/shopifyApiVersion";
 import { absoluteUrl } from "@/lib/siteConfig";
 
-const SHOPIFY_API_VERSION = "2025-07";
 const ARTICLE_BLOG_HANDLES = [
   "grooming",
   "local",
@@ -48,7 +48,9 @@ async function shopifyRequest<T>(query: string): Promise<T | null> {
 
   try {
     const response = await fetch(
-      `https://${cleanStoreDomain(storeDomain)}/api/${SHOPIFY_API_VERSION}/graphql.json`,
+      `https://${cleanStoreDomain(
+        storeDomain
+      )}/api/${SHOPIFY_STOREFRONT_API_VERSION}/graphql.json`,
       {
         method: "POST",
         headers: {
