@@ -1,0 +1,119 @@
+.main {
+  margin-top: 60px;
+  padding: 2rem;
+}
+
+.hero {
+  display: grid;
+  align-content: end;
+  min-height: min(68vh, 720px);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(3rem, 9vw, 8rem) 0 clamp(2rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--black);
+}
+
+.eyebrow {
+  margin-bottom: 1rem;
+  font-family: var(--font-family-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-size: clamp(4rem, 14vw, 11rem);
+  font-weight: normal;
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+}
+
+.intro {
+  max-width: 640px;
+  margin-top: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+  line-height: 1.35;
+}
+
+.notice {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(0, 2fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 5rem;
+  padding: clamp(2rem, 5vw, 4rem) 0;
+  border-bottom: 1px solid var(--black);
+  align-items: center;
+}
+
+.notice h2 {
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  font-weight: normal;
+  line-height: 1;
+}
+
+.notice p {
+  max-width: 560px;
+  color: #555;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto 5rem;
+}
+
+.actionButton {
+  display: flex;
+  min-height: 64px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--black);
+  border-radius: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-family);
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.actionButton:hover:not(:disabled) {
+  background: var(--old-gold);
+  color: var(--black);
+}
+
+.actionButton:focus-visible {
+  outline: 2px solid var(--cerulean);
+  outline-offset: 3px;
+}
+
+.actionButton:disabled {
+  border-color: var(--gray);
+  background: transparent;
+  color: var(--gray);
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 700px) {
+  .main {
+    padding: 1rem;
+  }
+
+  .hero {
+    min-height: 60vh;
+  }
+
+  .notice {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+}

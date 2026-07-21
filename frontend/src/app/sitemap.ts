@@ -178,6 +178,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     sitemapEntry("/"),
     sitemapEntry("/about"),
     sitemapEntry("/about/gallery"),
+    sitemapEntry("/careers"),
     sitemapEntry("/team"),
     sitemapEntry("/policy"),
     sitemapEntry("/read"),

@@ -60,6 +60,7 @@ const Footer = () => {
         <div>
           <h3>Who we are</h3>
           <ul>
+            <li><Link href="/about">About</Link></li>
             <li><Link href="/team">Team</Link></li>
             <li><Link href="/read">Read</Link></li>
           </ul>
@@ -67,7 +68,8 @@ const Footer = () => {
         <div>
           <h3>Support</h3>
           <ul>
-            <li><Link href="/about">About</Link></li>
+            <li><Link href="/careers">Careers</Link></li>
+            <li><Link href="https://academy.artisanbarber.com">Academy</Link></li>
             <li><Link href="/policy">Policy</Link></li>
           </ul>
         </div>
