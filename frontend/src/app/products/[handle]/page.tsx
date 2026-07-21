@@ -8,6 +8,7 @@ import ProductRecommendations from "@/components/ProductRecommendations";
 import ProductReviews from "@/components/ProductReviews";
 import { mockReviewsByProductHandle } from "@/lib/mockReviews";
 import { buildPageMetadata } from "@/lib/metadata";
+import { absoluteUrl } from "@/lib/siteConfig";
 import Image from "next/image";
 
 import {
@@ -125,9 +126,33 @@ export default async function ProductPage({
 
   const product: Product = normalizeProduct(rawProduct);
   const mockReviews = mockReviewsByProductHandle[handle] ?? [];
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.title,
+    description: product.descriptionHtml.replace(/<[^>]*>/g, " ").trim(),
+    image: product.images.map((image) => image.url),
+    brand: { "@type": "Brand", name: product.vendor },
+    url: absoluteUrl(`/products/${handle}`),
+    offers: product.variants.map((variant) => ({
+      "@type": "Offer",
+      price: variant.price.amount,
+      priceCurrency: variant.price.currencyCode,
+      availability: variant.availableForSale
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      url: absoluteUrl(`/products/${handle}`),
+    })),
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <Navigation />
 
       <main className={styles.main}>

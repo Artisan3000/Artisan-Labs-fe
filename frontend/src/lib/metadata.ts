@@ -7,6 +7,9 @@ type PageMetadataConfig = {
   path?: string;
   image?: string | null;
   type?: "website" | "article";
+  robots?: Metadata["robots"];
+  publishedTime?: string;
+  authors?: string[];
 };
 
 function imageUrl(image?: string | null) {
@@ -20,6 +23,9 @@ export function buildPageMetadata({
   path = "/",
   image,
   type = "website",
+  robots,
+  publishedTime,
+  authors,
 }: PageMetadataConfig = {}): Metadata {
   const pageTitle = title || siteConfig.defaultTitle;
   const pageDescription = description || siteConfig.defaultDescription;
@@ -39,6 +45,8 @@ export function buildPageMetadata({
       siteName: siteConfig.siteName,
       images,
       type,
+      ...(type === "article" && publishedTime ? { publishedTime } : {}),
+      ...(type === "article" && authors?.length ? { authors } : {}),
     },
     twitter: {
       card: "summary_large_image",
@@ -46,5 +54,6 @@ export function buildPageMetadata({
       description: pageDescription,
       images: images.map((item) => item.url),
     },
+    robots,
   };
 }

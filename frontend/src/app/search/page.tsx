@@ -12,6 +12,10 @@ export const metadata: Metadata = buildPageMetadata({
   description:
     "Search Artisan Barber articles, grooming goods, and shop products.",
   path: "/search",
+  robots: {
+    index: false,
+    follow: true,
+  },
 });
 
 const blogHandles = [

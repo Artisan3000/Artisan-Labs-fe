@@ -23,11 +23,13 @@ type ShopifyProductNode = {
 
 type ShopifyCollectionNode = {
   handle: string;
+  updatedAt?: string | null;
 };
 
 type ShopifyArticleNode = {
   handle: string;
   publishedAt?: string | null;
+  updatedAt?: string | null;
 };
 
 type ShopifyBlogArticles = {
@@ -79,10 +81,11 @@ function sitemapEntry(
   path: string,
   lastModified?: string | null
 ): MetadataRoute.Sitemap[number] {
-  return {
-    url: absoluteUrl(path),
-    lastModified: lastModified ? new Date(lastModified) : new Date(),
-  };
+  const entry: MetadataRoute.Sitemap[number] = { url: absoluteUrl(path) };
+
+  if (lastModified) entry.lastModified = new Date(lastModified);
+
+  return entry;
 }
 
 async function getProductEntries() {
@@ -122,7 +125,7 @@ async function getCollectionEntries() {
   `);
 
   return (data?.collections?.nodes ?? []).map((collection) =>
-    sitemapEntry(`/shop/${collection.handle}`)
+    sitemapEntry(`/shop/${collection.handle}`, collection.updatedAt)
   );
 }
 
@@ -134,6 +137,7 @@ async function getArticleEntries() {
           nodes {
             handle
             publishedAt
+            updatedAt
           }
         }
       }
@@ -150,7 +154,10 @@ async function getArticleEntries() {
 
   return Object.values(data ?? {}).flatMap((blog) =>
     (blog?.articles?.nodes ?? []).map((article) =>
-      sitemapEntry(`/read/${article.handle}`, article.publishedAt)
+      sitemapEntry(
+        `/read/${article.handle}`,
+        article.updatedAt || article.publishedAt
+      )
     )
   );
 }

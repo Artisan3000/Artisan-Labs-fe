@@ -6,6 +6,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { trackEvent } from "@/lib/analytics";
 
 const imageReveal = {
   hidden: { opacity: 0, y: 28, scale: 0.985 },
@@ -118,6 +119,10 @@ export default function AboutPage() {
       form.reset();
       setFormStatus("success");
       setFormMessage("Thanks. Your message has been sent.");
+      trackEvent("contact_submitted", {
+        form_name: "about_contact",
+        subject: String(formData.get("subject") || "General inquiry"),
+      });
     } catch (error) {
       setFormStatus("error");
       setFormMessage(

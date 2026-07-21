@@ -10,6 +10,7 @@ import {
 } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import { trackEvent } from "@/lib/analytics";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useOptionalCart } from "@/components/CartProvider";
@@ -432,7 +433,13 @@ const Navigation = () => {
                       <Link
                         href={cart.checkoutUrl}
                         className={styles.checkoutButton}
-                        onClick={closeCart}
+                        onClick={() => {
+                          trackEvent("checkout_started", {
+                            currency: cart.subtotal.currencyCode,
+                            value: Number(cart.subtotal.amount),
+                          });
+                          closeCart();
+                        }}
                       >
                         Checkout
                       </Link>

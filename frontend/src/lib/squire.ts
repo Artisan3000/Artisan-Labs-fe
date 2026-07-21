@@ -19,6 +19,12 @@ declare global {
 export function openSquireBooking(setup: SquireSetup = { brand: SQUIRE_BRAND_ID }) {
   if (typeof window === "undefined") return;
 
+  trackEvent("booking_started", {
+    booking_provider: "squire",
+    shop_id: setup.shop,
+    barber_id: setup.barber,
+  });
+
   let attempts = 0;
 
   const tryOpen = () => {
@@ -39,3 +45,4 @@ export function openSquireBooking(setup: SquireSetup = { brand: SQUIRE_BRAND_ID 
 
   tryOpen();
 }
+import { trackEvent } from "@/lib/analytics";

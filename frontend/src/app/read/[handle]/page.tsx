@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import { buildPageMetadata } from "@/lib/metadata";
 import { shopifyClient } from "@/lib/shopify";
+import { absoluteUrl, siteConfig } from "@/lib/siteConfig";
 import styles from "./page.module.css";
 
 const blogHandles = [
@@ -342,6 +343,8 @@ export async function generateMetadata({
     path: `/read/${article.handle}`,
     image: article.image?.url,
     type: "article",
+    publishedTime: article.publishedAt,
+    authors: article.authorV2?.name ? [article.authorV2.name] : undefined,
   });
 }
 
@@ -356,9 +359,28 @@ export default async function ReadArticlePage({
   if (!article) notFound();
 
   const recommendedArticles = await getRecommendedArticles(article);
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: article.publishedAt,
+    image: article.image?.url,
+    author: article.authorV2?.name
+      ? { "@type": "Person", name: article.authorV2.name }
+      : { "@type": "Organization", name: siteConfig.siteName },
+    publisher: { "@type": "Organization", name: siteConfig.siteName },
+    mainEntityOfPage: absoluteUrl(`/read/${article.handle}`),
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <Navigation />
       <main className={styles.main}>
         <Link href="/read" className={styles.backLink}>
