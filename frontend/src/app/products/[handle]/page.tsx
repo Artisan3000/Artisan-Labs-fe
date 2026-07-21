@@ -10,6 +10,7 @@ import { mockReviewsByProductHandle } from "@/lib/mockReviews";
 import { buildPageMetadata } from "@/lib/metadata";
 import { absoluteUrl } from "@/lib/siteConfig";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 import {
   ShopifyProduct,
@@ -121,7 +122,7 @@ export default async function ProductPage({
   const rawProduct = data?.product;
 
   if (!rawProduct) {
-    return <p>Product not found</p>;
+    notFound();
   }
 
   const product: Product = normalizeProduct(rawProduct);

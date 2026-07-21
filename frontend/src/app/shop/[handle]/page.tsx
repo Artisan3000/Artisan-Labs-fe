@@ -8,6 +8,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ShopControls from "@/components/ShopSorting";
 import { buildPageMetadata } from "@/lib/metadata";
+import { notFound } from "next/navigation";
 
 type CollectionMetadata = {
   title: string;
@@ -167,7 +168,7 @@ export default async function CollectionPage({
   const products = collection?.products?.nodes ?? [];
   const pageInfo = collection?.products?.pageInfo;
 
-  if (!collection) return <p>Collection not found.</p>;
+  if (!collection) notFound();
 
   return (
     <>
@@ -179,7 +180,7 @@ export default async function CollectionPage({
         <h1 className={styles.heading}>{collection.title}</h1>
 
         {collection.description && (
-          <p
+          <div
             className={styles.collectionDescription}
             dangerouslySetInnerHTML={{ __html: collection.description }}
           />
@@ -278,7 +279,7 @@ export default async function CollectionPage({
         )}
 
         <div>
-          <h1>
+          <p>
             The Artisan Barber Store is the creative extension of our craft.
             Beyond the chair, we develop limited-run products in grooming,
             apparel, and lifestyle goods that reflect our values of quality,
@@ -286,7 +287,7 @@ export default async function CollectionPage({
             personally use and want to share with our community. It’s our way of
             bringing the spirit of Artisan Barber into everyday life, offering
             tangible expressions of our culture and vision.
-          </h1>
+          </p>
         </div>
       </main>
 
