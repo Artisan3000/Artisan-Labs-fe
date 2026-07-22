@@ -95,6 +95,7 @@ export default function Weather() {
     <div className={styles.weather}>
       {weather.map((item) => (
         <div key={item.city} className={styles.weatherCity}>
+          <WeatherIcon condition={item.condition} />
           <div>
             <span className={styles.weatherCond}>{item.condition}</span>
             {", "}
@@ -102,7 +103,7 @@ export default function Weather() {
               {item.tempF}°F / {item.tempC}°C
             </span>
           </div>
-          <WeatherIcon condition={item.condition} />
+          
         </div>
       ))}
     </div>

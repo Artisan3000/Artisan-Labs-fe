@@ -9,7 +9,7 @@
 
 .heroHeader {
   display: grid;
-  grid-template-columns: minmax(0, 0.4fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.4fr) minmax(0, 1fr) minmax(0, 0.4fr);
   gap: 2rem;
   align-items: end;
   padding-bottom: 1.5rem;
@@ -30,6 +30,13 @@
   font-size: clamp(2.2rem, 6vw, 6rem);
   font-weight: normal;
   line-height: 0.9;
+  text-align: center;
+}
+
+.sportsKicker {
+  text-align: center;
+  border: 1px solid rgba(255, 255, 248, 0.18);
+  padding: 0.5rem;
 }
 
 .dashboard {
@@ -50,7 +57,7 @@
 }
 
 .panelLabel {
-  margin-bottom: 1rem;
+  margin: 0.5rem 0 1rem;
 }
 
 @media (max-width: 900px) {

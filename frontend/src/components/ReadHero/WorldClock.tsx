@@ -48,8 +48,8 @@ export default function WorldClock() {
     <div className={styles.worldClock}>
       {CITIES.map((city) => (
         <div key={city.name} className={styles.city}>
-          <span className={styles.cityTime}>{times[city.name] ?? "--:--:--"}</span>
           <span className={styles.cityName}>{city.name}</span>
+          <span className={styles.cityTime}>{times[city.name] ?? "--:--:--"}</span>
         </div>
       ))}
     </div>

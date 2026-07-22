@@ -2,6 +2,7 @@
   --white: #fffff8;
   --black: #111;
   --font-family: "Times New Roman", Times, serif;
+  --font-family-sans: Arial, Helvetica, sans-serif;
 
   --red: #b02e0c;
   --cerulean: #007ea7;
@@ -26,7 +27,7 @@ html {
 body {
   color: var(--black);
   background: var(--white);
-  font-family: "Times New Roman", Times, serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
