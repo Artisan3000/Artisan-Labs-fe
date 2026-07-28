@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import { buildPageMetadata } from "@/lib/metadata";
+import { isAcademySsoEnabled } from "@/lib/academy-sso/config";
+import { getEmployeeSession } from "@/lib/academy-sso/session";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -11,7 +13,11 @@ export const metadata: Metadata = buildPageMetadata({
   path: "/careers",
 });
 
-export default function CareersPage() {
+export const dynamic = "force-dynamic";
+
+export default async function CareersPage() {
+  const ssoEnabled = isAcademySsoEnabled();
+  const session = await getEmployeeSession();
   return (
     <>
       <Navigation />
@@ -31,9 +37,19 @@ export default function CareersPage() {
         </section>
 
         <section className={styles.actions} aria-label="Career resources">
-          <button type="button" className={styles.actionButton}>
-            Log in
-          </button>
+          {session ? (
+            <a href="/careers/portal" className={styles.actionButton}>
+              Employee portal
+            </a>
+          ) : ssoEnabled ? (
+            <a href="/api/auth/academy/start" className={styles.actionButton}>
+              Log in
+            </a>
+          ) : (
+            <button type="button" className={styles.actionButton} disabled>
+              Log in
+            </button>
+          )}
           <button
             type="button"
             className={styles.actionButton}

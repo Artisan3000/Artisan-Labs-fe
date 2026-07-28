@@ -67,6 +67,32 @@
   margin: 0 auto 5rem;
 }
 
+.sessionCard {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr);
+  gap: 2rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto 5rem;
+  padding: clamp(2rem, 5vw, 4rem) 0;
+  border-bottom: 1px solid var(--black);
+}
+
+.sessionCard h2 {
+  margin-bottom: 1rem;
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  font-weight: normal;
+}
+
+.sessionMeta {
+  color: #555;
+  line-height: 1.6;
+}
+
+.logoutForm {
+  width: 100%;
+}
+
 .actionButton {
   display: flex;
   min-height: 64px;
@@ -114,6 +140,10 @@
   }
 
   .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .sessionCard {
     grid-template-columns: 1fr;
   }
 }
