@@ -72,7 +72,7 @@ const team = [
     name: "Bri",
     title: "Concierge and Charitable Outreach",
     bio: "Living in New York City for 15 years, Briana is a professional in customer experience, retail, and social impact project management. Combining these skills at Artisan Barber, you can find Bri behind the front desk welcoming clients into the shop and creating content for social media. Using her experience in nonprofit operations, Bri leads the charge at the Artisan Barber Foundation, the charitable branch of our business focused on giving back to underserved youth through free haircut campaigns and leadership programs.",
-    img: "/team/image.png",
+    img: "/team/bri.jpg",
   },
   /* {
     name: "Dione",
