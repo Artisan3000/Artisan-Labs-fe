@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import { buildPageMetadata } from "@/lib/metadata";
@@ -27,8 +28,18 @@ export default async function CareersPage() {
           <h1>Careers</h1>
           <p className={styles.intro}>
             We are building a team grounded in craft, hospitality, and
-            community. Career opportunities will be posted here soon.
+            community. Career opportunities will be posted here.
           </p>
+        </section>
+
+        <section className={styles.teamPhoto} aria-label="The Artisan Barber team">
+          <Image
+            src="/team/careers-team.jpg"
+            alt="The Artisan Barber team inside the barbershop"
+            width={2400}
+            height={1600}
+            sizes="(max-width: 1240px) calc(100vw - 4rem), 1200px"
+          />
         </section>
 
         <section className={styles.notice} aria-labelledby="openings-heading">

@@ -9,7 +9,7 @@
   min-height: min(68vh, 720px);
   max-width: 1200px;
   margin: 0 auto;
-  padding: clamp(3rem, 9vw, 8rem) 0 clamp(2rem, 5vw, 4rem);
+  padding: clamp(3rem, 5vw, 4rem) 0 clamp(2rem, 9vw, 8rem);
   border-bottom: 1px solid var(--black);
 }
 
@@ -29,10 +29,23 @@
 }
 
 .intro {
-  max-width: 640px;
+  max-width: 700px;
   margin-top: clamp(2rem, 5vw, 4rem);
   font-size: clamp(1.2rem, 2.2vw, 1.8rem);
   line-height: 1.35;
+}
+
+.teamPhoto {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) 0;
+  border-bottom: 1px solid var(--black);
+}
+
+.teamPhoto img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .notice {
@@ -78,6 +91,15 @@
   border-bottom: 1px solid var(--black);
 }
 
+.portalMenu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid var(--black);
+  padding-bottom: 1rem;
+}
+
 .sessionCard h2 {
   margin-bottom: 1rem;
   font-size: clamp(1.8rem, 4vw, 3.5rem);
@@ -90,7 +112,30 @@
 }
 
 .logoutForm {
-  width: 100%;
+  width: fit-content;
+}
+
+.logoutForm button {
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--black);
+  border-radius: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-family);
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.logoutForm button:hover:not(:disabled) {
+  background: var(--old-gold);
+  color: var(--black);
+  cursor: pointer;
 }
 
 .actionButton {
@@ -132,6 +177,10 @@
 
   .hero {
     min-height: 60vh;
+  }
+
+  .teamPhoto {
+    padding: 1rem 0;
   }
 
   .notice {
