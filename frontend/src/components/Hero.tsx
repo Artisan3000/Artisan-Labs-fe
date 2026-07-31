@@ -43,9 +43,12 @@ export default function HomeHero() {
 
         {/* Overlay Text */}
         <div className={styles.overlayText}>
-          <h1 className={styles.fadeUp}>Your signature look begins at Artisan.</h1>
+          <h1 className={styles.fadeUp}>
+            Precision haircuts at our Upper East Side barbershop
+          </h1>
           <p className={styles.float}>
-            Manhattan&apos;s go-to barbershop for scissor cuts, clean fades, and precision styling.
+            Your signature look begins at Artisan, Manhattan&apos;s destination
+            for scissor cuts, clean fades, and precision styling.
           </p>
           <div className={styles.ctaRow}>
             <Link href="/about/gallery" className={styles.secondaryButton}>

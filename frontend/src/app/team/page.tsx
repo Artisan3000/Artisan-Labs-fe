@@ -30,7 +30,7 @@ const team = [
   },
   {
     name: "Irma",
-    title: "Master Hair Stylist / Colorist",
+    title: "Master Hair Stylist",
     exp: "Cutting since '99",
     bio: "With over 25 years of experience, Irma is a precision stylist at Artisan Barber known for her sharp scissor work, warm personality, and passion for helping clients walk out with confidence. Originally from Rochester, NY, she brings creativity, charm, and even homemade coquito to her chair—making every appointment feel personal and unforgettable.",
     img: "https://cdn.shopify.com/s/files/1/0613/6292/9724/files/irma.png?v=1757629513",
@@ -150,14 +150,14 @@ export default function TeamPage() {
       <Navigation />
       <main className={styles.main}>
         <header className={styles.header}>
-          <motion.h2
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Our team has over a century of combined hair industry experience
-          </motion.h2>
+            Meet our Upper East Side barbers and stylists
+          </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}

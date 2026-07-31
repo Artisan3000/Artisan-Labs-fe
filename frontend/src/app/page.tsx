@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import styles from "./page.module.css";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
@@ -16,20 +17,17 @@ import {
 } from "@/components/Accordion";
 import { shopifyClient } from "@/lib/shopify";
 import { buildPageMetadata } from "@/lib/metadata";
+import {
+  businessConfig,
+  services,
+  type ServiceId,
+} from "@/lib/businessConfig";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Upper East Side Barbershop",
-  description:
-    "Book precision haircuts, beard trims, and grooming services at Artisan Barber on the Upper East Side, and shop curated grooming goods.",
+  title: "Upper East Side Barbershop & Men's Haircuts",
+  description: `Book precision haircuts, skin fades, scissor cuts, and beard trims at Artisan Barber, ${businessConfig.address.street} on Manhattan's Upper East Side.`,
   path: "/",
 });
-
-type Service = {
-  title: string;
-  price: string;
-  description: string;
-  icon: React.ReactNode;
-};
 
 function ScissorsIcon() {
   return (
@@ -180,50 +178,19 @@ function ChildIcon() {
   );
 }
 
-const services: Service[] = [
-  {
-    title: "Clipper and scissor cut",
-    price: "$65+",
-    description: "Classic shape with scissor detail and a clean finish.",
-    icon: <ScissorsIcon />,
-  },
-  {
-    title: "Beard trim",
-    price: "$45+",
-    description: "Precision trim for a clean, polished beard shape.",
-    icon: <RazorIcon />,
-  },
-  {
-    title: "Buzz cut",
-    price: "$55+",
-    description: "Low-maintenance, evenly dialed in, and built to stay crisp.",
-    icon: <ClippersIcon />,
-  },
-  {
-    title: "Hair and beard combo",
-    price: "$100+",
-    description: "A complete shape-up for both your cut and beard line.",
-    icon: <BeardIcon />,
-  },
-  {
-    title: "Scissor only cut",
-    price: "$75+",
-    description: "Tailored length and movement for a softer, longer silhouette.",
-    icon: <CombIcon />,
-  },
-  {
-    title: "Children's haircut",
-    price: "$55+",
-    description: "Comfortable, patient service designed for younger clients.",
-    icon: <ChildIcon />,
-  },
-];
+const serviceIcons: Record<ServiceId, React.ReactNode> = {
+  "clipper-and-scissor-cut": <ScissorsIcon />,
+  "beard-trim": <RazorIcon />,
+  "buzz-cut": <ClippersIcon />,
+  "hair-and-beard-combo": <BeardIcon />,
+  "scissor-only-cut": <CombIcon />,
+  "childrens-haircut": <ChildIcon />,
+};
 
 const faqItems = [
   {
     question: "Do I need an appointment or can I walk in?",
-    answer:
-      "Walk-ins are always welcome to sit and wait for the next appointment, however booking ahead guarantees your time in the chair is reserved. You can also join our online wait list for a same-day standby appointment.",
+    answer: businessConfig.policies.walkIns,
   },
   {
     question: "How long does a haircut usually take?",
@@ -257,8 +224,7 @@ const faqItems = [
   },
   {
     question: "Do we do color?",
-    answer:
-      "No. We're not offering any color services at our shop, however we can make referrals upon request.",
+    answer: businessConfig.policies.colorServices,
   },
   {
     question: "Do you offer gift cards?",
@@ -459,16 +425,20 @@ export default async function Home() {
             <h2 className={styles.heading}>What we do</h2>
             <div className={styles.servicesGrid}>
               {services.map((service) => (
-                <article key={service.title} className={styles.serviceCard}>
-                  {service.icon}
+                <Link
+                  key={service.id}
+                  href={`/services#${service.id}`}
+                  className={styles.serviceCard}
+                >
+                  {serviceIcons[service.id]}
                   <div className={styles.serviceHeader}>
-                    <h3 className={styles.serviceTitle}>{service.title}</h3>
+                    <h3 className={styles.serviceTitle}>{service.name}</h3>
                     <span className={styles.servicePrice}>{service.price}</span>
                   </div>
                   <p className={styles.serviceDescription}>
                     {service.description}
                   </p>
-                </article>
+                </Link>
               ))}
             </div>
           </div>

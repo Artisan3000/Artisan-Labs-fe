@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import styles from "./Marquee.module.css";
+import { businessConfig } from "@/lib/businessConfig";
 
 export default function Marquee() {
   return (
@@ -16,8 +17,10 @@ export default function Marquee() {
               className={styles.icon}
             />
             <span className={styles.text}>
-              Walk ins welcomed. Come in Monday - Friday from 11am to 7pm.
-              We&apos;re closed on Saturdays. Sundays are appointment only.
+              Walk-ins welcome. Come in Monday - Friday from{" "}
+              {businessConfig.hours.weekdays.display}. Saturday:{" "}
+              {businessConfig.hours.saturday}. Sunday:{" "}
+              {businessConfig.hours.sunday}.
             </span>
           </div>
         ))}

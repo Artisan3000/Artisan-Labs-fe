@@ -3,6 +3,7 @@ import { CartProvider } from "@/components/CartProvider";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import SiteWidget from "@/components/SiteWidget";
 import { absoluteUrl, siteConfig } from "@/lib/siteConfig";
+import { businessConfig } from "@/lib/businessConfig";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -47,23 +48,23 @@ export default function RootLayout({
         "@id": `${absoluteUrl("/")}#business`,
         name: siteConfig.siteName,
         url: absoluteUrl("/"),
-        telephone: "+1-833-750-2760",
+        telephone: businessConfig.phone.e164,
         image: absoluteUrl(siteConfig.defaultOgImage),
         priceRange: "$$",
         address: {
           "@type": "PostalAddress",
-          streetAddress: "331 East 81st Street",
-          addressLocality: "New York",
-          addressRegion: "NY",
-          postalCode: "10028",
-          addressCountry: "US",
+          streetAddress: businessConfig.address.street,
+          addressLocality: businessConfig.address.locality,
+          addressRegion: businessConfig.address.region,
+          postalCode: businessConfig.address.postalCode,
+          addressCountry: businessConfig.address.country,
         },
         openingHoursSpecification: [
           {
             "@type": "OpeningHoursSpecification",
-            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-            opens: "11:00",
-            closes: "19:00",
+            dayOfWeek: businessConfig.hours.weekdays.days,
+            opens: businessConfig.hours.weekdays.opens,
+            closes: businessConfig.hours.weekdays.closes,
           },
         ],
         sameAs: [

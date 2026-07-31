@@ -1,5 +1,6 @@
 import styles from "./styles.module.css";
 import Link from "next/link";
+import { businessConfig } from "@/lib/businessConfig";
 
 const Footer = () => {
   return (
@@ -36,23 +37,23 @@ const Footer = () => {
         <div>
           Monday - Friday
           <br />
-          11:00 AM - 7:00 PM
+          {businessConfig.hours.weekdays.display}
         </div>
         <div>
-          Saturday: Closed
+          Saturday: {businessConfig.hours.saturday}
           <br />
-          Sunday: Appointment Only
+          Sunday: {businessConfig.hours.sunday}
         </div>
         <div>
-          {/* (917) 388-3554 */}
-          (833) 750-2760
+          {businessConfig.phone.display}
           <br />
           Get In Touch
         </div>
         <div>
-          331 East 81st Street
+          {businessConfig.address.street}
           <br />
-          New York, NY 10028
+          {businessConfig.address.locality}, {businessConfig.address.region}{" "}
+          {businessConfig.address.postalCode}
         </div>
       </div>
 
@@ -60,6 +61,7 @@ const Footer = () => {
         <div>
           <h3>Who we are</h3>
           <ul>
+            <li><Link href="/services">Services</Link></li>
             <li><Link href="/about">About</Link></li>
             <li><Link href="/team">Team</Link></li>
             <li><Link href="/read">Read</Link></li>

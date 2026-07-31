@@ -7,6 +7,7 @@ import styles from "./page.module.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { trackEvent } from "@/lib/analytics";
+import { businessConfig, formatAddress } from "@/lib/businessConfig";
 
 const imageReveal = {
   hidden: { opacity: 0, y: 28, scale: 0.985 },
@@ -16,14 +17,14 @@ const imageReveal = {
 const locations = [
   {
     title: "Current Location",
-    address: "331 E 81st. Street, New York, NY 10028",
+    address: formatAddress(),
     image: "/ues-space.jpg",
     imageAlt: "Artisan Barber Upper East Side shop interior",
     imagePosition: "center",
     body: "Opened in 2021, today’s location has had a refined evolution: a fully operational Apothecary, Haberdashery, and Gentleman’s Salon nestled in a sophisticated stretch of the Upper East Side. This space blends old-world elegance with modern edge - offering signature cuts, hot towel treatments, and curated grooming products. The music is smooth, the barbers are seasoned, and the atmosphere is immersive - making this more than just a barbershop. It’s a lifestyle destination for the modern gentleman.",
   },
   {
-    title: "Second Location",
+    title: "Former Lower East Side Location",
     address: "254 Broome Street, New York, NY 10003",
     image: "/les-space.jpg",
     imageAlt: "Barber working with a client inside the Lower East Side shop",
@@ -31,7 +32,7 @@ const locations = [
     body: "In the heart of the Lower East Side, Artisan Barber’s second location opened in 2019. Set in a duplex-style space, it doubled as an art gallery and culture lounge, hosting events, photo shoots, and brand collaborations. The shop also sold vintage apparel alongside grooming essentials, giving clients a unique blend of style, substance, and self-expression. With an ever-rotating playlist and a team of versatile, creative barbers, this location became a staple for downtown tastemakers before its closure in 2022.",
   },
   {
-    title: "First Location",
+    title: "Original Upper East Side Location",
     address: "1728 2nd Avenue, New York, NY 10128",
     image: "/les-space-02.jpg",
     imageAlt: "Black and white photograph of a barber cutting hair",
@@ -143,20 +144,20 @@ export default function AboutPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
         >
-          Where we&apos;ve been
+          An Upper East Side barbershop built on craft and community
         </motion.h1>
         <div className={styles.stats}>
           <div>
-            <h3>2017</h3>
+            <h3>{businessConfig.foundedYear}</h3>
             <p>Established</p>
           </div>
           <div>
-            <h3>5000+</h3>
+            <h3>{businessConfig.verifiedClientCount}+</h3>
             <p>Clients</p>
           </div>
           <div>
             <h3>3</h3>
-            <p>Locations</p>
+            <p>New York spaces</p>
           </div>
         </div>
 
@@ -193,23 +194,25 @@ export default function AboutPage() {
           <h2>Hours</h2>
           <div className={styles.hours}>
             <p className={styles.day}>
-              Monday: <span>11am - 7pm</span>
+              Monday: <span>{businessConfig.hours.weekdays.display}</span>
             </p>
             <p className={styles.day}>
-              Tuesday: <span>11am - 7pm</span>
+              Tuesday: <span>{businessConfig.hours.weekdays.display}</span>
             </p>
             <p className={styles.day}>
-              Wednesday: <span>11am - 7pm</span>
+              Wednesday: <span>{businessConfig.hours.weekdays.display}</span>
             </p>
             <p className={styles.day}>
-              Thursday: <span>11am - 7pm</span>
+              Thursday: <span>{businessConfig.hours.weekdays.display}</span>
             </p>
             <p className={styles.day}>
-              Friday: <span>11am - 7pm</span>
+              Friday: <span>{businessConfig.hours.weekdays.display}</span>
             </p>
-            <p className={styles.day}>Closed on Saturdays</p>
             <p className={styles.day}>
-              Sunday: <span>Appointment only</span>
+              Saturday: <span>{businessConfig.hours.saturday}</span>
+            </p>
+            <p className={styles.day}>
+              Sunday: <span>{businessConfig.hours.sunday}</span>
             </p>
           </div>
         </section>

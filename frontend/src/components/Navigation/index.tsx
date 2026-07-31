@@ -25,6 +25,7 @@ const homeNavItems = [
 ];
 
 const siteNavItems = [
+  { name: "Services", href: "/services" },
   { name: "Shop", href: "/shop" },
   { name: "About", href: "/about" },
   { name: "Read", href: "/read" },
@@ -52,6 +53,7 @@ const readLinks = [
 ];
 
 const mobileSiteLinks = [
+  { name: "Services", href: "/services" },
   { name: "Shop", href: "/shop" },
   { name: "About", href: "/about" },
   { name: "Gallery", href: "/about/gallery" },
@@ -199,6 +201,9 @@ const Navigation = () => {
           ))
         ) : (
           <>
+            <div className={styles.menuItem}>
+              <Link href="/services">Services</Link>
+            </div>
             <div
               className={styles.menuItem}
               onMouseEnter={() => setOpenMenu("shop")}

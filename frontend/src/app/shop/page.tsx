@@ -9,9 +9,9 @@ import Footer from "@/components/Footer";
 import { buildPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Shop",
+  title: "Men's Grooming Products & Hair Styling",
   description:
-    "Shop grooming, apparel, and lifestyle goods from Artisan Barber.",
+    "Shop Artisan Barber hair styling, beard care, skin care, and curated men's grooming products for everyday use.",
   path: "/shop",
 });
 
@@ -115,9 +115,16 @@ export default async function ShopPage({
     <>
       <Navigation />
       <main className={styles.main}>
+        <header className={styles.intro}>
+          <h1>Men&apos;s hair, beard, and grooming products</h1>
+          <p>
+            Explore styling, beard, skin, body, and home goods selected by the
+            Artisan Barber team for everyday grooming and care.
+          </p>
+        </header>
         <div className={styles.shopSettings}>
           <div className={styles.shopSettingsCat}>
-            <h1>Category</h1>
+            <h2>Category</h2>
             {/* <Link href="/shop/">All</Link> */}
             <Link href="/shop/hair">Hair</Link>
             <Link href="/shop/skin">Skin</Link>
@@ -126,7 +133,7 @@ export default async function ShopPage({
             <Link href="/shop/home">Home</Link>
           </div>
           <div className={styles.shopSettingsCol}>
-            <h1>Vendors</h1>
+            <h2>Vendors</h2>
             <Link href="/shop/">All</Link>
             <Link href="/shop/artisan-barber">Artisan Barber</Link>
             <Link href="/shop/blind-barber">Blind Barber</Link>
@@ -136,7 +143,7 @@ export default async function ShopPage({
           </div>
 
         </div>
-        <h1 className={styles.heading}>Latest</h1>
+        <h2 className={styles.heading}>Latest products</h2>
         {products.length === 0 ? (
           <p>No products found.</p>
         ) : (

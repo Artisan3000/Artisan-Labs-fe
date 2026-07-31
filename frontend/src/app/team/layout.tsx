@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Team",
+  title: "Our Upper East Side Barbers & Stylists",
   description:
-    "Meet the Artisan Barber team of master barbers, stylists, and creative staff in New York City.",
+    "Meet Artisan Barber's Upper East Side team, including specialists in fades, scissor cuts, curly hair, children's cuts, and precision styling.",
   path: "/team",
 });
 

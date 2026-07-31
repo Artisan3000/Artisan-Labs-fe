@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/metadata";
+import { businessConfig } from "@/lib/businessConfig";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "About",
-  description:
-    "Learn about Artisan Barber's New York story, shop history, hours, and contact information.",
+  title: "About Our Upper East Side Barbershop Since 2017",
+  description: `Discover Artisan Barber's story, from its 2017 New York founding to its current Upper East Side shop at ${businessConfig.address.street}.`,
   path: "/about",
 });
 
