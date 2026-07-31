@@ -9,6 +9,7 @@ import ProductReviews from "@/components/ProductReviews";
 import { mockReviewsByProductHandle } from "@/lib/mockReviews";
 import { buildPageMetadata } from "@/lib/metadata";
 import { absoluteUrl } from "@/lib/siteConfig";
+import { buildBreadcrumbJsonLd } from "@/lib/structuredData";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
@@ -145,6 +146,11 @@ export default async function ProductPage({
       url: absoluteUrl(`/products/${handle}`),
     })),
   };
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Shop", path: "/shop" },
+    { name: product.title, path: `/products/${handle}` },
+  ]);
 
   return (
     <>
@@ -152,6 +158,12 @@ export default async function ProductPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(productJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c"),
         }}
       />
       <Navigation />

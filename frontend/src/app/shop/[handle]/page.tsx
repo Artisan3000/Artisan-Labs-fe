@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import ShopControls from "@/components/ShopSorting";
 import { buildPageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
+import { buildBreadcrumbJsonLd } from "@/lib/structuredData";
 
 type CollectionMetadata = {
   title: string;
@@ -170,8 +171,20 @@ export default async function CollectionPage({
 
   if (!collection) notFound();
 
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Shop", path: "/shop" },
+    { name: collection.title, path: `/shop/${handle}` },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <Navigation />
 
       <main className={styles.main}>

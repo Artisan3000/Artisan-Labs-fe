@@ -7,6 +7,7 @@ import Navigation from "@/components/Navigation";
 import { buildPageMetadata } from "@/lib/metadata";
 import { shopifyClient } from "@/lib/shopify";
 import { absoluteUrl, siteConfig } from "@/lib/siteConfig";
+import { buildBreadcrumbJsonLd } from "@/lib/structuredData";
 import styles from "./page.module.css";
 
 const blogHandles = [
@@ -372,6 +373,11 @@ export default async function ReadArticlePage({
     publisher: { "@type": "Organization", name: siteConfig.siteName },
     mainEntityOfPage: absoluteUrl(`/read/${article.handle}`),
   };
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Read", path: "/read" },
+    { name: article.title, path: `/read/${article.handle}` },
+  ]);
 
   return (
     <>
@@ -379,6 +385,12 @@ export default async function ReadArticlePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c"),
         }}
       />
       <Navigation />
