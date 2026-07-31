@@ -9,10 +9,14 @@ Phase 2 working inventory for consolidating URLs from the former Shopify storefr
 | `/blogs/:blog/:handle` | `/read/:handle` | Current article routes retain the Shopify article handle. |
 | `/blogs/:blog` | `/read` | Shopify blog indexes are consolidated into the current Read index. |
 | `/pages/blog` | `/read` | The former page was the primary article index. |
+| `/pages/learn` | `/read` | The former Learn index is consolidated into the current editorial index. |
+| `/pages/careers` | `/careers` | The current Careers route replaces the indexed Shopify careers page. |
 | `/pages/service` | `/services` | The current Services page replaces the former service page. |
 | `/pages/visit` | `/services` | The former Visit page primarily contained services, location, hours, and booking information. |
 | `/pages/shop` | `/shop` | The current Shop page replaces the former Shopify landing page. |
 | `/collections/newest-products` | `/shop/new` | The current `new` collection exists and replaces the indexed `newest-products` collection. |
+| `/collections/best-sellers` | `/shop/best-sellers` | The collection retains its handle under the current Shop route. |
+| `/collections/hair-styling` | `/shop/hair-styling` | The collection retains its handle under the current Shop route. |
 
 All implemented redirects use permanent Next.js redirects and return HTTP 308.
 
