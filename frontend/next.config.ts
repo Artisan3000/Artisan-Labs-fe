@@ -23,6 +23,21 @@ const nextConfig: NextConfig = {
         destination: "/shop",
         permanent: true,
       },
+      {
+        source: "/pages/blog",
+        destination: "/read",
+        permanent: true,
+      },
+      {
+        source: "/blogs/:blog",
+        destination: "/read",
+        permanent: true,
+      },
+      {
+        source: "/collections/newest-products",
+        destination: "/shop/new",
+        permanent: true,
+      },
     ];
   },
   images: {
