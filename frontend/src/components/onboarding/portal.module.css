@@ -1,0 +1,141 @@
+.portal { min-height: 100vh; padding-top: 60px; background: var(--white); color: var(--black); }
+.visuallyHidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.portalHeader { min-height: 94px; padding: 1.25rem clamp(1rem, 3vw, 2.5rem); display: flex; align-items: center; justify-content: space-between; gap: 2rem; border-bottom: 1px solid var(--black); }
+.kicker { font-family: var(--font-family-sans); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; }
+.headerTitle { margin-top: .2rem; font-size: clamp(1.35rem, 2.2vw, 2rem); }
+.identity { display: flex; align-items: center; gap: .75rem; font-family: var(--font-family-sans); font-size: .82rem; }
+.identity strong, .identity small { display: block; }
+.identity small { margin-top: .15rem; color: #5a5a54; }
+.avatar { width: 42px; height: 42px; display: grid; place-items: center; flex: 0 0 auto; border: 1px solid var(--black); border-radius: 50%; font-family: var(--font-family-sans); font-size: .75rem; }
+.portalGrid { max-width: 1500px; min-height: calc(100vh - 220px); margin: 0 auto; display: grid; grid-template-columns: 220px minmax(0, 1fr); }
+.portalNav { padding: 2rem 1.25rem; display: flex; flex-direction: column; gap: .25rem; border-right: 1px solid var(--black); font-family: var(--font-family-sans); }
+.portalNav a { padding: .8rem .75rem; border: 1px solid transparent; }
+.portalNav a:hover, .portalNav a:focus-visible { border-color: var(--black); background: var(--old-gold); outline: 0; }
+.portalNav .adminLink { margin-top: 1.5rem; border-top-color: var(--black); }
+.content { min-width: 0; padding: clamp(2rem, 5vw, 5rem); }
+.portalFooter { min-height: 66px; padding: 1rem clamp(1rem, 3vw, 2.5rem); display: flex; justify-content: space-between; align-items: center; gap: 1rem; border-top: 1px solid var(--black); font-family: var(--font-family-sans); font-size: .75rem; }
+.previewBanner { padding: .75rem 1rem; position: sticky; top: 60px; z-index: 20; display: flex; justify-content: center; gap: 1.5rem; background: var(--old-gold); border-bottom: 1px solid var(--black); text-align: center; font-family: var(--font-family-sans); font-weight: 700; }
+.previewBanner a { text-decoration: underline; text-underline-offset: 3px; }
+.pageHeader { max-width: 950px; margin-bottom: clamp(2.5rem, 7vw, 5rem); }
+.pageHeader h1, .state h1 { margin-top: .75rem; font-size: clamp(3rem, 8vw, 7.5rem); font-weight: 400; letter-spacing: -.045em; line-height: .88; }
+.pageHeader > p:last-child, .state > p { max-width: 680px; margin-top: 1.5rem; color: #50504a; font-size: clamp(1.1rem, 1.7vw, 1.4rem); line-height: 1.45; }
+.welcomeGrid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(240px, .5fr); gap: 2rem; align-items: center; padding-bottom: clamp(2rem, 5vw, 4rem); border-bottom: 1px solid var(--black); }
+.progressRing { --progress: 0deg; width: clamp(180px, 21vw, 260px); aspect-ratio: 1; margin-left: auto; display: grid; place-content: center; border-radius: 50%; background: radial-gradient(circle, var(--white) 59%, transparent 60%), conic-gradient(var(--old-gold) var(--progress), #d8d8cf 0); text-align: center; }
+.progressRing span { font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1; }
+.progressRing small { margin-top: .3rem; font-family: var(--font-family-sans); text-transform: uppercase; letter-spacing: .1em; }
+.section { padding: clamp(2rem, 5vw, 4rem) 0; border-bottom: 1px solid var(--black); }
+.sectionTitle { margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.sectionTitle h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 400; }
+.summaryGrid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--black); }
+.summaryCard { min-height: 170px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--black); }
+.summaryCard:last-child { border: 0; }
+.summaryCard small, .meetingMeta, .tag, .documentMeta { font-family: var(--font-family-sans); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+.summaryCard strong { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; }
+.nextCard { padding: clamp(1.5rem, 4vw, 3rem); display: grid; grid-template-columns: 90px minmax(0, 1fr) auto; gap: 2rem; border: 1px solid var(--black); align-items: center; }
+.ordinal { font-size: clamp(2.5rem, 6vw, 5rem); color: var(--old-gold); }
+.nextCard h2, .meetingCard h2, .resourceCategory h2 { margin: .35rem 0; font-size: clamp(1.65rem, 3vw, 2.5rem); font-weight: 400; }
+.nextCard p, .meetingCard p, .resourceCategory p { line-height: 1.55; color: #50504a; }
+.primaryButton, .secondaryButton, .textButton, .uploadButton, .dangerButton { min-height: 44px; padding: .65rem 1rem; border: 1px solid var(--black); border-radius: 0; font: inherit; cursor: pointer; }
+.primaryButton { display: inline-flex; align-items: center; justify-content: center; background: var(--black); color: var(--white); }
+.secondaryButton { display: inline-flex; align-items: center; justify-content: center; background: transparent; color: var(--black); }
+.disabledButton { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; padding: .65rem 1rem; border: 1px solid var(--black); color: var(--black); opacity: .45; }
+.textButton { min-height: auto; padding: .35rem .5rem; background: transparent; }
+.uploadButton { position: relative; display: inline-flex; align-items: center; justify-content: center; background: var(--black); color: var(--white); }
+.uploadButton input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.dangerButton { background: transparent; color: #721c16; border-color: #721c16; }
+.primaryButton:hover, .secondaryButton:hover, .textButton:hover, .uploadButton:hover, .dangerButton:hover { background: var(--old-gold); color: var(--black); }
+.primaryButton:focus-visible, .secondaryButton:focus-visible, .textButton:focus-visible, .uploadButton:focus-within, .dangerButton:focus-visible, .checkItem input:focus-visible, .slotForm select:focus-visible, .adminFields input:focus-visible, .adminFields select:focus-visible, .adminMeeting input:focus-visible { outline: 3px solid var(--cerulean); outline-offset: 3px; }
+.primaryButton:disabled, .secondaryButton:disabled, .textButton:disabled, .dangerButton:disabled { opacity: .5; cursor: wait; }
+.state { min-height: calc(100vh - 220px); padding: clamp(3rem, 10vw, 9rem) clamp(1rem, 5vw, 5rem); }
+.state .primaryButton { margin-top: 2rem; }
+.checkGroup { padding: 1.5rem 0; border-top: 1px solid var(--black); }
+.checkGroup header { margin-bottom: 1rem; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; }
+.checkGroup h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 400; }
+.checkGroup header p { max-width: 580px; color: #50504a; line-height: 1.45; }
+.checkItem { min-height: 58px; padding: .75rem 0; display: flex; align-items: flex-start; gap: .85rem; border-top: 1px solid #c9c9c1; cursor: pointer; line-height: 1.4; }
+.checkItem input { width: 21px; height: 21px; margin-top: .1rem; accent-color: var(--black); }
+.checkItem small { display: block; margin-top: .2rem; color: #666; font-family: var(--font-family-sans); font-size: .7rem; text-transform: uppercase; }
+.meetingList, .resourceList { display: grid; gap: 1rem; }
+.meetingCard, .resourceCategory { padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--black); }
+.meetingHeader { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 1.5rem; }
+.meetingDetails { min-width: 210px; display: grid; gap: .85rem; font-family: var(--font-family-sans); }
+.meetingDetails dt { font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
+.meetingDetails dd { margin-top: .15rem; color: #50504a; font-size: .85rem; }
+.tag { width: fit-content; padding: .3rem .5rem; border: 1px solid var(--black); color: var(--black); }
+.slotForm { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #c9c9c1; }
+.slotForm > label { display: block; margin-bottom: .5rem; font-family: var(--font-family-sans); font-size: .78rem; }
+.slotForm > div { display: flex; gap: .5rem; }
+.slotForm select { min-height: 44px; min-width: 250px; padding: .5rem; border: 1px solid var(--black); border-radius: 0; background: var(--white); font: inherit; }
+.liveMessage { min-height: 1.2em; margin-top: .5rem; font-family: var(--font-family-sans); font-size: .75rem; }
+.acknowledgment { margin-top: 1.5rem; padding: 1rem; border: 1px solid var(--old-gold); background: color-mix(in srgb, var(--old-gold) 12%, var(--white)); }
+.acknowledgment p { margin-bottom: .75rem; color: var(--black); }
+.articleSections { max-width: 760px; margin: 1.5rem 0; display: grid; gap: 1.5rem; }
+.articleSections h3 { margin-bottom: .4rem; font-size: 1.35rem; font-weight: 400; }
+.document { padding: 1rem 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: center; border-top: 1px solid #c9c9c1; }
+.document h3 { margin: .3rem 0; font-size: 1.25rem; font-weight: 400; }
+.resourceActions { display: flex; align-items: center; justify-content: flex-end; gap: .5rem; flex-wrap: wrap; }
+.adminTable { width: 100%; border-collapse: collapse; font-family: var(--font-family-sans); font-size: .85rem; }
+.adminTable th, .adminTable td { padding: .9rem .65rem; border-bottom: 1px solid var(--black); text-align: left; vertical-align: top; }
+.adminTable th { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+.adminTable a { text-decoration: underline; text-underline-offset: 3px; }
+.adminForm { max-width: 900px; padding: 1.5rem; border: 1px solid var(--black); }
+.adminFields { margin-bottom: 1.25rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.adminFields label { display: grid; gap: .4rem; font-family: var(--font-family-sans); font-size: .75rem; }
+.adminFields input, .adminFields select { min-height: 44px; padding: .5rem; border: 1px solid var(--black); border-radius: 0; background: var(--white); font: inherit; }
+.adminFields .inlineCheck { display: flex; align-items: center; }
+.adminFields .inlineCheck input { min-height: auto; width: 18px; height: 18px; }
+.adminSection { padding: 2rem 0; border-top: 1px solid var(--black); }
+.adminSection > h2 { margin-bottom: 1.25rem; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 400; }
+.sectionIntro { max-width: 700px; margin: -1rem 0 1.5rem; color: #50504a; line-height: 1.5; }
+.adminMeetingList { display: grid; gap: 1rem; }
+.adminMeeting { padding: 1rem; display: grid; grid-template-columns: minmax(180px, 1fr) auto minmax(180px, .7fr) minmax(150px, .6fr) auto auto; gap: 1rem; align-items: end; border: 1px solid #c9c9c1; }
+.adminMeeting > label:not(.inlineCheck) { display: grid; gap: .4rem; font-family: var(--font-family-sans); font-size: .75rem; }
+.adminMeeting input:not([type="checkbox"]) { min-height: 44px; padding: .5rem; border: 1px solid var(--black); border-radius: 0; font: inherit; }
+.adminMeeting h3 { font-size: 1.15rem; font-weight: 400; }
+.adminMeeting p { color: #60605a; font-family: var(--font-family-sans); font-size: .75rem; }
+.inlineCheck { display: flex; align-items: center; gap: .5rem; font-family: var(--font-family-sans); font-size: .8rem; }
+.inlineCheck input { width: 18px; height: 18px; accent-color: var(--black); }
+.resourceAdminCard { margin-bottom: 1rem; padding: 1.5rem; border: 1px solid var(--black); }
+.resourceAdminCard > header { margin-bottom: 1.25rem; display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; }
+.resourceAdminCard h3, .submissionRow h3 { margin-top: .25rem; font-size: 1.35rem; font-weight: 400; }
+.submissionRow { padding: 1rem 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: center; border-top: 1px solid #c9c9c1; }
+.submissionRow p { margin-top: .25rem; color: #50504a; font-family: var(--font-family-sans); font-size: .75rem; }
+
+@media (max-width: 800px) {
+  .portalHeader { align-items: flex-start; }
+  .identity { align-items: flex-start; }
+  .identity > span:nth-child(2) { display: none; }
+  .portalGrid { grid-template-columns: 1fr; }
+  .portalNav { position: sticky; top: 60px; z-index: 10; padding: .5rem 1rem; overflow-x: auto; flex-direction: row; border-right: 0; border-bottom: 1px solid var(--black); background: var(--white); }
+  .portalNav a { white-space: nowrap; }
+  .portalNav .adminLink { margin: 0 0 0 auto; border-top-color: transparent; }
+  .content { padding: 2.5rem 1rem; }
+  .welcomeGrid, .nextCard { grid-template-columns: 1fr; }
+  .progressRing { margin: 0; }
+  .summaryGrid { grid-template-columns: 1fr; }
+  .summaryCard { min-height: 120px; border-right: 0; border-bottom: 1px solid var(--black); }
+  .meetingHeader { grid-template-columns: 54px minmax(0, 1fr); }
+  .meetingHeader > :last-child { grid-column: 2; }
+  .document { grid-template-columns: 1fr; }
+  .resourceActions { justify-content: flex-start; }
+  .adminTable { display: block; overflow-x: auto; }
+  .adminFields { grid-template-columns: 1fr; }
+  .adminMeeting { grid-template-columns: 1fr 1fr; align-items: end; }
+  .adminMeetingTitle { grid-column: 1 / -1; }
+  .submissionRow { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .portalHeader { min-height: 80px; }
+  .avatar { display: none; }
+  .headerTitle { font-size: 1.15rem; }
+  .pageHeader h1, .state h1 { font-size: 3rem; }
+  .slotForm > div { align-items: stretch; flex-direction: column; }
+  .slotForm select { min-width: 0; width: 100%; }
+  .portalFooter { align-items: flex-start; flex-direction: column; }
+  .adminMeeting { grid-template-columns: 1fr; }
+  .adminMeetingTitle { grid-column: auto; }
+  .resourceAdminCard > header { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) { .primaryButton, .secondaryButton, .textButton { transition: none; } }
