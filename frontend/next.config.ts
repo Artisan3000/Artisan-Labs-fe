@@ -23,6 +23,41 @@ const nextConfig: NextConfig = {
         destination: "/shop",
         permanent: true,
       },
+      {
+        source: "/pages/blog",
+        destination: "/read",
+        permanent: true,
+      },
+      {
+        source: "/pages/learn",
+        destination: "/read",
+        permanent: true,
+      },
+      {
+        source: "/pages/careers",
+        destination: "/careers",
+        permanent: true,
+      },
+      {
+        source: "/blogs/:blog",
+        destination: "/read",
+        permanent: true,
+      },
+      {
+        source: "/collections/newest-products",
+        destination: "/shop/new",
+        permanent: true,
+      },
+      {
+        source: "/collections/best-sellers",
+        destination: "/shop/best-sellers",
+        permanent: true,
+      },
+      {
+        source: "/collections/hair-styling",
+        destination: "/shop/hair-styling",
+        permanent: true,
+      },
     ];
   },
   images: {

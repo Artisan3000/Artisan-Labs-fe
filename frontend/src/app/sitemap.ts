@@ -39,7 +39,6 @@ type ShopifyCollectionNode = {
 type ShopifyArticleNode = {
   handle: string;
   publishedAt?: string | null;
-  updatedAt?: string | null;
 };
 
 type ShopifyBlogArticles = {
@@ -221,7 +220,6 @@ async function getBlogArticleEntries(blogHandle: string) {
                 nodes {
                   handle
                   publishedAt
-                  updatedAt
                 }
                 pageInfo {
                   hasNextPage
@@ -244,7 +242,7 @@ async function getBlogArticleEntries(blogHandle: string) {
       ...(connection.nodes ?? []).map((article) =>
         sitemapEntry(
           `/read/${article.handle}`,
-          article.updatedAt || article.publishedAt
+          article.publishedAt
         )
       )
     );

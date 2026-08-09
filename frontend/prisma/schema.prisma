@@ -1,0 +1,206 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum EmploymentClassification {
+  W2
+  CONTRACTOR_1099
+}
+
+enum Applicability {
+  ALL
+  W2
+  CONTRACTOR_1099
+}
+
+enum ResourceDocumentType {
+  BLOB
+  EXTERNAL_LINK
+}
+
+enum ResourceKind {
+  REFERENCE
+  FORM
+}
+
+model OnboardingProfile {
+  id                       String                       @id @default(cuid())
+  academyUserId            String                       @unique
+  displayName              String
+  email                    String
+  employmentClassification EmploymentClassification?
+  startDate                DateTime?                    @db.Date
+  trainingAccess           Boolean                      @default(false)
+  assistantStylistEligible Boolean                      @default(false)
+  isActive                 Boolean                      @default(true)
+  createdAt                DateTime                     @default(now())
+  updatedAt                DateTime                     @updatedAt
+  checklistCompletions     ChecklistCompletion[]
+  meetingAssignments       MeetingAssignment[]
+  resourceProgress         ResourceProgress[]
+  resourceSubmissions      ResourceSubmission[]
+
+  @@index([isActive, displayName])
+}
+
+model ChecklistGroup {
+  id        String          @id @default(cuid())
+  slug      String          @unique
+  title     String
+  subtitle  String?
+  sortOrder Int             @default(0)
+  isActive  Boolean         @default(true)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  items     ChecklistItem[]
+
+  @@index([isActive, sortOrder])
+}
+
+model ChecklistItem {
+  id            String                @id @default(cuid())
+  groupId       String
+  slug          String                @unique
+  label         String
+  applicability Applicability         @default(ALL)
+  sortOrder     Int                   @default(0)
+  isActive      Boolean               @default(true)
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+  group         ChecklistGroup        @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  completions   ChecklistCompletion[]
+
+  @@index([groupId, isActive, sortOrder])
+  @@index([applicability, isActive])
+}
+
+model ChecklistCompletion {
+  profileId  String
+  itemId     String
+  completedAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  profile    OnboardingProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  item       ChecklistItem     @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@id([profileId, itemId])
+  @@index([itemId])
+}
+
+model Meeting {
+  id                          String              @id @default(cuid())
+  slug                        String              @unique
+  title                       String
+  description                 String
+  durationMinutes             Int
+  sortOrder                   Int                 @default(0)
+  applicability               Applicability       @default(ALL)
+  requiresAssistantStylist    Boolean             @default(false)
+  isActive                    Boolean             @default(true)
+  createdAt                   DateTime            @default(now())
+  updatedAt                   DateTime            @updatedAt
+  assignments                 MeetingAssignment[]
+
+  @@index([isActive, sortOrder])
+  @@index([applicability, isActive])
+}
+
+model MeetingAssignment {
+  id             String            @id @default(cuid())
+  profileId      String
+  meetingId      String
+  scheduledAt    DateTime?
+  hostDisplayName String?
+  completedAt    DateTime?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  profile        OnboardingProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  meeting        Meeting           @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+
+  @@unique([profileId, meetingId])
+  @@index([meetingId])
+}
+
+model ResourceCategory {
+  id            String             @id @default(cuid())
+  slug          String             @unique
+  title         String
+  description   String?
+  articleContent Json?
+  applicability Applicability      @default(ALL)
+  sortOrder     Int                @default(0)
+  isPublished   Boolean            @default(false)
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  documents     ResourceDocument[]
+
+  @@index([isPublished, sortOrder])
+  @@index([applicability, isPublished])
+}
+
+model ResourceDocument {
+  id          String               @id @default(cuid())
+  categoryId  String
+  slug        String               @unique
+  title       String
+  description String?
+  type        ResourceDocumentType
+  kind        ResourceKind         @default(REFERENCE)
+  blobUrl     String?              @unique
+  blobPathname String?             @unique
+  fileName    String?
+  externalUrl String?
+  mimeType    String?
+  isRequired  Boolean              @default(false)
+  version     Int                  @default(1)
+  sortOrder   Int                  @default(0)
+  isPublished Boolean              @default(false)
+  archivedAt  DateTime?
+  requiredSubmissionVersion Int    @default(1)
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  category    ResourceCategory     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  progress    ResourceProgress[]
+  submissions ResourceSubmission[]
+
+  @@index([categoryId, isPublished, sortOrder])
+}
+
+model ResourceSubmission {
+  profileId       String
+  documentId      String
+  blobUrl         String             @unique
+  blobPathname    String             @unique
+  fileName        String
+  mimeType        String             @default("application/pdf")
+  sizeBytes       Int
+  documentVersion Int
+  uploadIssuedAt  DateTime
+  receivedAt      DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  profile         OnboardingProfile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  document        ResourceDocument   @relation(fields: [documentId], references: [id], onDelete: Restrict)
+
+  @@id([profileId, documentId])
+  @@index([documentId])
+}
+
+model ResourceProgress {
+  profileId       String
+  documentId      String
+  firstOpenedAt   DateTime?
+  lastOpenedAt    DateTime?
+  completedAt     DateTime?
+  completedVersion Int?
+  updatedAt       DateTime           @updatedAt
+  profile         OnboardingProfile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  document        ResourceDocument   @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@id([profileId, documentId])
+  @@index([documentId])
+}

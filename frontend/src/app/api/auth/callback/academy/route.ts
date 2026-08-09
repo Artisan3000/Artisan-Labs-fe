@@ -6,6 +6,7 @@ import {
   createEmployeeSession,
   parseExchangedIdentity,
 } from "@/lib/academy-sso/session";
+import { syncIdentityIfOnboardingEnabled } from "@/lib/onboarding/data";
 
 function exactParam(params: URLSearchParams, name: string) {
   const values = params.getAll(name);
@@ -70,6 +71,12 @@ export async function GET(request: Request) {
   );
   if (!identity) {
     return authError("Unable to complete employee login.", 400);
+  }
+
+  try {
+    await syncIdentityIfOnboardingEnabled(identity);
+  } catch {
+    return authError("Employee onboarding is temporarily unavailable.", 503);
   }
 
   await createEmployeeSession(
