@@ -39,6 +39,11 @@
 .primaryButton { display: inline-flex; align-items: center; justify-content: center; background: var(--black); color: var(--white); }
 .secondaryButton { display: inline-flex; align-items: center; justify-content: center; background: transparent; color: var(--black); }
 .disabledButton { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; padding: .65rem 1rem; border: 1px solid var(--black); color: var(--black); opacity: .45; }
+
+.tooltipWrap { position: relative; display: inline-flex; }
+.tooltipBubble { position: absolute; bottom: calc(100% + .5rem); left: 50%; transform: translateX(-50%); width: max-content; max-width: 240px; padding: .5rem .75rem; background: var(--black); color: var(--white); border-radius: 0; font-family: var(--font-family-sans); font-size: .75rem; line-height: 1.4; text-align: center; visibility: hidden; opacity: 0; transition: opacity .15s ease; pointer-events: none; z-index: 10; }
+.tooltipWrap:hover .tooltipBubble, .tooltipWrap:focus-within .tooltipBubble { visibility: visible; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .tooltipBubble { transition: none; } }
 .textButton { min-height: auto; padding: .35rem .5rem; background: transparent; }
 .uploadButton { position: relative; display: inline-flex; align-items: center; justify-content: center; background: var(--black); color: var(--white); }
 .uploadButton input { position: absolute; width: 1px; height: 1px; opacity: 0; }

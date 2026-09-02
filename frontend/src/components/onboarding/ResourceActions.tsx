@@ -29,7 +29,10 @@ export default function ResourceActions({ document, disabled = false }: { docume
 
   return <div className={styles.resourceActions}>
     {disabled
-      ? <span className={styles.disabledButton} aria-disabled="true">Open document<span className={styles.visuallyHidden}>: {document.title}</span></span>
+      ? <span className={styles.tooltipWrap}>
+          <span className={styles.disabledButton} tabIndex={0} aria-disabled="true" aria-describedby={`${document.id}-preview-tip`}>Open document<span className={styles.visuallyHidden}>: {document.title}</span></span>
+          <span id={`${document.id}-preview-tip`} className={styles.tooltipBubble} role="tooltip">You're viewing a read-only preview, so this is disabled for you. The employee can open and download it from their own portal.</span>
+        </span>
       : <a className={styles.secondaryButton} href={document.href} target={document.kind === "LINK" ? "_blank" : undefined} rel={document.kind === "LINK" ? "noreferrer" : undefined}>{document.kind === "FILE" ? (isForm ? "Open blank form" : "Open document") : "Visit resource"}<span className={styles.visuallyHidden}>: {document.title}</span></a>}
     {!disabled && isForm && <label className={styles.uploadButton}>{submittedAt ? "Replace submission" : "Upload completed PDF"}<input ref={inputRef} type="file" accept="application/pdf,.pdf" disabled={pending} onChange={(event) => { const file = event.currentTarget.files?.[0]; if (file) submitForm(file); }} /></label>}
     {!disabled && !isForm && <button className={styles.textButton} disabled={pending} onClick={() => { const next = !completed; setCompleted(next); startTransition(async () => { const response = await fetch("/api/onboarding/resources/progress", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ documentId: document.id, completed: next }) }); if (!response.ok) setCompleted(!next); }); }}>{pending ? "Saving…" : completed ? "Mark incomplete" : "Mark complete"}</button>}
