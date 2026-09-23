@@ -30,6 +30,7 @@
 }
 
 .header h1 {
+  overflow-wrap: anywhere;
   font-size: clamp(2.6rem, 7vw, 6.2rem);
   font-weight: normal;
   line-height: 0.95;
@@ -72,7 +73,9 @@
 }
 
 .content {
+  min-width: 0;
   max-width: 760px;
+  overflow-wrap: anywhere;
   margin: 0 auto;
   font-size: 1.08rem;
   line-height: 1.75;
@@ -110,8 +113,21 @@
 }
 
 .content :global(img) {
+  display: block;
   max-width: 100%;
   height: auto;
+}
+
+.content :global(video),
+.content :global(iframe),
+.content :global(table),
+.content :global(pre) {
+  max-width: 100%;
+}
+
+.content :global(table),
+.content :global(pre) {
+  overflow-x: auto;
 }
 
 .content :global(blockquote) {

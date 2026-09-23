@@ -69,7 +69,7 @@ export default function RootLayout({
         ],
         sameAs: [
           "https://www.instagram.com/artisanbarber/",
-          "https://www.tiktok.com/@artisanbarber2017/",
+          "https://www.tiktok.com/@artisanbarbernyc",
           "https://www.youtube.com/@ARTISANBARBER",
         ],
       },

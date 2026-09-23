@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 type ContactPayload = {
   name?: string;
+  organization?: string;
   email?: string;
   phone?: string;
   subject?: string;
@@ -28,6 +29,7 @@ export async function POST(req: Request) {
   try {
     const payload = (await req.json()) as ContactPayload;
     const name = normalize(payload.name);
+    const organization = normalize(payload.organization);
     const email = normalize(payload.email).toLowerCase();
     const phone = normalize(payload.phone);
     const subject = normalize(payload.subject) || "Website inquiry";
@@ -65,6 +67,9 @@ export async function POST(req: Request) {
     }
 
     const safeName = escapeHtml(name);
+    const safeOrganization = organization
+      ? escapeHtml(organization)
+      : "Not provided";
     const safeEmail = escapeHtml(email);
     const safePhone = phone ? escapeHtml(phone) : "Not provided";
     const safeSubject = escapeHtml(subject);
@@ -83,6 +88,7 @@ export async function POST(req: Request) {
         subject: `Artisan Barber contact: ${subject}`,
         text: [
           `Name: ${name}`,
+          `School / Organization: ${organization || "Not provided"}`,
           `Email: ${email}`,
           `Phone: ${phone || "Not provided"}`,
           `Subject: ${subject}`,
@@ -92,6 +98,7 @@ export async function POST(req: Request) {
         html: `
           <h2>New Artisan Barber website inquiry</h2>
           <p><strong>Name:</strong> ${safeName}</p>
+          <p><strong>School / Organization:</strong> ${safeOrganization}</p>
           <p><strong>Email:</strong> ${safeEmail}</p>
           <p><strong>Phone:</strong> ${safePhone}</p>
           <p><strong>Subject:</strong> ${safeSubject}</p>

@@ -5,6 +5,7 @@ import Navigation from "@/components/Navigation";
 import { buildPageMetadata } from "@/lib/metadata";
 import FoundationReveal from "./FoundationReveal";
 import FoundationImageReveal from "./FoundationImageReveal";
+import FoundationInquiryForm from "./FoundationInquiryForm";
 import {
   activations,
   collaboratorRows,
@@ -424,20 +425,21 @@ export default function FoundationPage() {
         </section>
 
         <section className={styles.invitation} aria-labelledby="invitation-heading">
-          <div>
+          <div className={styles.invitationCopyBlock}>
             <p className={styles.sectionLabel}>The next record</p>
-            <h2 id="invitation-heading">Work with the Foundation.</h2>
+            <h2 id="invitation-heading">Bring Artisan Foundation to your school.</h2>
             <p className={styles.invitationCopy}>
-              We are interested in conversations with schools, working
-              professionals, community organizations, and product partners who
-              can contribute to future Foundation programming.
+              Schools and organizations interested in an activation can tell us
+              what they are building and how we can work together.
             </p>
           </div>
-          <div className={styles.involvementRoutes}>
-            {involvementRoutes.map((route) => (
-              <p key={route}>{route}</p>
-            ))}
-            <span className={styles.developmentCta}>Contact details forthcoming</span>
+          <div className={styles.inquiryBlock}>
+            <div className={styles.involvementRoutes}>
+              {involvementRoutes.map((route) => (
+                <p key={route}>{route}</p>
+              ))}
+            </div>
+            <FoundationInquiryForm />
           </div>
         </section>
       </main>

@@ -80,7 +80,7 @@ const Footer = () => {
           <h3>Follow</h3>
           <ul className={styles.socials}>
             <li>
-              <Link href="https://www.tiktok.com/@artisanbarber2017/" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+              <Link href="https://www.tiktok.com/@artisanbarbernyc" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12.7 2h2.1c.2 1.4 1.2 2.5 2.5 2.8v2.1c-.9 0-1.8-.2-2.6-.5v7.7c0 3-2.4 5.4-5.4 5.4S4 17.1 4 14.1s2.4-5.4 5.4-5.4c.3 0 .6 0 .9.1v2.2c-.3-.1-.6-.1-.9-.1-1.8 0-3.2 1.4-3.2 3.2S7.6 17.3 9.4 17.3s3.2-1.4 3.2-3.2V2z" />
                 </svg>
