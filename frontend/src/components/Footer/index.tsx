@@ -71,7 +71,7 @@ const Footer = () => {
           <h3>Support</h3>
           <ul>
             <li><Link href="/careers">Careers</Link></li>
-            <li><Link href="https://academy.artisanbarber.com">Academy</Link></li>
+            <li><Link href="/foundation">Foundation</Link></li>
             <li><Link href="/policy">Policy</Link></li>
           </ul>
         </div>

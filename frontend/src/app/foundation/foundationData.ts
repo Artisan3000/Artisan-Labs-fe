@@ -137,14 +137,14 @@ export const activations: Activation[] = [
     number: "03",
     year: "2022",
     date: "June 2022",
-    title: "Finance, Grooming, and Collective Focus",
+    title: "SCOGÉ x Cavier",
     treatment: "standard-small",
-    collaborators: ["Finance coach Chad Wellington", "Collective Focus"],
+    collaborators: ["Cavier", "Collective Focus"],
     participantCount:
       "Approximately 12 middle schoolers and several high school students",
-    activities: ["Finance coaching", "Group discussion", "Grooming"],
+    activities: ["Art and Design", "Group discussion", "Grooming"],
     summary:
-      "Chad Wellington joined approximately 12 middle schoolers and several high school students for finance coaching, alongside group discussion and grooming activity documented with Collective Focus.",
+      "Cavier joined approximately 12 middle schoolers and several high school students for art and design, alongside group discussion and grooming activity documented with Collective Focus.",
     images: [
       {
         src: "/images/foundation/2022-06-finance/student-haircut-portrait.webp",
@@ -152,7 +152,7 @@ export const activations: Activation[] = [
         height: 2133,
         alt: "Student shown in profile after a haircut.",
         caption:
-          "Grooming activity documented during the June 2022 finance session.",
+          "Grooming activity documented during the June 2022 SCOGÉ x Cavier session.",
       },
       {
         src: "/images/foundation/2022-06-finance/discussion-circle.webp",
@@ -160,7 +160,7 @@ export const activations: Activation[] = [
         height: 723,
         alt: "Students and adults seated in a discussion circle inside a classroom.",
         caption:
-          "Students and adults gathered in a discussion circle during the June 2022 activation.",
+          "Students and adults gathered in a discussion circle during the June 2022 SCOGÉ x Cavier activation.",
       },
       {
         src: "/images/foundation/2022-06-finance/collective-focus-context.webp",
@@ -168,7 +168,7 @@ export const activations: Activation[] = [
         height: 723,
         alt: "Two adults seated behind a table with a Collective Focus banner.",
         caption:
-          "Collective Focus context documented during the June 2022 activation.",
+          "Collective Focus context documented during the June 2022 SCOGÉ x Cavier activation.",
       },
     ],
   },
@@ -307,15 +307,51 @@ export const activations: Activation[] = [
     activities: ["Career Day"],
     summary:
       "The supplied chronology records a May 2025 Career Day with Daniel Diaz, identified there as a Senior Account Executive at Google. The record does not establish Google as a sponsor or organizational partner.",
-    images: [],
+    images: [
+      {
+        src: "/images/foundation/2025-05-career-day/career-day-speaker.webp",
+        width: 1200,
+        height: 900,
+        alt: "Career Day speaker engaging with students in a classroom.",
+        caption: "A speaker engaging with students during Career Day, May 2025.",
+      },
+      {
+        src: "/images/foundation/2025-05-career-day/career-day-classroom.webp",
+        width: 1200,
+        height: 1600,
+        alt: "Career Day speaker presenting to students in a classroom.",
+        caption: "A classroom presentation during Career Day, May 2025.",
+      },
+      {
+        src: "/images/foundation/2025-05-career-day/career-day-presentation.webp",
+        width: 1200,
+        height: 900,
+        alt: "Career Day speaker presenting to students beside a classroom screen.",
+        caption: "A presentation introducing students to a Career Day speaker's work.",
+      },
+      {
+        src: "/images/foundation/2025-05-career-day/career-day-classroom-wide.webp",
+        width: 1200,
+        height: 1600,
+        alt: "Students gathered for a Career Day presentation in their classroom.",
+        caption: "Students gathered for a classroom presentation during Career Day.",
+      },
+      {
+        src: "/images/foundation/2025-05-career-day/career-day-group.webp",
+        width: 1200,
+        height: 900,
+        alt: "Career Day participants gathered outside the school.",
+        caption: "Career Day participants at the school, May 2025.",
+      },
+    ],
   },
 ];
 
 export const collaboratorRows = [
   {
-    name: "Chad Wellington",
+    name: "Cavier",
     date: "June 2022",
-    contribution: "Finance coaching",
+    contribution: "Art and Design",
   },
   {
     name: "Collective Focus",

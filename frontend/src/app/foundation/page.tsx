@@ -112,6 +112,51 @@ function ActivationLedger({ activation }: { activation: Activation }) {
 }
 
 function ActivationRecord({ activation }: { activation: Activation }) {
+  if (activation.id === "career-day") {
+    return (
+      <article id={activation.id} className={`${styles.activation} ${styles.careerDay}`}>
+        <FoundationReveal
+          className={styles.careerDayCopy}
+          kind="record"
+          threshold={0.08}
+        >
+          <ActivationHeader activation={activation} />
+          <ActivationLedger activation={activation} />
+        </FoundationReveal>
+        <ArchiveImage
+          image={activation.images[0]}
+          className={styles.careerDaySpeaker}
+          sizes="(max-width: 700px) 58vw, (max-width: 1100px) 34vw, 405px"
+          reveal={{ delay: 0.08, threshold: 0.08 }}
+        />
+        <ArchiveImage
+          image={activation.images[1]}
+          className={styles.careerDayMentor}
+          sizes="(max-width: 700px) 72vw, (max-width: 1100px) 42vw, 500px"
+          reveal={{ delay: 0.16, threshold: 0.08 }}
+        />
+        <ArchiveImage
+          image={activation.images[2]}
+          className={styles.careerDayPresentation}
+          sizes="(max-width: 700px) 78vw, (max-width: 1100px) 44vw, 520px"
+          reveal={{ delay: 0.12, threshold: 0.08 }}
+        />
+        <ArchiveImage
+          image={activation.images[3]}
+          className={styles.careerDayWide}
+          sizes="(max-width: 700px) 72vw, (max-width: 1100px) 42vw, 500px"
+          reveal={{ delay: 0.16, threshold: 0.08 }}
+        />
+        <ArchiveImage
+          image={activation.images[4]}
+          className={styles.careerDayGroup}
+          sizes="(max-width: 700px) 84vw, (max-width: 1100px) 48vw, 580px"
+          reveal={{ delay: 0.2, threshold: 0.08 }}
+        />
+      </article>
+    );
+  }
+
   if (activation.treatment === "sparse") {
     return (
       <FoundationReveal
