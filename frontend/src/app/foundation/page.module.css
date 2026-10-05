@@ -566,6 +566,48 @@
   margin-top: clamp(6rem, 10vw, 10rem);
 }
 
+.careerDay {
+  min-height: 1780px;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.careerDayCopy {
+  grid-column: 1 / 7;
+}
+
+.careerDaySpeaker {
+  grid-column: 8 / 12;
+  width: min(86%, 337px);
+  justify-self: end;
+}
+
+.careerDayMentor {
+  grid-column: 3 / 8;
+  width: min(92%, 337px);
+  margin-top: clamp(5rem, 11vw, 11rem);
+}
+
+.careerDayPresentation {
+  grid-column: 8 / -1;
+  width: min(100%, 520px);
+  margin-top: clamp(4rem, 8vw, 8rem);
+}
+
+.careerDayWide {
+  grid-column: 3 / 8;
+  width: min(100%, 500px);
+  margin-top: clamp(5rem, 10vw, 10rem);
+}
+
+.careerDayGroup {
+  grid-column: 5 / -1;
+  width: min(100%, 580px);
+  justify-self: end;
+  margin-top: clamp(6rem, 12vw, 12rem);
+}
+
 .collaborators {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -689,7 +731,8 @@
   }
 
   .finance2022,
-  .allKings {
+  .allKings,
+  .careerDay {
     min-height: 1100px;
   }
 
@@ -699,6 +742,12 @@
 
   .ripeLedger {
     grid-column: 8 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .archiveIndex a {
+    transition: none;
   }
 }
 
@@ -1039,6 +1088,49 @@
 
   .ripeExercise {
     grid-column: 5 / -1;
+    width: 100%;
+    margin-top: 5rem;
+  }
+
+  .careerDay {
+    min-height: auto;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .careerDayCopy {
+    grid-column: 1 / -1;
+  }
+
+  .careerDaySpeaker {
+    grid-column: 1 / 9;
+    width: 100%;
+    max-width: 337px;
+    margin-top: 5rem;
+  }
+
+  .careerDayMentor {
+    grid-column: 5 / -1;
+    width: 100%;
+    max-width: 337px;
+    margin-top: 5rem;
+  }
+
+  .careerDayPresentation {
+    grid-column: 1 / -1;
+    width: 88%;
+    margin-left: auto;
+    margin-top: 5rem;
+  }
+
+  .careerDayWide {
+    grid-column: 1 / 10;
+    width: 100%;
+    margin-top: 5rem;
+  }
+
+  .careerDayGroup {
+    grid-column: 3 / -1;
     width: 100%;
     margin-top: 5rem;
   }

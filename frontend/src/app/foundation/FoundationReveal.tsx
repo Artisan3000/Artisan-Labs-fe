@@ -61,9 +61,9 @@ export default function FoundationReveal({
   useEffect(() => {
     if (!enhanced || hasCrossedTrigger) return;
 
-    let frame = 0;
+    let frame: number | undefined;
     const checkPosition = () => {
-      window.cancelAnimationFrame(frame);
+      if (frame !== undefined) window.cancelAnimationFrame(frame);
       frame = window.requestAnimationFrame(() => {
         const top = ref.current?.getBoundingClientRect().top;
         if (top !== undefined && top <= window.innerHeight * 0.9) {
@@ -77,7 +77,7 @@ export default function FoundationReveal({
     window.addEventListener("resize", checkPosition);
 
     return () => {
-      window.cancelAnimationFrame(frame);
+      if (frame !== undefined) window.cancelAnimationFrame(frame);
       window.removeEventListener("scroll", checkPosition);
       window.removeEventListener("resize", checkPosition);
     };
