@@ -45,7 +45,9 @@ const Footer = () => {
           Sunday: {businessConfig.hours.sunday}
         </div>
         <div>
-          {businessConfig.phone.display}
+          <a href={`tel:${businessConfig.phone.e164}`}>
+            {businessConfig.phone.display}
+          </a>
           <br />
           Get In Touch
         </div>

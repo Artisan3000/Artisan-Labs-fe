@@ -2,8 +2,8 @@ export const businessConfig = {
   foundedYear: 2017,
   verifiedClientCount: 5000,
   phone: {
-    display: "(833) 750-2760",
-    e164: "+1-833-750-2760",
+    display: "(917) 388-3554",
+    e164: "+19173883554",
   },
   address: {
     street: "331 East 81st Street",
