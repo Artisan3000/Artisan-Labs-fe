@@ -74,6 +74,12 @@ const team = [
     bio: "Living in New York City for 15 years, Briana is a professional in customer experience, retail, and social impact project management. Combining these skills at Artisan Barber, you can find Bri behind the front desk welcoming clients into the shop and creating content for social media. Using her experience in nonprofit operations, Bri leads the charge at the Artisan Barber Foundation, the charitable branch of our business focused on giving back to underserved youth through free haircut campaigns and leadership programs.",
     img: "/team/bri.jpg",
   },
+  {
+    name: "Christine Forbes",
+    title: "Concierge & Social Media Coordinator",
+    bio: "Christine is a multimedia journalist with a background in photography, editorial writing, and videography. At Artisan Barber, she brings together hospitality and visual storytelling, welcoming clients at the front desk while helping shape the shop’s social media presence through content, photography, and copywriting. A Barnard College alumna, Christine brings a fresh perspective to how Artisan tells the stories of its people and community.",
+    img: "/team/christine-forbes.jpg",
+  },
   /* {
     name: "Dione",
     title: "Apprentice Barber",
