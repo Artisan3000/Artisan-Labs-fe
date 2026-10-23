@@ -1,4 +1,5 @@
 export type PortalRole = "EMPLOYEE" | "ADMIN";
+export type { AdminViewMode } from "@/lib/onboarding/view-mode";
 export type EmploymentType = "W2" | "CONTRACTOR_1099" | null;
 
 export interface PortalIdentity {

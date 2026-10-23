@@ -8,9 +8,9 @@ export const metadata: Metadata = { title: "Employee Onboarding", robots: { inde
 export const dynamic = "force-dynamic";
 
 export default async function PortalHome({ searchParams }: { searchParams: Promise<{ preview?: string | string[] }> }) {
-  const previewProfileId = await resolvePreview(searchParams); const { session, result } = await loadPortal(previewProfileId);
+  const previewProfileId = await resolvePreview(searchParams); const { session, result, viewMode } = await loadPortal(previewProfileId);
   const suffix = result.isPreview && previewProfileId ? `?preview=${encodeURIComponent(previewProfileId)}` : "";
-  return <PortalBoundary session={session} result={result} previewProfileId={previewProfileId}>
+  return <PortalBoundary session={session} result={result} viewMode={viewMode} previewProfileId={previewProfileId}>
     <section className={styles.welcomeGrid}>
       <header className={styles.pageHeader}><p className={styles.kicker}>Artisan Barber · New hire</p><h1>Welcome to the shop, {result.profile.name.split(" ")[0]}.</h1><p>Your first weeks are about learning how Artisan works, meeting the people around you, and building confidence one step at a time.</p></header>
       <ProgressRing percent={result.progress.percent} />

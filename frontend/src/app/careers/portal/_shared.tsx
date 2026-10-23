@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { isAcademySsoEnabled } from "@/lib/academy-sso/config";
 import { getEmployeeSession } from "@/lib/academy-sso/session";
 import { getOnboardingView } from "@/lib/onboarding/data";
@@ -6,6 +7,7 @@ import { isOnboardingEnabled } from "@/lib/onboarding/config";
 import PortalShell from "@/components/onboarding/PortalShell";
 import PortalState from "@/components/onboarding/PortalState";
 import type { OnboardingView } from "@/components/onboarding/types";
+import { ADMIN_VIEW_MODE_COOKIE, classificationForViewMode, parseAdminViewMode, type AdminViewMode } from "@/lib/onboarding/view-mode";
 
 const portalPreviewEnabled = process.env.NODE_ENV !== "production" && process.env.CAREERS_PORTAL_PREVIEW === "true";
 const previewSession = { userId: "preview", name: "Preview Employee", email: "preview@artisanbarber.test", role: "EMPLOYEE" as const };
@@ -14,9 +16,12 @@ export async function loadPortal(previewProfileId?: string) {
   if (!portalPreviewEnabled && !isAcademySsoEnabled()) redirect("/careers");
   const session = portalPreviewEnabled ? previewSession : await getEmployeeSession();
   if (!session) redirect("/api/auth/academy/start");
+  const storedMode = parseAdminViewMode((await cookies()).get(ADMIN_VIEW_MODE_COOKIE)?.value);
+  const viewMode: AdminViewMode = session.role === "ADMIN" ? storedMode : "ADMIN";
   if (!isOnboardingEnabled()) {
     return {
       session,
+      viewMode,
       previewProfileId: undefined,
       result: {
         status: "disabled" as const,
@@ -28,13 +33,13 @@ export async function loadPortal(previewProfileId?: string) {
       },
     };
   }
-  const permittedPreviewId = session.role === "ADMIN" ? previewProfileId : undefined;
-  const result = await getOnboardingView({ session, previewProfileId: permittedPreviewId });
-  return { session, result, previewProfileId: permittedPreviewId };
+  const permittedPreviewId = viewMode === "ADMIN" && session.role === "ADMIN" ? previewProfileId : undefined;
+  const result = await getOnboardingView({ session, previewProfileId: permittedPreviewId, previewClassification: classificationForViewMode(viewMode) });
+  return { session, result, previewProfileId: permittedPreviewId, viewMode };
 }
 
-export function PortalBoundary({ session, result, previewProfileId, children }: { session: { role: "EMPLOYEE" | "ADMIN" }; result: { status: "disabled" | "pending" | "inactive" | "ready"; profile: OnboardingView["profile"]; isPreview: boolean }; previewProfileId?: string; children: React.ReactNode }) {
-  return <PortalShell identity={result.profile} viewerRole={session.role} preview={result.isPreview} previewProfileId={result.isPreview ? previewProfileId : undefined}>
+export function PortalBoundary({ session, result, previewProfileId, viewMode = "ADMIN", children }: { session: { role: "EMPLOYEE" | "ADMIN" }; result: { status: "disabled" | "pending" | "inactive" | "ready"; profile: OnboardingView["profile"]; isPreview: boolean }; previewProfileId?: string; viewMode?: AdminViewMode; children: React.ReactNode }) {
+  return <PortalShell identity={result.profile} viewerRole={session.role} viewMode={viewMode} preview={result.isPreview} previewProfileId={result.isPreview ? previewProfileId : undefined}>
     {result.status === "disabled" ? <PortalState kind="empty" name={result.profile.name} /> : result.status === "pending" ? <PortalState kind="pending" name={result.profile.name} /> : result.status === "inactive" ? <PortalState kind="inactive" name={result.profile.name} /> : children}
   </PortalShell>;
 }

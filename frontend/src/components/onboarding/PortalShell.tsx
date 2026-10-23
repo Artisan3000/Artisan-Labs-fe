@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import type { PortalIdentity, PortalRole } from "./types";
+import type { AdminViewMode } from "@/lib/onboarding/view-mode";
+import AdminViewSwitcher from "./AdminViewSwitcher";
 import styles from "./portal.module.css";
 
 const employeeLinks = [
@@ -15,12 +17,14 @@ export default function PortalShell({
   viewerRole,
   preview = false,
   previewProfileId,
+  viewMode = "ADMIN",
   children,
 }: {
   identity: PortalIdentity;
   viewerRole: PortalRole;
   preview?: boolean;
   previewProfileId?: string;
+  viewMode?: AdminViewMode;
   children: React.ReactNode;
 }) {
   const initials = identity.name.split(/\s+/).slice(0, 2).map((word) => word[0]).join("");
@@ -29,6 +33,7 @@ export default function PortalShell({
     <>
       <Navigation />
       <div className={styles.portal}>
+        {viewerRole === "ADMIN" && <AdminViewSwitcher activeMode={viewMode} />}
         <header className={styles.portalHeader}>
           <div>
             <p className={styles.kicker}>Artisan Barber</p>
@@ -41,7 +46,7 @@ export default function PortalShell({
           </div>
         </header>
 
-        {preview && <aside className={styles.previewBanner} role="status"><span>Previewing {identity.name} — read only</span><Link href="/careers/portal/admin">Exit preview</Link></aside>}
+        {preview && <aside className={styles.previewBanner} role="status"><span>Previewing {identity.name} — read only</span>{previewProfileId && <Link href="/careers/portal/admin">Exit preview</Link>}</aside>}
 
         <div className={styles.portalGrid}>
           <nav className={styles.portalNav} aria-label="Onboarding">

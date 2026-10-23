@@ -10,6 +10,7 @@ import type {
 import { prisma } from "@/lib/prisma";
 import { calculateProgress, formSubmissionIsComplete, meetingStatus, resourceIsComplete } from "./domain";
 import { OnboardingHttpError, requireAdmin } from "./security";
+import type { Classification } from "./domain";
 
 export async function syncOnboardingProfile(session: EmployeeIdentity) {
   return prisma.onboardingProfile.upsert({
@@ -30,8 +31,22 @@ export async function syncIdentityIfOnboardingEnabled(session: EmployeeIdentity)
 
 async function resolveProfile(
   session: EmployeeIdentity,
-  previewProfileId?: string
+  previewProfileId?: string,
+  previewClassification?: Classification | null
 ) {
+  if (previewClassification) {
+    requireAdmin(session);
+    return {
+      id: `admin-view-${previewClassification}`,
+      displayName: previewClassification === "W2" ? "W-2 employee preview" : "1099 contractor preview",
+      email: "admin-preview@artisanbarber.test",
+      employmentClassification: previewClassification,
+      startDate: null,
+      trainingAccess: false,
+      assistantStylistEligible: false,
+      isActive: true,
+    };
+  }
   if (!previewProfileId) return syncOnboardingProfile(session);
   requireAdmin(session);
   const profile = await prisma.onboardingProfile.findUnique({
@@ -44,12 +59,14 @@ async function resolveProfile(
 export async function getOnboardingView({
   session,
   previewProfileId,
+  previewClassification,
 }: {
   session: EmployeeIdentity;
   previewProfileId?: string;
+  previewClassification?: Classification | null;
 }) {
-  const profile = await resolveProfile(session, previewProfileId);
-  const isPreview = Boolean(previewProfileId);
+  const profile = await resolveProfile(session, previewProfileId, previewClassification);
+  const isPreview = Boolean(previewProfileId || previewClassification);
   const identity = {
     profileId: profile.id,
     name: profile.displayName,

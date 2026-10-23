@@ -9,8 +9,8 @@ export const metadata: Metadata = { title: "Manage Onboarding Resources", robots
 export const dynamic = "force-dynamic";
 
 export default async function AdminResourcesPage() {
-  const { session, result } = await loadPortal();
-  if (session.role !== "ADMIN") redirect("/careers/portal");
+  const { session, result, viewMode } = await loadPortal();
+  if (session.role !== "ADMIN" || viewMode !== "ADMIN") redirect("/careers/portal");
   if (result.status === "disabled") return <PortalBoundary session={session} result={result}>{null}</PortalBoundary>;
-  return <PortalShell identity={result.profile} viewerRole="ADMIN"><header className={styles.pageHeader}><p className={styles.kicker}>Administration</p><h1>Resource library</h1><p>Add and publish private PDF resources. Forms can collect one current employee submission; reference documents use explicit completion.</p></header><AdminResourceManager /></PortalShell>;
+  return <PortalShell identity={result.profile} viewerRole="ADMIN" viewMode={viewMode}><header className={styles.pageHeader}><p className={styles.kicker}>Administration</p><h1>Resource library</h1><p>Add and publish private PDF resources. Forms can collect one current employee submission; reference documents use explicit completion.</p></header><AdminResourceManager /></PortalShell>;
 }
