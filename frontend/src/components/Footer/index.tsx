@@ -73,6 +73,7 @@ const Footer = () => {
           <h3>Support</h3>
           <ul>
             <li><Link href="/careers">Careers</Link></li>
+            <li><a href="https://academy.artisanbarber.com">Artisan Academy</a></li>
             <li><Link href="/foundation">Foundation</Link></li>
             <li><Link href="/policy">Policy</Link></li>
           </ul>
